@@ -61,10 +61,11 @@ elmo-hikes/
 ---
 
 ## Contributors
-
 - **Andy Guo** - BCIT CST Student with a passion in learning programming algorithms and coding structures. Fun fact: Had once went 3 days without sleep.
+- **James Cameron Garcia** - BCIT CST Student who is looking to work on his programming foundations. Fun fact: Loves listening to rap music.
 - **Fawaz Shariff** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Loves solving Rubik's Cubes in under a minute.
-- **James Cameron Garcia** - BCIT CST Student, Backend enthusiast with a knack for data structures. Fun fact: Has a collection of over 1000000 houseplants.
+git status -v
+
 
 
 ---
