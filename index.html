@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
+    <!-- Requiamber meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Landing Page</title>
     <!-- Other libraries go here -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="land.js"></script>
 </head>
 
 <body>
@@ -15,21 +17,23 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <header class="text-black p-4x" id="h1">
-        <nav class="bg-gray-400 invisible md:visible flex justify-between px-4 py-2">
+    <header class="bg-amber-200 text-black p-4x" id="h1">
+        <nav class="bg-amber-400 md:visible flex justify-between px-4 py-2">
             <div class="flex gap-4">
-                <a href="#" class="bg-gray-500 rounded w-16 text-center p-2">Home</a>
-                <a href="#" class="bg-gray-500 rounded w-16 text-center p-2">Map</a>
+                <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Home</a>
+                <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Map</a>
             </div>
-            <a href="#" class="bg-gray-500 rounded w-16 text-center p-2">Profile</a>
+            <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Profile</a>
         </nav>
-        <main class="max-w-6xl mx-auto m-10 space-y-5 text-center">
-            <div class="flex justify-around">
+        <main class="max-w-6xl mx-auto m-10 pb-10 space-y-5 text-center">
+            <div class="flex justify-between ml-10">
                 <img src="https://cdn-icons-png.flaticon.com/512/10486/10486773.png" alt="Menu"
-                    class="w-14 l-8 rounded bg-gray-500 p-1  my-auto">
-                <h1 class="text-7xl tracking-widest font-bold">Scout</h1>
+                    class="w-8 h-8 p-1 md:w-12 md:h-12 rounded bg-amber-500 md:p-3 my-auto object-contain">
+                <h1 class="text-5xl md:text-6xl tracking-widest font-bold font-mono">Scout</h1>
                 <button class="invisible">Placeholder</button>
             </div>
+            <input id="search_bar" type="text" placeholder="Search for Venues"
+                class="bg-white rounded-xl py-2 px-3 w-90 border border-amber-100 outline-2 focus:ring-2 focus:ring-amber-400 transition-all">
         </main>
     </header>
 
