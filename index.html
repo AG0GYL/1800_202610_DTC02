@@ -47,72 +47,196 @@
       </section>
     </header>
     <!-- MAIN CONTENT SECTION -->
-    <main class="max-w-5xl mx-auto p-5">
-      <section class="explore-section flex flex-col py-20">
-        <h2 class="text-5xl text-center">
-          Trending Venues
-        </h2>
-        <p class="text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </p>
-        <div class="hidden justify-between my-5 md:flex">
-          <img
-            src="https://cdn-icons-png.freepik.com/512/16513/16513675.png?ga=GA1.1.828372959.1768202405"
-            width="30"
-            alt=""
-          />
-          <img
-            src="https://cdn-icons-png.freepik.com/512/16519/16519277.png?ga=GA1.1.828372959.1768202405"
-            width="30"
-            alt=""
-          />
-        </div>
-        <div class="cards-container flex flex-col md:flex-row gap-7">
-          <article class="card-one shadow-lg rounded-3xl">
+    <main>
+      <div class="main-container max-w-5xl mx-auto p-5">
+        <!-- TRENDING VENUE SECTION -->
+        <section class="explore-section flex flex-col py-10">
+          <h2 class="text-5xl">Trending Venues</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <div class="hidden justify-between my-5 md:flex">
             <img
-              src="https://picsum.photos/id/29/400/320"
+              src="https://cdn-icons-png.freepik.com/512/16513/16513675.png?ga=GA1.1.828372959.1768202405"
+              width="30"
               alt=""
-              class="w-full"
             />
-            <div class="card-text-container p-4">
-              <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laborum, quibusdam?
-              </p>
-            </div>
-          </article>
-          <article class="card-two shadow-lg rounded-3xl">
             <img
-              src="https://picsum.photos/id/211/400/320"
+              src="https://cdn-icons-png.freepik.com/512/16519/16519277.png?ga=GA1.1.828372959.1768202405"
+              width="30"
               alt=""
-              class="w-full"
             />
-            <div class="card-text-container p-4">
-              <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laborum, quibusdam?
-              </p>
+          </div>
+          <div class="cards-container flex flex-col md:flex-row gap-7">
+            <article class="card-one shadow-lg rounded-3xl">
+              <img
+                src="https://picsum.photos/id/29/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+            <article class="card-two shadow-lg rounded-3xl">
+              <img
+                src="https://picsum.photos/id/211/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+            <article class="card-two shadow-lg rounded-3xl">
+              <img
+                src="https://picsum.photos/id/212/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+            <article class="card-two shadow-lg rounded-3xl">
+              <img
+                src="https://picsum.photos/id/202/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+          </div>
+          <a
+            href="#"
+            class="p-4 flex justify-end duration-150 hover:text-cyan-800"
+            >See more</a
+          >
+        </section>
+        <!-- FIND YOUR VENUE SECTION -->
+        <section class="find-venue-section flex flex-col py-5 gap-4">
+          <h2 class="text-5xl">Need to find a watch party venue?</h2>
+          <p>
+            Answer a few questions. We'll highlight venues that's suited for you
+          </p>
+          <!-- FIND MY EXPERIENCE SECTION -->
+          <div class="personalize-container space-y-4">
+            <div class="flex flex-col gap-4 md:flex-row">
+              <div
+                class="cards-container grid grid-cols-1 min-[1020px]:grid-cols-2 gap-7"
+              >
+                <div
+                  class="select-energy shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
+                >
+                  <h2>Your Energy</h2>
+                  <img
+                    src=" https://cdn-icons-png.flaticon.com/512/7512/7512520.png "
+                    alt="lightning-emoji"
+                    class="h-20"
+                  />
+                  <p>Select vibe</p>
+                </div>
+                <div
+                  class="select-crowd shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
+                >
+                  <h2>Your Crowd Size</h2>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3416/3416032.png "
+                    alt="crowd-emoji"
+                    class="h-20"
+                  />
+                  <p>Pick Size</p>
+                </div>
+                <div
+                  class="select-language shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
+                >
+                  <h2>Your Language</h2>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/18234/18234402.png "
+                    alt="talk-emoji"
+                    class="h-20"
+                  />
+                  <p>Choose one</p>
+                </div>
+                <div
+                  class="select-budget shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
+                >
+                  <h2>Your Budget</h2>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/12740/12740855.png"
+                    alt="money-emoji"
+                    class="h-20"
+                  />
+                  <p>Set range</p>
+                </div>
+              </div>
+              <div class="flex max-w-2xl gap-4 align-middle">
+                <article class="card-one shadow-lg rounded-3xl">
+                  <img
+                    src="https://picsum.photos/id/28/400/320"
+                    alt=""
+                    class="w-full"
+                  />
+                  <div class="card-text-container p-4">
+                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Laborum, quibusdam?
+                    </p>
+                  </div>
+                </article>
+                <article class="card-one shadow-lg rounded-3xl">
+                  <img
+                    src="https://picsum.photos/id/27/400/320"
+                    alt=""
+                    class="w-full"
+                  />
+                  <div class="card-text-container p-4">
+                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Laborum, quibusdam?
+                    </p>
+                  </div>
+                </article>
+                <article class="card-one shadow-lg rounded-3xl">
+                  <img
+                    src="https://picsum.photos/id/26/400/320"
+                    alt=""
+                    class="w-full"
+                  />
+                  <div class="card-text-container p-4">
+                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Laborum, quibusdam?
+                    </p>
+                  </div>
+                </article>
+              </div>
             </div>
-          </article>
-          <article class="card-two shadow-lg rounded-3xl">
-            <img
-              src="https://picsum.photos/id/212/400/320"
-              alt=""
-              class="w-full"
-            />
-            <div class="card-text-container p-4">
-              <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laborum, quibusdam?
-              </p>
-            </div>
-          </article>
-        </div>
-        <a href="#" class="p-4 flex justify-end duration-150 hover:text-cyan-800">See more</a>
-      </section>
+            <button class="px-20 py-5 bg-blue-500 text-slate-100 rounded-lg">
+              Get Matched
+            </button>
+          </div>
+        </section>
+      </div>
     </main>
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
