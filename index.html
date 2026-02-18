@@ -9,287 +9,208 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="land.js"></script>
+    <style></style>
   </head>
 
-  <body>
+  <body class="bg-slate-200">
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <header class="bg-amber-200 text-black p-4x" id="h1">
-      <nav class="bg-amber-400 md:visible flex justify-between px-4 py-2">
-        <div class="flex gap-4">
-          <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Home</a>
-          <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Map</a>
+    <!--HERO SECTION  -->
+    <header class="bg-slate-50">
+      <!-- NAVBAR SECTION -->
+      <nav class="flex justify-between p-4">
+        <div class="flex items-center">
+          <h1 class="font-bold">Scout</h1>
         </div>
-        <a href="#" class="bg-amber-500 rounded w-16 text-center p-2"
-          >Profile</a
-        >
-      </nav>
-      <section class="max-w-6xl mx-auto m-10 pb-10 space-y-5 text-center">
-        <div class="flex justify-between ml-10">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/10486/10486773.png"
-            alt="Menu"
-            class="w-8 h-8 p-1 md:w-12 md:h-12 rounded bg-amber-500 md:p-3 my-auto object-contain"
+        <ul class="flex items-center gap-5">
+          <li><a href="#">Maps</a></li>
+          <input
+            type="button"
+            value="Sign in"
+            id=""
+            class="py-2 px-5 text-slate-50 bg-[#0602ff] rounded-3xl"
           />
-          <h1 class="text-5xl md:text-6xl tracking-widest font-bold font-mono">
-            Scout
-          </h1>
-          <button class="invisible">Placeholder</button>
-        </div>
-        <input
-          id="search_bar"
-          type="text"
-          placeholder="Search for Venues"
-          class="bg-white rounded-xl py-2 px-3 w-90 border border-amber-100 outline-2 focus:ring-2 focus:ring-amber-400 transition-all"
-        />
-      </section>
-    </header>
-    <!-- MAIN CONTENT SECTION -->
-    <main>
-      <div class="main-container max-w-5xl mx-auto p-5">
-        <!-- TRENDING VENUE SECTION -->
-        <section class="explore-section flex flex-col py-10">
-          <h2 class="text-5xl">Trending Venues</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <div class="hidden justify-between my-5 md:flex">
-            <img
-              src="https://cdn-icons-png.freepik.com/512/16513/16513675.png?ga=GA1.1.828372959.1768202405"
-              width="30"
-              alt=""
+        </ul>
+      </nav>
+      <!-- HEADER CONTENT -->
+      <section
+        style="background-image: url(./images/header-bg.jpg)"
+        class="text-slate-50 p-10 bg-repeat bg-cover min-h-[250px]"
+      >
+        <div class="flex flex-col gap-10 max-w-3xl mx-auto">
+          <h2 class="text-6xl font-extrabold">Find your next venue</h2>
+          <!-- SEARCHBAR -->
+          <div class="flex rounded-lg p-3">
+            <input
+              type="text"
+              value="Search"
+              id=""
+              class="bg-[#fff] text-stone-500 p-3 pr-20 rounded-l-lg"
             />
-            <img
-              src="https://cdn-icons-png.freepik.com/512/16519/16519277.png?ga=GA1.1.828372959.1768202405"
-              width="30"
-              alt=""
-            />
-          </div>
-          <div class="cards-container flex flex-col md:flex-row gap-7">
-            <article class="card-one shadow-lg rounded-3xl">
-              <img
-                src="https://picsum.photos/id/29/400/320"
-                alt=""
-                class="w-full"
-              />
-              <div class="card-text-container p-4">
-                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laborum, quibusdam?
-                </p>
-              </div>
-            </article>
-            <article class="card-two shadow-lg rounded-3xl">
-              <img
-                src="https://picsum.photos/id/211/400/320"
-                alt=""
-                class="w-full"
-              />
-              <div class="card-text-container p-4">
-                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laborum, quibusdam?
-                </p>
-              </div>
-            </article>
-            <article class="card-two shadow-lg rounded-3xl">
-              <img
-                src="https://picsum.photos/id/212/400/320"
-                alt=""
-                class="w-full"
-              />
-              <div class="card-text-container p-4">
-                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laborum, quibusdam?
-                </p>
-              </div>
-            </article>
-            <article class="card-two shadow-lg rounded-3xl">
-              <img
-                src="https://picsum.photos/id/202/400/320"
-                alt=""
-                class="w-full"
-              />
-              <div class="card-text-container p-4">
-                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laborum, quibusdam?
-                </p>
-              </div>
-            </article>
-          </div>
-          <a
-            href="#"
-            class="p-4 flex justify-end duration-150 hover:text-cyan-800"
-            >See more</a
-          >
-        </section>
-        <!-- FIND YOUR VENUE SECTION -->
-        <section class="find-venue-section flex flex-col py-5 gap-4">
-          <h2 class="text-5xl">Need to find a watch party venue?</h2>
-          <p>
-            Answer a few questions. We'll highlight venues that's suited for you
-          </p>
-          <!-- FIND MY EXPERIENCE SECTION -->
-          <div class="personalize-container space-y-4">
-            <div class="flex flex-col gap-4 md:flex-row">
-              <div
-                class="cards-container grid grid-cols-1 min-[1020px]:grid-cols-2 gap-7"
+            <button class="flex bg-white">
+              <svg
+                fill="#000000"
+                viewBox="0 -0.24 28.423 28.423"
+                id="_02_-_Search_Button"
+                data-name="02 - Search Button"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 p-2"
               >
-                <div
-                  class="select-energy shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
-                >
-                  <h2>Your Energy</h2>
-                  <img
-                    src=" https://cdn-icons-png.flaticon.com/512/7512/7512520.png "
-                    alt="lightning-emoji"
-                    class="h-20"
-                  />
-                  <p>Select vibe</p>
-                </div>
-                <div
-                  class="select-crowd shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
-                >
-                  <h2>Your Crowd Size</h2>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/3416/3416032.png "
-                    alt="crowd-emoji"
-                    class="h-20"
-                  />
-                  <p>Pick Size</p>
-                </div>
-                <div
-                  class="select-language shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
-                >
-                  <h2>Your Language</h2>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/18234/18234402.png "
-                    alt="talk-emoji"
-                    class="h-20"
-                  />
-                  <p>Choose one</p>
-                </div>
-                <div
-                  class="select-budget shadow-lg p-5 flex flex-col gap-4 rounded-2xl items-center"
-                >
-                  <h2>Your Budget</h2>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/12740/12740855.png"
-                    alt="money-emoji"
-                    class="h-20"
-                  />
-                  <p>Set range</p>
-                </div>
-              </div>
-              <div class="flex max-w-2xl gap-4 align-middle">
-                <article class="card-one shadow-lg rounded-3xl">
-                  <img
-                    src="https://picsum.photos/id/28/400/320"
-                    alt=""
-                    class="w-full"
-                  />
-                  <div class="card-text-container p-4">
-                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Laborum, quibusdam?
-                    </p>
-                  </div>
-                </article>
-                <article class="card-one shadow-lg rounded-3xl">
-                  <img
-                    src="https://picsum.photos/id/27/400/320"
-                    alt=""
-                    class="w-full"
-                  />
-                  <div class="card-text-container p-4">
-                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Laborum, quibusdam?
-                    </p>
-                  </div>
-                </article>
-                <article class="card-one shadow-lg rounded-3xl">
-                  <img
-                    src="https://picsum.photos/id/26/400/320"
-                    alt=""
-                    class="w-full"
-                  />
-                  <div class="card-text-container p-4">
-                    <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Laborum, quibusdam?
-                    </p>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <button class="px-20 py-5 bg-blue-500 text-slate-100 rounded-lg">
-              Get Matched
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    id="Path_215"
+                    data-name="Path 215"
+                    d="M14.953,2.547A12.643,12.643,0,1,0,27.6,15.19,12.649,12.649,0,0,0,14.953,2.547Zm0,2A10.643,10.643,0,1,1,4.31,15.19,10.648,10.648,0,0,1,14.953,4.547Z"
+                    transform="translate(-2.31 -2.547)"
+                    fill-rule="evenodd"
+                  ></path>
+                  <path
+                    id="Path_216"
+                    data-name="Path 216"
+                    d="M30.441,28.789l-6.276-6.276a1,1,0,1,0-1.414,1.414L29.027,30.2a1,1,0,1,0,1.414-1.414Z"
+                    transform="translate(-2.31 -2.547)"
+                    fill-rule="evenodd"
+                  ></path>
+                </g>
+              </svg>
             </button>
+            <!-- FILTER -->
+            <div class="flex">
+              <button class="bg-[#0602ff] p-3 rounded-r-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-filter-2"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 6h16" />
+                  <path d="M6 12h12" />
+                  <path d="M9 18h6" />
+                </svg>
+              </button>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- MAIN SECTION -->
+      <main class="p-10">
+        <!-- TRENDING SECTION -->
+        <section class="trending-section flex flex-col gap-10">
+          <!-- TITLE -->
+          <section class="trending-section-title flex justify-between">
+            <div>
+              <h2 class="font-bold text-2xl">
+                Trending Venues in Vancouver, BC
+              </h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptates, corporis.
+              </p>
+            </div>
+            <div class="flex gap-4">
+              <button class="border p-3 rounded-full"><</button>
+              <button class="border p-3 rounded-full">></button>
+            </div>
+          </section>
+          <!-- CARDS -->
+          <section class="flex gap-5 overflow-scroll">
+            <article class="card-one shadow-lg rounded-3xl max-w-[20%]">
+              <img
+                src="https://picsum.photos/id/27/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+
+            <article class="card-one shadow-lg rounded-3xl max-w-[20%]">
+              <img
+                src="https://picsum.photos/id/27/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+
+            <article class="card-one shadow-lg rounded-3xl max-w-[20%]">
+              <img
+                src="https://picsum.photos/id/27/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+
+            <article class="card-one shadow-lg rounded-3xl max-w-[20%]">
+              <img
+                src="https://picsum.photos/id/27/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+
+            <article class="card-one shadow-lg rounded-3xl max-w-[20%]">
+              <img
+                src="https://picsum.photos/id/27/400/320"
+                alt=""
+                class="w-full"
+              />
+              <div class="card-text-container p-4">
+                <h3 class="text-2xl font-bold">Lorem, ipsum dolor.</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laborum, quibusdam?
+                </p>
+              </div>
+            </article>
+            
+          </section>
         </section>
-      </div>
-      <!-- Match schedule section -->
-      <div class="flex justify-left sm:mx-[23%] mx-[5%] mt-[5%] mb-[1%]">
-        <h1 class="text-5xl">Match Schedule</h1>
-      </div>
-      <div>
-        <div class="sm:flex sm:flex-wrap justify-center gap-6 mb-4 sm:mx-[24%] mx-[5%] space-y-5">
-        <div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/men/11.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/women/10.jpg" class="rounded-full h-20">
-        </div>
-        <div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/men/14.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/women/15.jpg" class="rounded-full h-20">
-        </div><div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/men/12.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/men/15.jpg" class="rounded-full h-20">
-        </div><div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/women/14.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/men/25.jpg" class="rounded-full h-20">
-        </div><div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/women/13.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/men/35.jpg" class="rounded-full h-20">
-        </div><div class="sm:w-[48%] bg-white shadow-xl rounded-full flex justify-between items-center px-6 py-3">
-            <img src="https://randomuser.me/api/portraits/women/12.jpg"
-                class="rounded-full h-20">
-            <span class="text-xl">Lorem VS Ipsum</span>
-            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-full h-20">
-        </div>
-        </div>
-        <a href="#" class="p-4 flex justify-end sm:mr-[25%] duration-150 hover:text-cyan-800">See more</a>
-        </div>
-      </div>
-    </main>
-    <!-- footer section -->
-    <footer class="bg-amber-200 mt-[5%] ">
-      <div class="bg-amber-400 md:visible flex justify-center px-4 py-2 sm:py-20 fixed bottom-0 sm:relative w-full">
-        <div class="flex gap-[33%] visible sm:invisible justify-center">
-          <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Home</a>
-          <a href="#" class="bg-amber-500 rounded w-16 text-center p-2">Map</a>
-           <a href="#" class="bg-amber-500 rounded w-16 text-center p-2"
-          >Profile</a>
-        </div>
-      </div>
-    </footer>
+      </main>
+      <footer >
+
+      </footer>
+    </header>
   </body>
 </html>
