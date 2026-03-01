@@ -9,18 +9,18 @@ function sayHello() {}
 
 function addNavBar() {
   const navBar = `
-            <div
+        <div
           id="navbar-container"
           class="sticky top-0 w-full bg-white border-slate-200 border-2"
         >
           <nav
             class="px-10 max-w-6xl mx-auto w-full flex justify-between items-center bg-white/90 py-5"
           >
-            <h1 class="font-extrabold text-orange-600 text-3xl">scout.</h1>
+            <h1 class="font-extrabold text-orange-600 text-3xl"><a href="/index.html">scout.</a></h1>
             <!-- RIGHT SECTION -->
             <ul class="justify-between hidden md:flex">
               <li class="font-semibold text-sm px-3 py-2">
-                <a href="#">Maps</a>
+                <a href="/pages/map.html">Maps</a>
               </li>
               <li class="font-semibold text-sm">
                 <input
