@@ -18,41 +18,39 @@
     </style> -->
   </head>
   <body>
-    <!-- BODY CONTAINER -->
-    <div id="body-container">
-      <header>
-        <!-- HERO CONTENT SECTION -->
-        <div
-          id="hero-content-section"
-          class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto"
-        >
-          <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
-            <h1 class="text-slate-50 text-7xl font-extrabold">
-              Find your perfect watch party venue.
-            </h1>
-            <form
-              class="flex bg-white rounded-xl w-fit hover:outline-1 outline-blue-500"
+    <!-- HEADER -->
+    <header>
+      <!-- HERO CONTENT SECTION -->
+      <div
+        id="hero-content-section"
+        class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto"
+      >
+        <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
+          <h1 class="text-slate-50 text-7xl font-extrabold">
+            Find your perfect watch party venue.
+          </h1>
+          <form class="flex bg-white rounded-xl w-1/2 min-w-sm">
+            <input
+              type="text"
+              placeholder="Enter an address, neighborhood, city, or ZIP code"
+              class="p-3 w-full outline-none"
+            />
+            <!-- DIVIDER -->
+            <div class="w-[1px] bg-gray-400 my-2"></div>
+            <button
+              type="button"
+              class="flex items-center gap-3 hover:bg-gray-300 px-4"
             >
-              <input
-                type="text"
-                placeholder="Enter an address, neighborhood, city, or ZIP code"
-                class="p-3 w-[400px] outline-none"
-              />
-              <!-- DIVIDER -->
-              <div class="w-[1px] bg-gray-400 my-2"></div>
-              <button
-                type="button"
-                class="flex items-center gap-3 hover:bg-gray-300 px-4"
-              >
-                <img src="./svg/filter.svg" alt="" />Filters
-              </button>
-              <button type="submit" class="bg-orange-600 px-4 rounded-r-xl">
-                <img src="./svg/search.svg" alt="" />
-              </button>
-            </form>
-          </div>
+              <img src="./svg/filter.svg" alt="" />
+            </button>
+            <button type="submit" class="bg-orange-600 px-4 rounded-r-xl">
+              <img src="./svg/search.svg" alt="" />
+            </button>
+          </form>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
   </body>
 </html>
