@@ -11,7 +11,7 @@ function addNavBar() {
   const navBar = `
         <div
           id="navbar-container"
-          class="sticky top-0 w-full bg-white border-slate-200 border-2"
+          class="sticky top-0 w-full bg-white border-slate-200 border-2 z-50"
         >
           <nav
             class="px-10 max-w-6xl mx-auto w-full flex justify-between items-center bg-white/90 py-5"
