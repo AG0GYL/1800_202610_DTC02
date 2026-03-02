@@ -1,0 +1,8 @@
+#map {
+  height: 100vh;
+  position: relative;
+}
+
+#navbar-container {
+  z-index: 2000;
+}
