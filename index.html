@@ -1,51 +1,46 @@
 <!doctype html>
 <html lang="en" class="overflow-y-scroll">
-  <head>
-    <!-- Requiamber meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Landing Page</title>
-    <!-- Other libraries go here -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./src/main.js" defer></script>
-    <!-- COMPONENTS -->
-    <script src="./src/navbar.js"></script>
-  </head>
-  <body>
-    <!-- HEADER -->
-    <header>
-      <!-- HERO CONTENT SECTION -->
-      <div
-        id="hero-content-section"
-        class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto"
-      >
-        <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
-          <h1 class="text-slate-50 text-7xl font-extrabold">
-            Find your perfect watch party venue.
-          </h1>
-          <form class="flex bg-white rounded-xl w-1/2 min-w-sm">
-            <input
-              type="text"
-              placeholder="Enter an address, neighborhood, city, or ZIP code"
-              class="p-3 w-full outline-none"
-            />
-            <!-- DIVIDER -->
-            <div class="w-[1px] bg-gray-400 my-2"></div>
-            <button
-              type="button"
-              class="flex items-center gap-3 hover:bg-gray-300 px-4"
-            >
-              <img src="./svg/filter.svg" alt="" />
-            </button>
-            <button type="submit" class="bg-orange-600 px-4 rounded-r-xl">
-              <img src="./svg/search.svg" alt="" />
-            </button>
-          </form>
-        </div>
-      </div>
-    </header>
 
-    <!-- MAIN -->
-  </body>
+<head>
+  <!-- Requiamber meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Landing Page</title>
+  <!-- Other libraries go here -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="./src/main.js" defer></script>
+  <!-- COMPONENTS -->
+  <script src="./src/navbar.js"></script>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <!-- HERO CONTENT SECTION -->
+    <div id="hero-content-section"
+      class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto">
+      <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
+        <h1 class="text-slate-50 text-7xl font-extrabold">
+          Find your perfect watch party venue.
+        </h1>
+        <form class="flex bg-white rounded-xl w-1/2 min-w-sm">
+          <input type="text" placeholder="Enter an address, neighborhood, city, or ZIP code"
+            class="p-3 w-full outline-none" />
+          <!-- DIVIDER -->
+          <div class="w-[1px] bg-gray-400 my-2"></div>
+          <button type="button" class="flex items-center gap-3 hover:bg-gray-300 px-4">
+            <img src="./svg/filter.svg" alt="" />
+          </button>
+          <button type="submit" class="bg-orange-600 px-4 rounded-r-xl">
+            <img src="./svg/search.svg" alt="" />
+          </button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+</body>
+
 </html>

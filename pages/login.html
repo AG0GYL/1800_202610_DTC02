@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Requiamber meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landing Page</title>
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- COMPONENTS -->
+    <script src="../src/navbar.js"></script>
+</head>
+
+<body class="">
+
+    <!-- Alerts -->
+    <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+
+    <!-- Login -->
+    <div class="flex" id="loginView">
+        <section class="w-[35%] my-28 mx-28">
+            <span class="space-y-10">
+                <h1 class="font-extrabold text-orange-600 text-4xl">scout.</h1>
+                <form id="loginForm" novalidate class="space-y-5">
+                    <div class="p-2 border-2 rounded-xl">
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Email" required />
+                    </div>
+                    <div class="p-2 border-2 rounded-xl">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password"
+                            required />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn bg-blue-400 p-2 text-xl rounded-xl">Login</button>
+                    </div>
+                </form>
+            </span>
+        </section>
+
+        <section class=" h-screen">
+            <img src="../images/BBY01.jpg" alt="Cover Image" class="w-full h-full object-cover">
+        </section>
+    </div>
+
+    <!-- Firebase and authentication related scripts -->
+    <!-- The order of loading matters -->
+    <script type="module" src="src/firebaseConfig.js"></script>
+    <script type="module" src="src/authentication.js"></script>
+    <script type="module" src="src/loginSignup.js"></script>
+</body>
+
+</html>

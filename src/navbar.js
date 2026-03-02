@@ -4,7 +4,7 @@
 // If you have custom global styles, import them as well:
 // import '../styles/style.css';
 
-function sayHello() {}
+function sayHello() { }
 // document.addEventListener('DOMContentLoaded', sayHello);
 
 function addNavBar() {
@@ -23,12 +23,11 @@ function addNavBar() {
                 <a href="/pages/map.html">Maps</a>
               </li>
               <li class="font-semibold text-sm">
-                <input
-                  type="button"
-                  value="Sign up"
-                  id=""
-                  class="bg-orange-500 px-3 py-2 rounded-2xl text-white"
-                />
+                <a href="/pages/login.html"
+                  id="Sign"
+                  class="bg-orange-500 px-3 py-2 rounded-2xl text-white inline-block">
+                  Sign In
+                </a>
               </li>
             </ul>
             <!-- COLLAPSIBLE HAMBURGER -->
