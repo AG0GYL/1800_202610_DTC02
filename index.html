@@ -17,6 +17,7 @@
       }
     </style> -->
     <script src="./src/venue-carousel.js"></script>
+    <script src="./src/ms-stacked-cards.js"></script>
   </head>
   <body>
     <!-- HEADER -->
@@ -68,6 +69,16 @@
           class="flex overflow-x-auto gap-5 overflow-hidden py-5"
           id="card-carousel"
         ></section>
+      </section>
+      <!-- MATCH SCHEDULE -->
+      <section class="max-w-6xl mx-auto p-10">
+        <!-- TITLE -->
+        <div>
+          <h2 class="text-2xl font-bold">Match Schedule</h2>
+          <p class="text-stone-600 text-sm">Short list of matches nearby</p>
+        </div>
+        <!-- STACKED CARDS -->
+        <section id="stacked-cards" class="py-[2%]"></section>
       </section>
     </main>
   </body>
