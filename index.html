@@ -8,9 +8,9 @@
     <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./src/main.js" defer></script>
+    <script type="module" src="./personalized.js" defer></script>
     <!-- COMPONENTS -->
-    <script src="./src/navbar.js"></script>
+    <script type="module" src="./src/navbar.js" defer></script>
     <!-- <style>
       * {
         border: 1px solid darkorange;
@@ -20,6 +20,9 @@
     <script src="./src/ms-stacked-cards.js"></script>
   </head>
   <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+
     <!-- HEADER -->
     <header>
       <!-- HERO CONTENT SECTION -->
@@ -29,7 +32,8 @@
       >
         <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
           <h1 class="text-slate-50 text-7xl font-extrabold">
-            Find your perfect watch party venue.
+            <span id="name-goes-here"></span>Find your perfect watch party
+            venue.
           </h1>
           <form class="flex bg-white rounded-xl w-1/2 min-w-sm">
             <input
