@@ -8,7 +8,7 @@
     <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="module" src="./personalized.js" defer></script>
+    <script type="module" src="./main.js" defer></script>
     <!-- COMPONENTS -->
     <script type="module" src="./src/navbar.js" defer></script>
     <!-- <style>
@@ -35,6 +35,9 @@
             <span id="name-goes-here"></span>Find your perfect watch party
             venue.
           </h1>
+          <p class="text-white text-xl">
+            <span id="quote-goes-here">Test</span>
+          </p>
           <form class="flex bg-white rounded-xl w-1/2 min-w-sm">
             <input
               type="text"
@@ -71,9 +74,29 @@
         <!-- CARD CAROUSEL -->
         <section
           class="flex overflow-x-auto gap-5 overflow-hidden py-5"
-          id="card-carousel"
+          id="venue-card-carousel"
         ></section>
       </section>
+      <template id="venueCardTemplate">
+        <div
+          class="overflow-hidden flex rounded-lg relative flex-col gap-2 shrink-0 shadow-2xl border-2 border-stone-600 hover:border-orange-600"
+        >
+          <div class="card">
+            <img
+              class="card-img-top card-image w-full"
+              src="..."
+              alt="Venue Image"
+            />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <p>Length: <span class="card-length"></span> km</p>
+              <a class="btn btn-primary read-more" href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+      </template>
+
       <!-- MATCH SCHEDULE -->
       <section class="max-w-6xl mx-auto p-10">
         <!-- TITLE -->
