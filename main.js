@@ -165,7 +165,8 @@ async function displayCardsDynamically() {
       newcard.querySelector(".card-length").textContent = venue.length;
       newcard.querySelector(".card-image").textContent = venue.photo_url;
       newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
-
+      newcard.querySelector(".read-more").href = `./pages/venue.html?docID=${doc.id}`;
+      
       // Attach the new card to the container
       document.getElementById("venue-card-carousel").appendChild(newcard);
     });
@@ -176,3 +177,4 @@ async function displayCardsDynamically() {
 
 // Call the function to display cards when the page loads
 displayCardsDynamically();
+
