@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- COMPONENTS -->
+    <script type="module" src="../src/navbar.js" defer></script>
+  </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+    <main class="container py-4">
+      <h1 id="venueName">Loading...</h1>
+      <img
+        id="venueImage"
+        class="img-fluid rounded mt-3"
+        src=""
+        alt="venue image"
+      />
+    </main>
+    <script type="module" src="../src/venue.js"></script>
+  </body>
+</html>
