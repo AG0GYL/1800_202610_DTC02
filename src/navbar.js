@@ -3,12 +3,43 @@
 
 // If you have custom global styles, import them as well:
 // import '../styles/style.css';
-
-function sayHello() {}
 // document.addEventListener('DOMContentLoaded', sayHello);
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "/src/firebaseConfig.js";
 import { logoutUser } from "/src/authentication.js";
+
+import { onAuthReady } from "/src/authentication.js";
+import { db } from "/src/firebaseConfig.js";
+import { doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+
+function showName() {
+  const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
+
+  // Wait for Firebase to determine the current authentication state.
+  // onAuthReady() runs the callback once Firebase finishes checking the signed-in user.
+  // The user's name is extracted from the Firebase Authentication object
+  // You can "go to console" to check out current users.
+  onAuthReady((user) => {
+    // If a user is logged in:
+    // Use their display name if available, otherwise show their email.
+    const name = user.displayName || user.email;
+
+    // Update the welcome message with their name/email.
+    if (nameElement) {
+      nameElement.textContent = `Hi, ${name}! `;
+    }
+  });
+}
+
+function toggleDropdown() {
+  document.querySelector(`#dropdown`).classList.toggle("hidden");
+}
 
 class SiteNavbar extends HTMLElement {
   constructor() {
@@ -26,7 +57,7 @@ class SiteNavbar extends HTMLElement {
             <a href="/index.html">scout.</a>
           </h1>
 
-          <ul class="justify-between items-center hidden md:flex gap-2">
+          <ul class="justify-between items-center flex gap-2">
             <li class="font-semibold text-sm px-3 py-2">
               <a href="/pages/map.html">Maps</a>
             </li>
@@ -37,15 +68,6 @@ class SiteNavbar extends HTMLElement {
               </div>
             </li>
           </ul>
-
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-            viewBox="0 0 24 24" fill="none" stroke="#000000"
-            stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-            class="flex md:hidden cursor-pointer">
-            <path d="M4 6l16 0" />
-            <path d="M4 12l16 0" />
-            <path d="M4 18l16 0" />
-          </svg>
 
         </nav>
       </div>
@@ -58,13 +80,77 @@ class SiteNavbar extends HTMLElement {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         authControl.innerHTML = `
-          <button id="signOutBtn"
-            class="bg-orange-500 hover:bg-orange-600 transition px-3 py-2 rounded-2xl text-white text-sm min-w-[80px]">
-            Log out
-          </button>
+          <!-- dropdown -->
+          <div id="avatar-container" class="relative">
+            <button id="avatarBtn" class="w-10 h-10 rounded-full bg-orange-500 text-white hover:outline-4 hover:outline-orange-500/25">S</button>
+            <div
+              class="dropdown absolute right-0 top-15 flex-col bg-white overflow-hidden min-w-[300px] rounded-3xl hidden"
+              id="dropdown"
+            >
+              <div id="dropdown-header" class="px-6 py-3">
+                <h2 id="dropdown-name" class="text-2xl font-bold">${user.displayName}</h2>
+                <h2 id="dropdown-email" class="text-stone-500">${user.email}</h2>
+              </div>
+              <div
+                class="dropdown-items flex flex-col divide-y divide-gray-300 text-lg font-semibold"
+              >
+                <a
+                  href="#"
+                  class="dropdown-item flex items-center hover:bg-orange-100 gap-3 hover:text-orange-600 px-6 py-3"
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.5"
+                  >
+                    <use href="/svg/icons.svg#profile" />
+                  </svg>
+                  Profile
+                </a>
+                <a
+                  href="#"
+                  class="dropdown-item flex items-center hover:bg-orange-100 gap-3 hover:text-orange-600 px-6 py-3"
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <use href="/svg/icons.svg#settings" />
+                  </svg>
+                  Settings
+                </a>
+                <a
+                  href="#"
+                  id="logoutBtn"
+                  class="dropdown-item flex items-center hover:bg-orange-100 gap-3 text-orange-600 px-6 py-3"
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <use href="/svg/icons.svg#logout" />
+                  </svg>
+                  Log out
+                </a>
+              </div>
+            </div>
+          </div>
         `;
         authControl
-          .querySelector("#signOutBtn")
+          .querySelector("#avatarBtn")
+          .addEventListener("click", toggleDropdown);
+        authControl
+          .querySelector("#logoutBtn")
           ?.addEventListener("click", logoutUser);
       } else {
         authControl.innerHTML = `
