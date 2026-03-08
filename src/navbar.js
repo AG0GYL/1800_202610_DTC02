@@ -8,38 +8,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "/src/firebaseConfig.js";
 import { logoutUser } from "/src/authentication.js";
 
-import { onAuthReady } from "/src/authentication.js";
-import { db } from "/src/firebaseConfig.js";
-import { doc, onSnapshot } from "firebase/firestore";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-
-function showName() {
-  const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
-
-  // Wait for Firebase to determine the current authentication state.
-  // onAuthReady() runs the callback once Firebase finishes checking the signed-in user.
-  // The user's name is extracted from the Firebase Authentication object
-  // You can "go to console" to check out current users.
-  onAuthReady((user) => {
-    // If a user is logged in:
-    // Use their display name if available, otherwise show their email.
-    const name = user.displayName || user.email;
-
-    // Update the welcome message with their name/email.
-    if (nameElement) {
-      nameElement.textContent = `Hi, ${name}! `;
-    }
-  });
-}
-
 function toggleDropdown() {
   document.querySelector(`#dropdown`).classList.toggle("hidden");
 }
+
+// CLICK OUTSIDE OF DROPDOWN MENU
+document.addEventListener("click", (e) => {
+  const container = document.querySelector("#avatar-container");
+  const dropdown = document.querySelector("#dropdown");
+
+  if (!container.contains(e.target)) {
+    dropdown.classList.add("hidden");
+  }
+});
 
 class SiteNavbar extends HTMLElement {
   constructor() {
@@ -146,9 +127,12 @@ class SiteNavbar extends HTMLElement {
             </div>
           </div>
         `;
+        // AVATAR PROFILE DROPDOWN
         authControl
           .querySelector("#avatarBtn")
           .addEventListener("click", toggleDropdown);
+
+        // DROPDOWN BUTTON
         authControl
           .querySelector("#logoutBtn")
           ?.addEventListener("click", logoutUser);
