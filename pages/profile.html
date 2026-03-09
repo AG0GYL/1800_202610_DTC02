@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Requiamber meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal Profile</title>
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- COMPONENTS -->
+    <script src="../src/navbar.js" type="module"></script>
+    <script src="./profile.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+    <main class="max-w-6xl mx-auto p-10">
+      <section
+        id="profile-container"
+        class="bg-slate-300 max-w-md p-3 divide-y"
+      >
+        <h1 class="text-3xl font-bold">User Profile</h1>
+        <div
+          id="image-upload-container"
+          class="flex items-center gap-4 justify-between"
+        >
+          <img
+            id="profileImage"
+            src="../images/elmo.jpg"
+            alt="Profile Picture"
+            width="50"
+            height="50"
+          />
+          <br />
+          <input type="file" id="inputImage" accept="image/*" class="" />
+          <label
+            for="inputImage"
+            class="bg-orange-500 text-white px-4 py-2 rounded-xl cursor-pointer w-3/4"
+            >Upload Photo</label
+          >
+        </div>
+        <form id="profileForm" class="flex flex-col gap-1 py-4">
+          <div class="flex justify-between">
+            <label for="nameInput">Name</label>
+            <input
+              type="text"
+              id="nameInput"
+              name="name"
+              class="bg-white rounded-md w-3/4"
+            />
+          </div>
+          <div class="flex justify-between">
+            <label for="schoolInput">School</label>
+            <input
+              type="text"
+              id="schoolInput"
+              name="school"
+              class="bg-white rounded-md w-3/4"
+            />
+          </div>
+          <div class="flex justify-between">
+            <label for="cityInput">City</label>
+            <input
+              type="text"
+              id="cityInput"
+              name="city"
+              class="bg-white rounded-md w-3/4"
+            />
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
