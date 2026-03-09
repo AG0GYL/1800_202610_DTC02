@@ -73,29 +73,36 @@
         </div>
         <!-- CARD CAROUSEL -->
         <section
-          class="flex overflow-x-auto gap-5 overflow-hidden py-5"
+          class="flex overflow-x-auto gap-6 overflow-hidden py-5 px-5"
           id="venue-card-carousel"
         ></section>
       </section>
-      <template id="venueCardTemplate">
-        <div
-          class="overflow-hidden flex rounded-lg relative flex-col gap-2 shrink-0 shadow-2xl border-2 border-stone-600 hover:border-orange-600"
+      <template id="venueCardTemplate" class="relative">
+        <a
+          class="read-more block shrink-0 group outline-5 rounded-lg overflow-hidden outline-stone-600 hover:outline-orange-600"
+          href="#"
         >
-          <div class="card">
-            <img
-              class="card-img-top card-image w-full"
-              src="..."
-              alt="Venue Image"
-              id="venueImage"
-            />
-            <div class="card-body">
-              <h5 class="card-title text-2xl font-bold"></h5>
-              <p class="card-text"></p>
-              <p>Length: <span class="card-length"></span> km</p>
-              <a class="read-more" href="#">Read More</a>
+          <div class="flex relative flex-col gap-2 shadow-2xl">
+            <div class="card max-w-[300px]">
+              <img
+                class="card-img-top card-image w-full h-full object-cover"
+                src="..."
+                alt="Venue Image"
+                id="venueImage"
+              />
+              <div class="card-body p-2">
+                <h5 class="card-title text-2xl font-bold"></h5>
+              </div>
+              <div
+                id="card-overlay"
+                class="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 bg-black/65 text-white p-2 flex justify-center items-center text-center flex-col"
+              >
+                <p class="card-text"></p>
+                <p>Length: <span class="card-length"></span> km</p>
+              </div>
             </div>
           </div>
-        </div>
+        </a>
       </template>
 
       <!-- MATCH SCHEDULE -->

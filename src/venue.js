@@ -21,9 +21,13 @@ async function displayVenueInfo() {
 
     // Update the page
     document.getElementById("venueName").textContent = name;
-    const img = document.querySelector("#venueImage");
-    img.src = `${venue.photo_url}`;
-    img.alt = `${name} image`;
+    const headerContainer = document.getElementById("headerBackgroundOverlay");
+    headerContainer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${venue.photo_url})`;
+
+    headerContainer.classList.add(`bg-cover`, `bg-center`);
+    // const img = document.querySelector("#venueImage");
+    // img.src = `${venue.photo_url}`;
+    // img.alt = `${name}`;
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";

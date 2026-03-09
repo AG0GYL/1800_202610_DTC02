@@ -58,7 +58,7 @@ function addVenue() {
   console.log("Adding sample Venue data...");
   addDoc(venueRef, {
     code: "BBY01",
-    photo_url: "https://picsum.photos/id/237/300/150",
+    photo_url: "https://picsum.photos/id/214/1800/900",
     name: "Burnaby Lake Park Trail",
     city: "Burnaby",
     level: "easy",
@@ -71,7 +71,7 @@ function addVenue() {
   });
   addDoc(venueRef, {
     code: "AM01",
-    photo_url: "https://picsum.photos/id/237/300/150",
+    photo_url: "https://picsum.photos/id/214/1800/900",
     name: "Buntzen Lake Trail",
     city: "Anmore",
     level: "moderate",
@@ -84,7 +84,7 @@ function addVenue() {
   });
   addDoc(venueRef, {
     code: "NV01",
-    photo_url: "https://picsum.photos/id/237/300/150",
+    photo_url: "https://picsum.photos/id/214/1800/900",
     name: "Mount Seymour Trail",
     city: "North Vancouver",
     level: "hard",
@@ -97,7 +97,7 @@ function addVenue() {
   });
   addDoc(venueRef, {
     code: "BBY01",
-    photo_url: "https://picsum.photos/id/237/300/150",
+    photo_url: "https://picsum.photos/id/214/1800/900",
     name: "Burnaby Lake Park Trail",
     city: "Burnaby",
     level: "easy",
@@ -110,7 +110,7 @@ function addVenue() {
   });
   addDoc(venueRef, {
     code: "AM01",
-    photo_url: "https://picsum.photos/id/237/300/150",
+    photo_url: "https://picsum.photos/id/214/1800/900",
     name: "Buntzen Lake Trail",
     city: "Anmore",
     level: "moderate",
@@ -147,26 +147,31 @@ async function seedVenues() {
 seedVenues();
 
 async function displayCardsDynamically() {
-  let cardTemplate = document.getElementById("venueCenuTardTemplate");
-  const hikesCollectionRef = collection(db, "venue");
+  let cardTemplate = document.getElementById("venueCardTemplate");
+  const venuesCollectionRef = collection(db, "venue");
 
   try {
-    const querySnapshot = await getDocs(hikesCollectionRef);
+    const querySnapshot = await getDocs(venuesCollectionRef);
     querySnapshot.forEach((doc) => {
       // Clone the template
-      let newcard = venueCardTemplate.content.cloneNode(true);
+      let newcard = cardTemplate.content.cloneNode(true);
       // Get hike data once
       const venue = doc.data();
 
       // Populate the card with hike data
+
       newcard.querySelector(".card-title").textContent = venue.name;
-      newcard.querySelector(".card-text").textContent = 
+      newcard.querySelector(".card-text").textContent =
         venue.details || `Located in ${venue.city}.`;
       newcard.querySelector(".card-length").textContent = venue.length;
       newcard.querySelector(".card-image").textContent = venue.photo_url;
       newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
-      newcard.querySelector(".read-more").href = `./pages/venue.html?docID=${doc.id}`;
-      
+      newcard.querySelector(".read-more").href =
+        `./pages/venue.html?docID=${doc.id}`;
+
+      newcard.getElementById("card-overlay").classList.add("text-2xl");
+      newcard.getElementById("card-overlay").classList.add("p-2");
+
       // Attach the new card to the container
       document.getElementById("venue-card-carousel").appendChild(newcard);
     });
@@ -177,4 +182,3 @@ async function displayCardsDynamically() {
 
 // Call the function to display cards when the page loads
 displayCardsDynamically();
-
