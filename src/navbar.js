@@ -76,7 +76,7 @@ class SiteNavbar extends HTMLElement {
                 class="dropdown-items flex flex-col divide-y divide-gray-300 text-lg font-semibold"
               >
                 <a
-                  href="#"
+                  href="../pages/profile.html"
                   class="dropdown-item flex items-center hover:bg-orange-100 gap-3 hover:text-orange-600 px-6 py-3"
                 >
                   <svg

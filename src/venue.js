@@ -17,10 +17,14 @@ async function displayVenueInfo() {
 
     const venue = venueSnap.data();
     const name = venue.name;
+    const details = venue.details;
     const code = venue.code;
 
     // Update the page
     document.getElementById("venueName").textContent = name;
+    document.getElementById("venueDetails").textContent = details;
+
+    // venueDetails
     const headerContainer = document.getElementById("headerBackgroundOverlay");
     headerContainer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${venue.photo_url})`;
 

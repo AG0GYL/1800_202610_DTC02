@@ -77,29 +77,28 @@
           id="venue-card-carousel"
         ></section>
       </section>
-      <template id="venueCardTemplate" class="relative">
+
+      <template id="venueCardTemplate">
         <a
           class="read-more block shrink-0 group outline-5 rounded-lg overflow-hidden outline-stone-600 hover:outline-orange-600"
           href="#"
         >
-          <div class="flex relative flex-col gap-2 shadow-2xl">
-            <div class="card max-w-[300px]">
-              <img
-                class="card-img-top card-image w-full h-full object-cover"
-                src="..."
-                alt="Venue Image"
-                id="venueImage"
-              />
-              <div class="card-body p-2">
-                <h5 class="card-title text-2xl font-bold"></h5>
-              </div>
-              <div
-                id="card-overlay"
-                class="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 bg-black/65 text-white p-2 flex justify-center items-center text-center flex-col"
-              >
-                <p class="card-text"></p>
-                <p>Length: <span class="card-length"></span> km</p>
-              </div>
+          <div class="relative w-[280px] shadow-2xl">
+            <img
+              class="card-img-top card-image w-full h-[200px] object-cover"
+              src="..."
+              alt="Venue Image"
+              id="venueImage"
+            />
+            <div
+              id="card-overlay"
+              class="absolute top-0 left-0 w-full h-[200px] opacity-0 group-hover:opacity-100 bg-black/65 text-white p-3 flex justify-center items-center text-center flex-col gap-2"
+            >
+              <p class="card-text line-clamp-3 text-lg"></p>
+              <p><span class="card-level font-bold"></span></p>
+            </div>
+            <div class="card-body bg-white p-2">
+              <h5 class="card-title text-lg font-bold truncate"></h5>
             </div>
           </div>
         </a>
