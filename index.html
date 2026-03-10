@@ -73,29 +73,35 @@
         </div>
         <!-- CARD CAROUSEL -->
         <section
-          class="flex overflow-x-auto gap-5 overflow-hidden py-5"
+          class="flex overflow-x-auto gap-6 overflow-hidden py-5 px-5"
           id="venue-card-carousel"
         ></section>
       </section>
+
       <template id="venueCardTemplate">
-        <div
-          class="overflow-hidden flex rounded-lg relative flex-col gap-2 shrink-0 shadow-2xl border-2 border-stone-600 hover:border-orange-600"
+        <a
+          class="read-more block shrink-0 group outline-5 rounded-lg overflow-hidden outline-stone-600 hover:outline-orange-600"
+          href="#"
         >
-          <div class="card">
+          <div class="relative w-[280px] shadow-2xl">
             <img
-              class="card-img-top card-image w-full"
+              class="card-img-top card-image w-full h-[200px] object-cover"
               src="..."
               alt="Venue Image"
               id="venueImage"
             />
-            <div class="card-body">
-              <h5 class="card-title text-2xl font-bold"></h5>
-              <p class="card-text"></p>
-              <p>Length: <span class="card-length"></span> km</p>
-              <a class="read-more" href="#">Read More</a>
+            <div
+              id="card-overlay"
+              class="absolute top-0 left-0 w-full h-[200px] opacity-0 group-hover:opacity-100 bg-black/65 text-white p-3 flex justify-center items-center text-center flex-col gap-2"
+            >
+              <p class="card-text line-clamp-3 text-lg"></p>
+              <p><span class="card-level font-bold"></span></p>
+            </div>
+            <div class="card-body bg-white p-2">
+              <h5 class="card-title text-lg font-bold truncate"></h5>
             </div>
           </div>
-        </div>
+        </a>
       </template>
 
       <!-- MATCH SCHEDULE -->

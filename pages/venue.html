@@ -5,20 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- COMPONENTS -->
+    <link rel="stylesheet" href="./map.css" />
+    <!-- LEAFLET CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <!-- LEAFLET JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+      defer
+    ></script>
+    <script src="./map.js" defer></script>
     <!-- COMPONENTS -->
     <script type="module" src="../src/navbar.js" defer></script>
   </head>
   <body>
     <!-- our own navbar goes here -->
     <site-navbar></site-navbar>
-    <main class="container py-4">
-      <h1 id="venueName">Loading...</h1>
-      <img
-        id="venueImage"
-        class="img-fluid rounded mt-3"
-        src=""
-        alt="venue image"
-      />
+
+    <!-- beginning -->
+    <div class="bg-black text-white" id="headerBackgroundOverlay">
+      <div class="max-w-6xl mx-auto p-10 py-20">
+        <h1 class="text-5xl font-extrabold" id="venueName">Venue Name</h1>
+        <p class="max-w-6xl mx-auto pr-[30%]" id="venueDetails">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. At libero
+          natus praesentium iste necessitatibus velit quasi ratione minus
+          facilis neque nisi, quae tempore labore expedita amet corrupti numquam
+          perspiciatis eaque.
+        </p>
+      </div>
+    </div>
+    <!-- Middle -->
+
+    <main class="container py-[5%] max-w-6xl mx-auto px-10">
+      <ul class="flex flex-row space-x-3">
+        <li
+          class="bg-orange-500 duration-150 text-white text-xl p-3 rounded-lg cursor-pointer hover:text-black hover:bg-white hover:border"
+        >
+          Write a Review
+        </li>
+        <li class="text-xl p-3 rounded-lg border">Add Photos/videos</li>
+        <li class="text-xl p-3 rounded-lg border">Share</li>
+        <li class="text-xl p-3 rounded-lg border">Save</li>
+      </ul>
+      <main class="flex flex-row space-x-5 py-[5%]">
+        <section id="map-container" class="flex flex-col">
+          <h1 class="text-2xl font-bold py-[2%]">Location &amp; Hours</h1>
+          <a href="./map.html"><div id="map" class="w-100 max-h-70"></div></a>
+          <div class="flex flex-row justify-between py-[2%]">
+            <div class="flex flex-col">
+              <p>Street</p>
+              <p>City, postal code</p>
+            </div>
+            <button class="text-xl p-3 rounded-lg border">
+              <a href="./map.html">Get Directions</a>
+            </button>
+          </div>
+        </section>
+        <div class="flex flex-col py-[5%]">
+          <ul class="space-y-4">
+            <li>Mon 12:00 PM - 1:00 AM</li>
+            <li>Tues 12:00 PM - 1:00 AM</li>
+            <li>Wed 12:00 PM - 1:00 AM</li>
+            <li>Thurs 12:00 PM - 1:00 AM</li>
+            <li>Fri 12:00 PM - 1:00 AM</li>
+            <li>Sat 12:00 PM - 1:00 AM</li>
+            <li>Sun 12:00 PM - 1:00 AM</li>
+          </ul>
+        </div>
+      </main>
+      <div class="">
+        <h1 class="py-[2%] text-2xl font-bold">Reviews</h1>
+        <div class="shadow-xl rounded-4xl outline-2">
+          <div class="flex flex-row p-5">
+            <div class="flex flex-row items-center justify-center space-x-2">
+              <img
+                src="https://picsum.photos/id/400/300/150"
+                alt=""
+                class="rounded-full w-25 h-25"
+              />
+              <div class="flex flex-col">
+                <ul class="">
+                  <li>Username</li>
+                  <li>
+                    <div class="flex flex-row">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                        />
+                      </svg>
+                    </div>
+                  </li>
+                </ul>
+                <div>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus aliquam nobis incidunt voluptas dolores
+                  voluptatum, saepe reprehenderit quia cupiditate fugit eum
+                  suscipit mollitia animi possimus eligendi, necessitatibus
+                  quisquam itaque ipsa.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <script type="module" src="../src/venue.js"></script>
   </body>

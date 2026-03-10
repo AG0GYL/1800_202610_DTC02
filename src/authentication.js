@@ -54,7 +54,11 @@ export async function loginUser(email, password) {
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
   const user = userCredential.user; // Get the user object
 
   // Update the user's profile with the display name, NOTE: updateProfile is a built-in Firebase function
@@ -69,17 +73,19 @@ export async function signupUser(name, email, password) {
       name: name,
       email: email,
       country: "Canada", // Default value
-      school: "BCIT"     // Default value
+      school: "BCIT", // Default value
     });
     console.log("Firestore user document created successfully!");
-} catch (error) {
-  // Information for debugging: show the error code  
-  // In a real app, you might want to show a user-friendly message instead of the raw error.
-  // console.error("Error creating user document in Firestore:", error);
-  // console output may not be seen if redirection to main.html happens
-  // Therefore, we can try "alert".  
-  alert(`Error creating user document:\n${error.code || ""}\n${error.message || error}`);
-}
+  } catch (error) {
+    // Information for debugging: show the error code
+    // In a real app, you might want to show a user-friendly message instead of the raw error.
+    // console.error("Error creating user document in Firestore:", error);
+    // console output may not be seen if redirection to main.html happens
+    // Therefore, we can try "alert".
+    alert(
+      `Error creating user document:\n${error.code || ""}\n${error.message || error}`,
+    );
+  }
   // Return the user object for further use (e.g., redirecting or showing a welcome message)
   return user;
 }
@@ -95,7 +101,7 @@ export async function signupUser(name, email, password) {
 // -------------------------------------------------------------
 export async function logoutUser() {
   await signOut(auth);
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 }
 
 // -------------------------------------------------------------

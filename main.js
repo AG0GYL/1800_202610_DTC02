@@ -56,69 +56,148 @@ showName();
 function addVenue() {
   const venueRef = collection(db, "venue");
   console.log("Adding sample Venue data...");
+
   addDoc(venueRef, {
-    code: "BBY01",
-    photo_url: "https://picsum.photos/id/237/300/150",
-    name: "Burnaby Lake Park Trail",
-    city: "Burnaby",
-    level: "easy",
-    details: "A lovely place for a lunch walk.",
-    length: 10,
-    Venue_time: 60,
-    lat: 49.2467097082573,
-    lng: -122.9187029619698,
-    last_updated: serverTimestamp(),
-  });
-  addDoc(venueRef, {
-    code: "AM01",
-    photo_url: "https://picsum.photos/id/237/300/150",
-    name: "Buntzen Lake Trail",
-    city: "Anmore",
-    level: "moderate",
-    details: "Close to town, and relaxing.",
-    length: 10.5,
-    Venue_time: 80,
-    lat: 49.3399431028579,
-    lng: -122.85908496766939,
-    last_updated: serverTimestamp(),
-  });
-  addDoc(venueRef, {
-    code: "NV01",
-    photo_url: "https://picsum.photos/id/237/300/150",
-    name: "Mount Seymour Trail",
-    city: "North Vancouver",
-    level: "hard",
-    details: "Amazing ski slope views.",
-    length: 8.2,
+    code: "VAN01",
+    photo_url:
+      "https://www.sharkclub.com/wp-content/uploads/2018/08/Van1-1.jpg",
+    name: "Shark Club Sports Bar & Grill",
+    city: "Vancouver",
+    level: "lively",
+    details:
+      "Two 12ft HDTV screens and a stadium-quality sound system steps from BC Place and Rogers Arena.",
+    length: 0,
     Venue_time: 120,
-    lat: 49.38847101455571,
-    lng: -122.94092543551031,
+    lat: 49.278849,
+    lng: -123.1129919,
     last_updated: serverTimestamp(),
   });
+
   addDoc(venueRef, {
-    code: "BBY01",
-    photo_url: "https://picsum.photos/id/237/300/150",
-    name: "Burnaby Lake Park Trail",
-    city: "Burnaby",
-    level: "easy",
-    details: "A lovely place for a lunch walk.",
-    length: 10,
-    Venue_time: 60,
-    lat: 49.2467097082573,
-    lng: -122.9187029619698,
+    code: "VAN02",
+    photo_url:
+      "https://thepintto.com/cdn/shop/files/DSC00889.jpg?v=1700168926&width=1500",
+    name: "The Pint Public House",
+    city: "Vancouver",
+    level: "casual",
+    details:
+      "Steps from BC Place with 16 rotating beers on tap, famous wing specials, and a lively match-day crowd.",
+    length: 0,
+    Venue_time: 90,
+    lat: 49.2814279,
+    lng: -123.1077303,
     last_updated: serverTimestamp(),
   });
+
   addDoc(venueRef, {
-    code: "AM01",
-    photo_url: "https://picsum.photos/id/237/300/150",
-    name: "Buntzen Lake Trail",
-    city: "Anmore",
-    level: "moderate",
-    details: "Close to town, and relaxing.",
-    length: 10.5,
-    Venue_time: 80,
-    lat: 49.3399431028579,
-    lng: -122.85908496766939,
+    code: "VAN04",
+    photo_url:
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/4c/a7/3e/our-beerhall.jpg?w=900&h=500&s=1",
+    name: "BREWHALL",
+    city: "Vancouver",
+    level: "craft",
+    details:
+      "Olympic Village craft brewpub with big projector screens, arcade games, and a huge selection of in-house beers.",
+    length: 0,
+    Venue_time: 120,
+    lat: 49.2694506,
+    lng: -123.10351750000001,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "VAN05",
+    photo_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUV6R4gVVyS4DwvgTQbhc7CgBP39wyq4yRbA&s",
+    name: "Bimini's Since 1975",
+    city: "Vancouver",
+    level: "casual",
+    details:
+      "Legendary Kitsilano neighbourhood pub since 1975 with big-screen TVs, daily specials, and retro vibes.",
+    length: 0,
+    Venue_time: 90,
+    lat: 49.2678833,
+    lng: -123.1508689,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "VAN06",
+    photo_url:
+      "https://static.wixstatic.com/media/914129_99ab0f978e0a434ea0185bdc3a9f77f5~mv2.jpg/v1/fill/w_2500,h_1666,al_c/914129_99ab0f978e0a434ea0185bdc3a9f77f5~mv2.jpg",
+    name: "The Park Pub",
+    city: "Vancouver",
+    level: "lively",
+    details:
+      "West End sports pub with 17 HD screens, all major broadcaster subscriptions, and early 7am weekend opening for international matches.",
+    length: 0,
+    Venue_time: 120,
+    lat: 49.2870025,
+    lng: -123.14102929999999,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "VAN07",
+    photo_url:
+      "https://cdn.prod.website-files.com/62954f7e3328512ebad888a4/63d334087e4bf41fa27ae276_courtside-img.png",
+    name: "Courtside Food & Drinks",
+    city: "Vancouver",
+    level: "upscale",
+    details:
+      "Trendy Mount Pleasant sports bar with immersive basketball decor, a 15-ft outdoor jumbotron, and elevated stadium eats.",
+    length: 0,
+    Venue_time: 90,
+    lat: 49.2633873,
+    lng: -123.1012726,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "VAN08",
+    photo_url:
+      "https://static.wixstatic.com/media/2cf2fd_9bc26420efb04e1894be04479321c8c7.jpg/v1/fit/w_2500,h_1330,al_c/2cf2fd_9bc26420efb04e1894be04479321c8c7.jpg",
+    name: "Red Card Sports Bar + Eatery",
+    city: "Vancouver",
+    level: "casual",
+    details:
+      "Charming 1908 building in downtown Vancouver with 16 HD TVs, two projector screens, and an Italian wood-burning pizza oven.",
+    length: 0,
+    Venue_time: 90,
+    lat: 49.2794251,
+    lng: -123.12034709999999,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "RMD01",
+    photo_url:
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/ed/4d/ce/our-house-is-your-house.jpg?w=900&h=500&s=1",
+    name: "The Canadian Brewhouse & Grill",
+    city: "Richmond",
+    level: "family-friendly",
+    details:
+      "Richmond's go-to sports bar with wall-to-wall TVs, a massive menu, and a welcoming atmosphere for all ages.",
+    length: 0,
+    Venue_time: 90,
+    lat: 49.17762,
+    lng: -123.12370999999999,
+    last_updated: serverTimestamp(),
+  });
+
+  addDoc(venueRef, {
+    code: "SUR01",
+    photo_url:
+      "https://images-dh-production-baselayer.dailyhive.com/uploads/2024/05/image-33-2-e1716413850919.jpg?format=auto&width=988",
+    name: "Par4 Kitchen & Bar",
+    city: "Surrey",
+    level: "upscale",
+    details:
+      "Surrey's premier sports lounge with golf simulators, elevated global comfort cuisine, and UFC on every screen.",
+    length: 0,
+    Venue_time: 120,
+    lat: 49.1038281,
+    lng: -122.8005669,
     last_updated: serverTimestamp(),
   });
 }
@@ -147,26 +226,31 @@ async function seedVenues() {
 seedVenues();
 
 async function displayCardsDynamically() {
-  let cardTemplate = document.getElementById("venueCenuTardTemplate");
-  const hikesCollectionRef = collection(db, "venue");
+  let cardTemplate = document.getElementById("venueCardTemplate");
+  const venuesCollectionRef = collection(db, "venue");
 
   try {
-    const querySnapshot = await getDocs(hikesCollectionRef);
+    const querySnapshot = await getDocs(venuesCollectionRef);
     querySnapshot.forEach((doc) => {
       // Clone the template
-      let newcard = venueCardTemplate.content.cloneNode(true);
+      let newcard = cardTemplate.content.cloneNode(true);
       // Get hike data once
       const venue = doc.data();
 
       // Populate the card with hike data
+
       newcard.querySelector(".card-title").textContent = venue.name;
-      newcard.querySelector(".card-text").textContent = 
+      newcard.querySelector(".card-text").textContent =
         venue.details || `Located in ${venue.city}.`;
-      newcard.querySelector(".card-length").textContent = venue.length;
+      newcard.querySelector(".card-level").textContent = venue.level;
       newcard.querySelector(".card-image").textContent = venue.photo_url;
       newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
-      newcard.querySelector(".read-more").href = `./pages/venue.html?docID=${doc.id}`;
-      
+      newcard.querySelector(".read-more").href =
+        `./pages/venue.html?docID=${doc.id}`;
+
+      newcard.getElementById("card-overlay").classList.add("text-2xl");
+      newcard.getElementById("card-overlay").classList.add("p-2");
+
       // Attach the new card to the container
       document.getElementById("venue-card-carousel").appendChild(newcard);
     });
@@ -177,4 +261,3 @@ async function displayCardsDynamically() {
 
 // Call the function to display cards when the page loads
 displayCardsDynamically();
-
