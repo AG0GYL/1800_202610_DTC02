@@ -96,37 +96,14 @@
       </div>
     </header>
     <main class="max-w-6xl mx-auto px-10">
-      <!-- REVIEW NAVBAR -->
-      <section id="reviewFormSubmissionContainer" class="py-5 flex gap-4">
-        <button
-          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
-        >
-          Write a Review
-        </button>
-        <button
-          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
-        >
-          Add photos
-        </button>
-        <button
-          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
-        >
-          Share
-        </button>
-        <button
-          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
-        >
-          Save
-        </button>
-      </section>
       <!-- 2 COLUMN SET UP -->
-      <div id="columnContainer" class="flex w-full gap-5">
+      <div id="columnContainer" class="flex w-full gap-5 pt-10">
         <!-- PHOTOS / ABOUT / REVIEWS -->
         <section id="leftMainColumn" class="flex flex-col w-2/3 py-4 gap-5">
           <!-- PHOTO GALLERY CAROUSEL -->
           <div
             id="photoGalleryContainer"
-            class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg"
+            class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <section
               id="photoGalleryContainerHeader"
@@ -148,7 +125,7 @@
           <!-- ABOUT -->
           <div
             id="venueAboutDescription"
-            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <h2 class="text-2xl font-extrabold flex justify-start">About</h2>
             <p id="photoGalleryCarousel" class="">
@@ -159,10 +136,40 @@
             </p>
           </div>
 
+          <!-- REVIEW NAVBAR -->
+          <section id="reviewFormSubmissionControls" class="pt-5 flex gap-4">
+            <!-- WRITE A REVIEW BTN -->
+            <button
+              id="writeReviewBtn"
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+            >
+              Write a Review
+            </button>
+            <!-- ADD PHOTOS -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Add photos
+            </button>
+            <!-- SHARE BUTTON -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Share
+            </button>
+            <!-- SAVE BUTTON -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Save
+            </button>
+          </section>
+          <section id="reviewFormSubmissionContainer" class="hidden"></section>
+
           <!-- REVIEWS -->
           <div
             id="venueReviewsContainer"
-            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <section
               id="venueReviewsContainerHeader"
@@ -183,7 +190,7 @@
           <!-- MAP CONTAINER -->
           <div
             id="mapContainer"
-            class="flex flex-col w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg"
+            class="flex flex-col w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <h2 class="text-2xl font-extrabold">Location & Hours</h2>
             <!-- MAP -->
@@ -207,7 +214,7 @@
           <!-- SCHEDULE CONTAINER -->
           <div
             id="scheduleContainer"
-            class="flex flex-col w-full border-1 border-stone-400/90 pb-4 rounded-lg"
+            class="flex flex-col w-full border-1 border-stone-400/90 pb-4 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <span
               class="px-3 py-2 font-semibold text-green-600 cursor-pointer border-stone-400/90 border-b-1 rounded-none"
@@ -254,7 +261,7 @@
           <!-- WATCH PARTY SCHEDULE CONTAINER -->
           <div
             id="gameScheduleContainer"
-            class="flex flex-col w-full border-1 bg-stone-900 text-white pb-4 rounded-lg"
+            class="flex flex-col w-full border-1 bg-stone-900 text-white pb-4 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
           >
             <span class="px-3 py-2 font-semibold text-orange-500"
               >GAME SCHEDULES</span
