@@ -26,7 +26,7 @@ async function displayVenueInfo() {
 
     // venueDetails
     const headerContainer = document.getElementById("headerBackgroundOverlay");
-    headerContainer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${venue.photo_url})`;
+    headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${venue.photo_url})`;
 
     headerContainer.classList.add(`bg-cover`, `bg-center`);
     // const img = document.querySelector("#venueImage");

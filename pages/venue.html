@@ -6,6 +6,11 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- GOOGLE API FOR ICONS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- COMPONENTS -->
     <link rel="stylesheet" href="./map.css" />
     <!-- LEAFLET CSS -->
@@ -30,9 +35,23 @@
     <!-- our own navbar goes here -->
     <site-navbar></site-navbar>
 
-    <!-- beginning -->
-    <div class="bg-black text-white" id="headerBackgroundOverlay">
-      <div class="max-w-6xl mx-auto p-10 py-20">
+    <!-- HEADER SECTION -->
+    <header class="bg-black text-white" id="headerBackgroundOverlay">
+      <div class="max-w-6xl mx-auto px-10 pt-20">
+        <!-- KEYWORD TAGS FOR VENUE -->
+        <ul class="flex gap-4 py-5">
+          <span class="p-1 px-4 rounded-lg bg-green-600 cursor-pointer"
+            >● Open Now</span
+          >
+          <span
+            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
+            >Sports Bar</span
+          >
+          <span
+            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
+            >Pizza</span
+          >
+        </ul>
         <h1 class="text-5xl font-extrabold" id="venueName">Venue Name</h1>
         <p class="max-w-6xl mx-auto pr-[30%]" id="venueDetails">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. At libero
@@ -41,9 +60,126 @@
           perspiciatis eaque.
         </p>
       </div>
-    </div>
-    <!-- Middle -->
+      <!-- VENUE SUMMARY INFORMATION / RATING / NUMBER OF REVIEWS / PRICE / LOCATION -->
+      <div
+        id="venueSummaryInformation"
+        class="max-w-6xl mx-auto p-10 py-5 flex gap-2"
+      >
+        <!-- RATINGS -->
+        <div id="venueRatingStars">
+          <span class="material-icons text-orange-500" id="star1"
+            >star_outline</span
+          >
+          <span class="material-icons text-orange-500" id="star2"
+            >star_outline</span
+          >
+          <span class="material-icons text-orange-500" id="star3"
+            >star_outline</span
+          >
+          <span class="material-icons text-orange-500" id="star4"
+            >star_outline</span
+          >
+          <span class="material-icons text-orange-500" id="star5"
+            >star_outline</span
+          >
+        </div>
+        <span id="venueRatingNumbers" class="font-bold">4.2</span>
+        <!-- OTHER INFO -->
+        <div class="flex gap-4 text-stone-300">
+          <span class="font-semibold"
+            >(<span id="venueReviewCount">10</span> reviews)</span
+          >
+          <span id="venuePricing">$$</span>
+          <span id="venueLocation">Downtown Vancouver</span>
+          <span id="venueLocation"></span>
+        </div>
+      </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-10">
+      <!-- REVIEW NAVBAR -->
+      <section id="reviewFormSubmissionContainer" class="py-5 flex gap-4">
+        <button
+          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+        >
+          Write a Review
+        </button>
+        <button
+          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+        >
+          Add photos
+        </button>
+        <button
+          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+        >
+          Share
+        </button>
+        <button
+          class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+        >
+          Save
+        </button>
+      </section>
+      <!-- 2 COLUMN SET UP -->
+      <div id="columnContainer" class="flex w-full gap-10">
+        <!-- PHOTOS / ABOUT / REVIEWS -->
+        <section id="leftMainColumn" class="flex flex-col w-2/3 py-4 gap-5">
+          <!-- PHOTO GALLERY CAROUSEL -->
+          <div
+            id="photoGalleryContainer"
+            class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg"
+          >
+            <section
+              id="photoGalleryContainerHeader"
+              class="flex justify-between w-full items-center"
+            >
+              <h2 class="text-2xl font-extrabold">Photos</h2>
+              <a href="#" class="text-orange-500 font-semibold cursor-pointer"
+                >See all <span id="photoGalleryCount">47</span>→</a
+              >
+            </section>
+            <section
+              id="photoGalleryCarousel"
+              class="bg-orange-500/70 w-full flex justify-center h-[300px]"
+            >
+              Pictures
+            </section>
+          </div>
 
+          <!-- ABOUT -->
+          <div
+            id="venueAboutDescription"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg"
+          >
+            <h2 class="text-2xl font-extrabold flex justify-start">About</h2>
+            <p id="photoGalleryCarousel" class="">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+              quia vitae vero ullam maiores aperiam suscipit nisi totam
+              molestias dolor nostrum, praesentium in numquam? Natus quaerat id
+              esse neque eligendi.
+            </p>
+          </div>
+
+          <!-- REVIEWS -->
+          <div
+            id="venueReviewsContainer"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg"
+          >
+            <section
+              id="venueReviewsContainerHeader"
+              class="flex justify-between w-full items-center"
+            >
+              <h2 class="text-2xl font-extrabold">Rating & Reviews</h2>
+              <button href="#" class="text-orange-500 font-semibold cursor-pointer"
+                >Sort by: Most recent</
+              >
+            </section>
+          </div>
+        </section>
+        <section id="rightMainColumn" class="flex w-1/3">testing</section>
+      </div>
+    </main>
+
+    <!-- Middle -->
     <main class="container py-[5%] max-w-6xl mx-auto px-10">
       <ul class="flex flex-row space-x-3">
         <li
