@@ -408,10 +408,10 @@ async function populateReviews() {
       let starRating = "";
       const safeRating = Math.max(0, Math.min(5, venueRating));
       for (let i = 0; i < safeRating; i++) {
-        starRating += '<span class="material-icons">star</span>';
+        starRating += '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star</span>';
       }
       for (let i = safeRating; i < 5; i++) {
-        starRating += '<span class="material-icons">star_outline</span>';
+        starRating += '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star_outline</span>';
       }
       reviewCard.querySelector(".reviewUseRating").innerHTML = starRating;
 

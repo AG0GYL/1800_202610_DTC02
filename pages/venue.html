@@ -63,29 +63,31 @@
       <!-- VENUE SUMMARY INFORMATION / RATING / NUMBER OF REVIEWS / PRICE / LOCATION -->
       <div
         id="venueSummaryInformation"
-        class="max-w-6xl mx-auto p-10 py-5 flex gap-2"
+        class="max-w-6xl mx-auto p-10 py-5 flex gap-2 flex-col md:flex-row"
       >
         <!-- RATINGS -->
-        <div id="venueRatingStars">
-          <span class="material-icons text-orange-500" id="star1"
-            >star_outline</span
-          >
-          <span class="material-icons text-orange-500" id="star2"
-            >star_outline</span
-          >
-          <span class="material-icons text-orange-500" id="star3"
-            >star_outline</span
-          >
-          <span class="material-icons text-orange-500" id="star4"
-            >star_outline</span
-          >
-          <span class="material-icons text-orange-500" id="star5"
-            >star_outline</span
-          >
-        </div>
-        <span id="venueRatingNumbers" class="font-bold">4.2</span>
+        <section id="venueRatingsContainer" class="flex gap-3">
+          <div id="venueRatingStars">
+            <span class="material-icons text-orange-500" id="star1"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star2"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star3"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star4"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star5"
+              >star_outline</span
+            >
+          </div>
+          <span id="venueRatingNumbers" class="font-bold">4.2</span>
+        </section>
         <!-- OTHER INFO -->
-        <div class="flex gap-4 text-stone-300">
+        <div class="flex gap-4 text-stone-300 flex-wrap">
           <span class="font-semibold"
             >(<span id="venueReviewCount">10</span> reviews)</span
           >
@@ -97,9 +99,12 @@
     </header>
     <main class="max-w-6xl mx-auto px-10">
       <!-- 2 COLUMN SET UP -->
-      <div id="columnContainer" class="flex w-full gap-5 pt-10">
+      <div
+        id="columnContainer"
+        class="flex w-full gap-5 pt-10 flex-col md:flex-row"
+      >
         <!-- PHOTOS / ABOUT / REVIEWS -->
-        <section id="leftMainColumn" class="flex flex-col w-2/3 py-4 gap-5">
+        <section id="leftMainColumn" class="flex flex-col md:w-2/3 w-full py-4 gap-5">
           <!-- PHOTO GALLERY CAROUSEL -->
           <div
             id="photoGalleryContainer"
@@ -169,7 +174,7 @@
           <!-- REVIEWS -->
           <div
             id="venueReviewsContainer"
-            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400 gap-4"
           >
             <section
               id="venueReviewsContainerHeader"
@@ -183,10 +188,10 @@
                 Sort by: Most recent
               </button>
             </section>
-            <div id="venueReviewsGoesHere"></div>
+            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
           </div>
         </section>
-        <section id="rightMainColumn" class="flex flex-col w-1/3 py-4 gap-5">
+        <section id="rightMainColumn" class="flex flex-col md:w-1/3 w-full py-4 gap-5">
           <!-- MAP CONTAINER -->
           <div
             id="mapContainer"
@@ -333,7 +338,7 @@
           <!-- REVIEW TITLE -->
           <h2 class="reviewUserTitle font-semibold">Placeholder</h2>
           <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
-          <div class="reviewUserSummary flex gap-2">
+          <div class="reviewUserSummary flex gap-2 flex-wrap">
             <span
               class="reviewUserAtmosphere border-1 border-stone-400/90 py-1 px-3 rounded-lg"
               >Placeholder</span
