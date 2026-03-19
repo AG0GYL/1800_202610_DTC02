@@ -278,6 +278,102 @@
       </div>
     </main>
 
+    <!-- TEMPLATE GOES HERE -->
+    <!-- REVIEW CARD TEMPLATE -->
+    <template id="reviewCardTemplate">
+      <div
+        id="reviewCardTemplateContainer"
+        class="flex flex-col gap-4 justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md backdrop-blur-sm hover:border-orange-400"
+      >
+        <!-- AVATAR + USERNAME + TIMESTAMP -->
+        <section
+          id="reviewUserIdentification"
+          class="flex items-center justify-between"
+        >
+          <!-- avatar + username -->
+          <div class="flex items-center gap-2">
+            <div
+              id="reviewUserAvatar"
+              class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center"
+            >
+              C
+            </div>
+            <h2 id="reviewUserName">Placeholder</h2>
+          </div>
+          <!-- TIMESTAMP -->
+          <p id="reviewUserTimeStamp">00:00 AM</p>
+        </section>
+        <!-- SUMMARY: RATING + TITLE + SUMMARY VIBES -->
+        <section class="flex flex-col gap-2">
+          <!-- STAR RATING -->
+          <div class="flex gap-1" id="reviewUseRating">
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="1"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="2"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="3"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="4"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="5"
+              >star_outline</span
+            >
+          </div>
+          <!-- REVIEW TITLE -->
+          <h2 id="reviewUserTitle" class="font-semibold">Placeholder</h2>
+          <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
+          <div id="reviewUserSummary" class="flex gap-2">
+            <span
+              id="reviewUserAtmosphere"
+              class="border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              id="reviewUserGroupSize"
+              class="border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              id="reviewUserPricing"
+              class="border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              id="reviewUserWouldGoAgain"
+              class="border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+          </div>
+        </section>
+        <!-- LONG DESCRIPTION -->
+        <section>
+          <p
+            id="reviewUserDescription"
+            class="border-t-1 border-stone-200 pt-2"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quos
+            libero, sit dolorem, rem maxime voluptas maiores vitae dolorum
+            aliquid autem consequuntur inventore ducimus voluptate quo quas
+            velit vero! Autem.
+          </p>
+        </section>
+      </div>
+    </template>
+
     <!-- IMPORT JS -->
     <script type="module" src="../src/venue.js"></script>
   </body>
