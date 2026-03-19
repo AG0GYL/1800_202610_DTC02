@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../src/firebaseConfig.js";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, documentId, getDoc, setDoc } from "firebase/firestore";
 
 function showName() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
@@ -131,6 +131,10 @@ function populateUserInfo() {
           document.getElementById("nameInput").value = name;
           document.getElementById("schoolInput").value = school;
           document.getElementById("cityInput").value = city;
+
+          // Populate user current information
+          document.getElementById("currentName").innerText = name;
+          document.getElementById("currentSchool").innerText = school;
           //---------------------------------------------
           //Add metadata back, and assign to image source
           //---------------------------------------------
