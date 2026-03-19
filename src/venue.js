@@ -6,6 +6,9 @@ import {
   collection,
   addDoc,
   serverTimestamp,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 // Get the document ID from the URL
@@ -341,3 +344,82 @@ async function writeReview() {
 // ADD EVENT LISTENER TO SUBMIT BUTTON
 const submitReviewBtn = document.getElementById("submitReviewBtn");
 submitReviewBtn.addEventListener("click", writeReview);
+
+async function populateReviews() {
+  console.log("test");
+  const reviewCardTemplate = document.getElementById("reviewCardTemplate");
+  const venueReviewsGoesHere = document.getElementById(
+    "venueReviewsGoesHere",
+  );
+
+  // Get venue ID from the URL (e.g. ?docID=abc123)
+  const params = new URL(window.location.href);
+  const venueID = params.searchParams.get("docID");
+
+  if (!venueID) {
+    console.warn("No venueID found in URL.");
+    return;
+  }
+
+  try {
+    // Sub-collection path: venue/{venueID}/reviews
+    const reviewsRef = collection(db, "venue", venueID, "reviews");
+
+    // Optional: order by timestamp (recommended)
+    // const q = query(reviewsRef, orderBy("timestamp", "desc"));
+    // const querySnapshot = await getDocs(q);
+
+    const querySnapshot = await getDocs(reviewsRef);
+
+    console.log("Found", querySnapshot.size, "reviews");
+
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+
+      const venueTitle = data.title || "(No title)";
+      const venueAtmosphere = data.atmosphere || "(Not specified)";
+      const venueGroupSize = data.groupSize || "(Not specified)";
+      const venueDescription = data.description || "";
+      const venuePricing = data.pricing ?? "(unknown)";
+      const venueWouldVisitAgain = data.wouldVisitAgain ?? "(unknown)";
+      const venueRating = Number(data.rating ?? 0);
+
+      // Format the time
+      let time = "";
+      if (data.timestamp?.toDate) {
+        time = data.timestamp.toDate().toLocaleString();
+      }
+
+      // Clone the template and fill in the fields
+      const reviewCard = reviewCardTemplate.content.cloneNode(true);
+
+      reviewCard.querySelector(".reviewUserTitle").textContent = venueTitle;
+      reviewCard.querySelector(".reviewUserAtmosphere").textContent =
+        venueAtmosphere;
+      reviewCard.querySelector(".reviewUserGroupSize").textContent =
+        venueGroupSize;
+      reviewCard.querySelector(".reviewUserDescription").textContent =
+        venueDescription;
+      reviewCard.querySelector(".reviewUserPricing").textContent = venuePricing;
+      reviewCard.querySelector(".reviewUserWouldVisitAgain").textContent =
+        venueWouldVisitAgain;
+
+      // Star rating
+      let starRating = "";
+      const safeRating = Math.max(0, Math.min(5, venueRating));
+      for (let i = 0; i < safeRating; i++) {
+        starRating += '<span class="material-icons">star</span>';
+      }
+      for (let i = safeRating; i < 5; i++) {
+        starRating += '<span class="material-icons">star_outline</span>';
+      }
+      reviewCard.querySelector(".reviewUseRating").innerHTML = starRating;
+
+      venueReviewsGoesHere.appendChild(reviewCard);
+    });
+  } catch (error) {
+    console.error("Error loading reviews:", error);
+  }
+}
+
+populateReviews();
