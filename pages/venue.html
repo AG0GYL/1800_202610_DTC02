@@ -6,6 +6,11 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- GOOGLE API FOR ICONS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- COMPONENTS -->
     <link rel="stylesheet" href="./map.css" />
     <!-- LEAFLET CSS -->
@@ -30,9 +35,23 @@
     <!-- our own navbar goes here -->
     <site-navbar></site-navbar>
 
-    <!-- beginning -->
-    <div class="bg-black text-white" id="headerBackgroundOverlay">
-      <div class="max-w-6xl mx-auto p-10 py-20">
+    <!-- HEADER SECTION -->
+    <header class="bg-black text-white" id="headerBackgroundOverlay">
+      <div class="max-w-6xl mx-auto px-10 pt-20">
+        <!-- KEYWORD TAGS FOR VENUE -->
+        <ul class="flex gap-4 py-5">
+          <span class="p-1 px-4 rounded-lg bg-green-600 cursor-pointer"
+            >● Open Now</span
+          >
+          <span
+            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
+            >Sports Bar</span
+          >
+          <span
+            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
+            >Pizza</span
+          >
+        </ul>
         <h1 class="text-5xl font-extrabold" id="venueName">Venue Name</h1>
         <p class="max-w-6xl mx-auto pr-[30%]" id="venueDetails">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. At libero
@@ -41,142 +60,316 @@
           perspiciatis eaque.
         </p>
       </div>
-    </div>
-    <!-- Middle -->
-
-    <main class="container py-[5%] max-w-6xl mx-auto px-10">
-      <ul class="flex flex-row space-x-3">
-        <li
-          class="bg-orange-500 duration-150 text-white text-xl p-3 rounded-lg cursor-pointer hover:text-black hover:bg-white hover:border"
-        >
-          Write a Review
-        </li>
-        <li class="text-xl p-3 rounded-lg border">Add Photos/videos</li>
-        <li class="text-xl p-3 rounded-lg border">Share</li>
-        <li class="text-xl p-3 rounded-lg border">Save</li>
-      </ul>
-      <main class="flex flex-row space-x-5 py-[5%]">
-        <section id="map-container" class="flex flex-col">
-          <h1 class="text-2xl font-bold py-[2%]">Location &amp; Hours</h1>
-          <a href="./map.html"><div id="map" class="w-100 max-h-70"></div></a>
-          <div class="flex flex-row justify-between py-[2%]">
-            <div class="flex flex-col">
-              <p>Street</p>
-              <p>City, postal code</p>
-            </div>
-            <button class="text-xl p-3 rounded-lg border">
-              <a href="./map.html">Get Directions</a>
-            </button>
+      <!-- VENUE SUMMARY INFORMATION / RATING / NUMBER OF REVIEWS / PRICE / LOCATION -->
+      <div
+        id="venueSummaryInformation"
+        class="max-w-6xl mx-auto p-10 py-5 flex gap-2 flex-col md:flex-row"
+      >
+        <!-- RATINGS -->
+        <section id="venueRatingsContainer" class="flex gap-3">
+          <div id="venueRatingStars">
+            <span class="material-icons text-orange-500" id="star1"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star2"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star3"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star4"
+              >star_outline</span
+            >
+            <span class="material-icons text-orange-500" id="star5"
+              >star_outline</span
+            >
           </div>
+          <span id="venueRatingNumbers" class="font-bold">4.2</span>
         </section>
-        <div class="flex flex-col py-[5%]">
-          <ul class="space-y-4">
-            <li>Mon 12:00 PM - 1:00 AM</li>
-            <li>Tues 12:00 PM - 1:00 AM</li>
-            <li>Wed 12:00 PM - 1:00 AM</li>
-            <li>Thurs 12:00 PM - 1:00 AM</li>
-            <li>Fri 12:00 PM - 1:00 AM</li>
-            <li>Sat 12:00 PM - 1:00 AM</li>
-            <li>Sun 12:00 PM - 1:00 AM</li>
-          </ul>
-        </div>
-      </main>
-      <div class="">
-        <h1 class="py-[2%] text-2xl font-bold">Reviews</h1>
-        <div class="shadow-xl rounded-4xl outline-2">
-          <div class="flex flex-row p-5">
-            <div class="flex flex-row items-center justify-center space-x-2">
-              <img
-                src="https://picsum.photos/id/400/300/150"
-                alt=""
-                class="rounded-full w-25 h-25"
-              />
-              <div class="flex flex-col">
-                <ul class="">
-                  <li>Username</li>
-                  <li>
-                    <div class="flex flex-row">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                        />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                        />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                        />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                        />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="icon icon-tabler icons-tabler-filled icon-tabler-star"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                        />
-                      </svg>
-                    </div>
-                  </li>
-                </ul>
-                <div>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Repellendus aliquam nobis incidunt voluptas dolores
-                  voluptatum, saepe reprehenderit quia cupiditate fugit eum
-                  suscipit mollitia animi possimus eligendi, necessitatibus
-                  quisquam itaque ipsa.
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- OTHER INFO -->
+        <div class="flex gap-4 text-stone-300 flex-wrap">
+          <span class="font-semibold"
+            >(<span id="venueReviewCount">10</span> reviews)</span
+          >
+          <span id="venuePricing">$$</span>
+          <span id="venueLocation">Downtown Vancouver</span>
+          <span id="venueLocation"></span>
         </div>
       </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-10">
+      <!-- 2 COLUMN SET UP -->
+      <div
+        id="columnContainer"
+        class="flex w-full gap-5 pt-10 flex-col md:flex-row"
+      >
+        <!-- PHOTOS / ABOUT / REVIEWS -->
+        <section id="leftMainColumn" class="flex flex-col md:w-2/3 w-full py-4 gap-5">
+          <!-- PHOTO GALLERY CAROUSEL -->
+          <div
+            id="photoGalleryContainer"
+            class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+          >
+            <section
+              id="photoGalleryContainerHeader"
+              class="flex justify-between w-full items-center"
+            >
+              <h2 class="text-2xl font-extrabold">Photos</h2>
+              <a href="#" class="text-orange-500 font-semibold cursor-pointer"
+                >See all <span id="photoGalleryCount">47</span>→</a
+              >
+            </section>
+            <section
+              id="photoGalleryCarousel"
+              class="bg-orange-500/70 w-full flex justify-center h-[300px] rounded-lg"
+            >
+              Pictures
+            </section>
+          </div>
+
+          <!-- ABOUT -->
+          <div
+            id="venueAboutDescription"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+          >
+            <h2 class="text-2xl font-extrabold flex justify-start">About</h2>
+            <p id="photoGalleryCarousel" class="">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+              quia vitae vero ullam maiores aperiam suscipit nisi totam
+              molestias dolor nostrum, praesentium in numquam? Natus quaerat id
+              esse neque eligendi.
+            </p>
+          </div>
+
+          <!-- REVIEW NAVBAR -->
+          <section id="reviewFormSubmissionControls" class="pt-5 flex gap-4">
+            <!-- WRITE A REVIEW BTN -->
+            <button
+              id="writeReviewBtn"
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+            >
+              Write a Review
+            </button>
+            <!-- ADD PHOTOS -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Add photos
+            </button>
+            <!-- SHARE BUTTON -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Share
+            </button>
+            <!-- SAVE BUTTON -->
+            <button
+              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
+            >
+              Save
+            </button>
+          </section>
+          <section id="reviewFormSubmissionContainer" class="hidden"></section>
+
+          <!-- REVIEWS -->
+          <div
+            id="venueReviewsContainer"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400 gap-4"
+          >
+            <section
+              id="venueReviewsContainerHeader"
+              class="flex justify-between w-full items-center"
+            >
+              <h2 class="text-2xl font-extrabold">Rating & Reviews</h2>
+              <button
+                href="#"
+                class="text-orange-500 font-semibold cursor-pointer"
+              >
+                Sort by: Most recent
+              </button>
+            </section>
+            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
+          </div>
+        </section>
+        <section id="rightMainColumn" class="flex flex-col md:w-1/3 w-full py-4 gap-5">
+          <!-- MAP CONTAINER -->
+          <div
+            id="mapContainer"
+            class="flex flex-col w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+          >
+            <h2 class="text-2xl font-extrabold">Location & Hours</h2>
+            <!-- MAP -->
+            <a
+              href="./map.html"
+              id="map"
+              class="w-full max-h-[300px] rounded-lg"
+            ></a>
+            <div class="flex flex-col w-full gap-3">
+              <div class="flex flex-col w-full">
+                <p class="font-semibold">Street</p>
+                <p class="text-stone-600">City, postal code</p>
+              </div>
+              <a
+                href="./map.html"
+                class="text-orange-500 font-semibold cursor-pointer"
+                >Get Directions →</a
+              >
+            </div>
+          </div>
+          <!-- SCHEDULE CONTAINER -->
+          <div
+            id="scheduleContainer"
+            class="flex flex-col w-full border-1 border-stone-400/90 pb-4 rounded-lg shadow-md hover:border-orange-400"
+          >
+            <span
+              class="px-3 py-2 font-semibold text-green-600 cursor-pointer border-stone-400/90 border-b-1 rounded-none"
+              >● Open Now</span
+            >
+            <ul class="w-full px-3">
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Mon<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Tues<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Wed<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Thurs<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Fri<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Sat<span>12:00PM - 1:00 AM</span>
+              </li>
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                Sun<span>12:00PM - 1:00 AM</span>
+              </li>
+            </ul>
+          </div>
+          <!-- WATCH PARTY SCHEDULE CONTAINER -->
+          <div
+            id="gameScheduleContainer"
+            class="flex flex-col w-full border-1 bg-stone-900 text-white pb-4 rounded-lg shadow-md hover:border-orange-400"
+          >
+            <span class="px-3 py-2 font-semibold text-orange-500"
+              >GAME SCHEDULES</span
+            >
+            <ul id="gameScheduleGoesHere" class="w-full px-3">
+              <li
+                class="flex justify-between p-1 hover:font-semibold duration-150"
+              >
+                VAN vs. EDM<span>12:00PM - 1:00 AM</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </main>
+
+    <!-- TEMPLATE GOES HERE -->
+    <!-- REVIEW CARD TEMPLATE -->
+    <template id="reviewCardTemplate">
+      <div
+        class="reviewCardTemplateContainer flex flex-col gap-4 justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+      >
+        <!-- AVATAR + USERNAME + TIMESTAMP -->
+        <section
+          class="reviewUserIdentification flex items-center justify-between"
+        >
+          <!-- avatar + username -->
+          <div class="flex items-center gap-2">
+            <div
+              class="reviewUserAvatar w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center"
+            >
+              C
+            </div>
+            <h2 class="reviewUserName">Placeholder</h2>
+          </div>
+          <!-- TIMESTAMP -->
+          <p class="reviewUserTimeStamp">00:00 AM</p>
+        </section>
+        <!-- SUMMARY: RATING + TITLE + SUMMARY VIBES -->
+        <section class="flex flex-col gap-2">
+          <!-- STAR RATING -->
+          <div class="reviewUseRating flex gap-1">
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="1"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="2"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="3"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="4"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="5"
+              >star_outline</span
+            >
+          </div>
+          <!-- REVIEW TITLE -->
+          <h2 class="reviewUserTitle font-semibold">Placeholder</h2>
+          <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
+          <div class="reviewUserSummary flex gap-2 flex-wrap">
+            <span
+              class="reviewUserAtmosphere border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserGroupSize border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserPricing border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserWouldVisitAgain border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+          </div>
+        </section>
+        <!-- LONG DESCRIPTION -->
+        <section>
+          <p class="reviewUserDescription border-t-1 border-stone-200 pt-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quos
+            libero, sit dolorem, rem maxime voluptas maiores vitae dolorum
+            aliquid autem consequuntur inventore ducimus voluptate quo quas
+            velit vero! Autem.
+          </p>
+        </section>
+      </div>
+    </template>
+
+    <!-- IMPORT JS -->
     <script type="module" src="../src/venue.js"></script>
   </body>
 </html>
