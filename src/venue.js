@@ -8,6 +8,7 @@ import {
   serverTimestamp,
   query,
   where,
+  orderBy,
   getDocs,
 } from "firebase/firestore";
 
@@ -348,9 +349,7 @@ submitReviewBtn.addEventListener("click", writeReview);
 async function populateReviews() {
   console.log("test");
   const reviewCardTemplate = document.getElementById("reviewCardTemplate");
-  const venueReviewsGoesHere = document.getElementById(
-    "venueReviewsGoesHere",
-  );
+  const venueReviewsGoesHere = document.getElementById("venueReviewsGoesHere");
 
   // Get venue ID from the URL (e.g. ?docID=abc123)
   const params = new URL(window.location.href);
@@ -366,16 +365,26 @@ async function populateReviews() {
     const reviewsRef = collection(db, "venue", venueID, "reviews");
 
     // Optional: order by timestamp (recommended)
-    // const q = query(reviewsRef, orderBy("timestamp", "desc"));
-    // const querySnapshot = await getDocs(q);
-
-    const querySnapshot = await getDocs(reviewsRef);
+    const q = query(reviewsRef, orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
 
     console.log("Found", querySnapshot.size, "reviews");
 
-    querySnapshot.forEach((docSnap) => {
+    querySnapshot.forEach(async (docSnap) => {
       const data = docSnap.data();
 
+      // Fetch reviewer name
+      const reviewUserRef = doc(db, "users", data.userID);
+      const reviewUserSnapshot = await getDoc(reviewUserRef);
+
+      const userData = reviewUserSnapshot.data();
+
+      // REVIEWER DETAILS
+      const reviewUserName = userData.name || "Anonymous";
+      // FOR NOW: SET THE AVATAR TO THE FIRST CHAR OF THEIR NAME
+      const reviewUserAvatar = userData.name[0] || "A";
+
+      // REVIEW DETAILS
       const venueTitle = data.title || "(No title)";
       const venueAtmosphere = data.atmosphere || "(Not specified)";
       const venueGroupSize = data.groupSize || "(Not specified)";
@@ -393,6 +402,13 @@ async function populateReviews() {
       // Clone the template and fill in the fields
       const reviewCard = reviewCardTemplate.content.cloneNode(true);
 
+      // REVIEWER DETAILS
+      reviewCard.querySelector(".reviewUserName").textContent = reviewUserName;
+      reviewCard.querySelector(".reviewUserAvatar").textContent =
+        reviewUserAvatar;
+
+      // REVIEW DETAILS
+      reviewCard.querySelector(".reviewUserTimeStamp").textContent = time;
       reviewCard.querySelector(".reviewUserTitle").textContent = venueTitle;
       reviewCard.querySelector(".reviewUserAtmosphere").textContent =
         venueAtmosphere;
@@ -408,10 +424,12 @@ async function populateReviews() {
       let starRating = "";
       const safeRating = Math.max(0, Math.min(5, venueRating));
       for (let i = 0; i < safeRating; i++) {
-        starRating += '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star</span>';
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star</span>';
       }
       for (let i = safeRating; i < 5; i++) {
-        starRating += '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star_outline</span>';
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star_outline</span>';
       }
       reviewCard.querySelector(".reviewUseRating").innerHTML = starRating;
 
