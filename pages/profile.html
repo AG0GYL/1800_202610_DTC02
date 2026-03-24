@@ -18,8 +18,8 @@
 
     <main class="max-w-6xl mx-auto p-10 flex flex-col gap-4">
       <h1 class="text-5xl font-bold py-5">User Profile</h1>
-      <section id="columnContainer" class="flex gap-5">
-        <div id="leftColumnContainer" class="w-1/2 flex flex-col gap-5">
+      <section id="columnContainer" class="flex gap-5 flex-col md:flex-row">
+        <div id="leftColumnContainer" class="w-full md:w-1/2 flex flex-col gap-5">
           <!-- PROFILE PICTURE CONTAINER -->
           <section
             id="profilePictureContainer"
@@ -117,7 +117,7 @@
             </form>
           </section>
         </div>
-        <div id="rightColumnContainer" class="w-1/2 flex flex-col gap-5">
+        <div id="rightColumnContainer" class="w-full md:w-1/2 flex flex-col gap-5">
           <!-- FAVORITE TEAM SELECTION -->
           <section
             class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
