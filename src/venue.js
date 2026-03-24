@@ -82,8 +82,6 @@ function saveVenueDocumentIDAndToggleReviewForm() {
     return;
   }
 
-  // Save the venue ID locally;  provide the key, and the value
-  localStorage.setItem("venueDocID", venueID);
 
   // Toggle review form submission container
   const reviewFormSubmissionContainer = document.getElementById(
@@ -258,23 +256,23 @@ stars.forEach((star) => {
 // Go to firestore to get the name of the vene (using this ID)
 // and display in title of the page
 //-----------------------------------------------------------
-var venueDocID = localStorage.getItem("venueDocID");
-// displayVenueName(venueDocID);
-// async function displayVenueName(id) {
-//   try {
-//     const venueRef = doc(db, "venue", id);
-//     const venueSnap = await getDoc(venueRef);
+var venueDocID = new URL(window.location.href).searchParams.get("docID");
+displayVenueName(venueDocID);
+async function displayVenueName(id) {
+  try {
+    const venueRef = doc(db, "venue", id);
+    const venueSnap = await getDoc(venueRef);
 
-//     if (venueSnap.exists()) {
-//       const venueName = venueSnap.data().name;
-//       document.getElementById("venueName").textContent = venueName;
-//     } else {
-//       console.log("No such venue found!");
-//     }
-//   } catch (error) {
-//     console.error("Error getting venue document:", error);
-//   }
-// }
+    if (venueSnap.exists()) {
+      const venueName = venueSnap.data().name;
+      document.getElementById("venueName").textContent = venueName;
+    } else {
+      console.log("No such venue found!");
+    }
+  } catch (error) {
+    console.error("Error getting venue document:", error);
+  }
+}
 
 //---------------------------------------------------------------------
 // Function to write review data into Firestore
@@ -310,6 +308,7 @@ async function writeReview() {
     venueWouldVisitAgain,
     venueDescription,
   );
+  
 
   // simple validation
   if (!venueTitle || !venueDescription) {
