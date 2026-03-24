@@ -1,38 +1,38 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Requiamber meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Landing Page</title>
-    <!-- Other libraries go here -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- COMPONENTS -->
-    <script src="../src/navbar.js" type="module"></script>
-    <link rel="stylesheet" href="./map.css" />
-    <!-- LEAFLET CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <!-- LEAFLET JS -->
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-      defer
-    ></script>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./map.js" defer></script>
-  </head>
-  <body class="m-0 p-0">
-    <!-- our own navbar goes here -->
-    <site-navbar></site-navbar>
-    <section id="map-container" class="">
-      <div id="map"></div>
-    </section>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map Page</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- COMPONENTS -->
+  <script src="../src/navbar.js" type="module"></script>
+
+  <link rel="stylesheet" href="./map.css" />
+
+  <!-- LEAFLET CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- LEAFLET JS — blocking so L is defined before map.js runs -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- type="module" enables import statements, defer is implicit -->
+  <script src="./map.js" type="module"></script>
+</head>
+
+<body class="m-0 p-0">
+  <site-navbar></site-navbar>
+  <section id="map-container" class="">
+    <div id="map"></div>
+  </section>
+</body>
+
 </html>

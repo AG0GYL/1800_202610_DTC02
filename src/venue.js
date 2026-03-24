@@ -30,19 +30,32 @@ async function displayVenueInfo() {
     const name = venue.name;
     const details = venue.details;
     const code = venue.code;
+    const lng = venue.lng;
+    const lat = venue.lat;
 
     // Update the page
     document.getElementById("venueName").textContent = name;
     document.getElementById("venueDetails").textContent = details;
 
-    // venueDetails
+    // Header background
     const headerContainer = document.getElementById("headerBackgroundOverlay");
     headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${venue.photo_url})`;
+    headerContainer.classList.add("bg-cover", "bg-center");
 
-    headerContainer.classList.add(`bg-cover`, `bg-center`);
-    // const img = document.querySelector("#venueImage");
-    // img.src = `${venue.photo_url}`;
-    // img.alt = `${name}`;
+    //Map Href
+    document.getElementById("map").href = `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
+
+    // Map
+    const map = L.map("mapContainer").setView([lat, lng], 15);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+    L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup(`<b>${name}</b>`)
+      .openPopup();
+
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";
@@ -50,6 +63,7 @@ async function displayVenueInfo() {
 }
 
 displayVenueInfo();
+
 
 // Save venue document ID into local storage
 document.addEventListener("DOMContentLoaded", () => {
@@ -78,6 +92,7 @@ function saveVenueDocumentIDAndToggleReviewForm() {
   );
   reviewFormSubmissionContainer.classList.toggle("hidden");
 }
+
 
 function addReviewForm() {
   const reviewFormSubmissionContainer = document.getElementById(
