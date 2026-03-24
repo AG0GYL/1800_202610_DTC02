@@ -29,7 +29,6 @@ async function displayVenueInfo() {
     const venue = venueSnap.data();
     const name = venue.name;
     const details = venue.details;
-    const code = venue.code;
     const lng = venue.lng;
     const lat = venue.lat;
 
@@ -260,22 +259,22 @@ stars.forEach((star) => {
 // and display in title of the page
 //-----------------------------------------------------------
 var venueDocID = localStorage.getItem("venueDocID");
-displayVenueName(venueDocID);
-async function displayVenueName(id) {
-  try {
-    const venueRef = doc(db, "venue", id);
-    const venueSnap = await getDoc(venueRef);
+// displayVenueName(venueDocID);
+// async function displayVenueName(id) {
+//   try {
+//     const venueRef = doc(db, "venue", id);
+//     const venueSnap = await getDoc(venueRef);
 
-    if (venueSnap.exists()) {
-      const venueName = venueSnap.data().name;
-      document.getElementById("venueName").textContent = venueName;
-    } else {
-      console.log("No such venue found!");
-    }
-  } catch (error) {
-    console.error("Error getting venue document:", error);
-  }
-}
+//     if (venueSnap.exists()) {
+//       const venueName = venueSnap.data().name;
+//       document.getElementById("venueName").textContent = venueName;
+//     } else {
+//       console.log("No such venue found!");
+//     }
+//   } catch (error) {
+//     console.error("Error getting venue document:", error);
+//   }
+// }
 
 //---------------------------------------------------------------------
 // Function to write review data into Firestore
