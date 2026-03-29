@@ -42,19 +42,17 @@ async function displayVenueInfo() {
     headerContainer.classList.add("bg-cover", "bg-center");
 
     //Map Href
-    document.getElementById("map").href = `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
+    document.getElementById("map").href =
+      `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
 
     // Map
     const map = L.map("mapContainer").setView([lat, lng], 15);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup(`<b>${name}</b>`)
-      .openPopup();
-
+    L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";
@@ -62,7 +60,6 @@ async function displayVenueInfo() {
 }
 
 displayVenueInfo();
-
 
 // Save venue document ID into local storage
 document.addEventListener("DOMContentLoaded", () => {
@@ -82,14 +79,12 @@ function saveVenueDocumentIDAndToggleReviewForm() {
     return;
   }
 
-
   // Toggle review form submission container
   const reviewFormSubmissionContainer = document.getElementById(
     "reviewFormSubmissionContainer",
   );
   reviewFormSubmissionContainer.classList.toggle("hidden");
 }
-
 
 function addReviewForm() {
   const reviewFormSubmissionContainer = document.getElementById(
@@ -308,7 +303,6 @@ async function writeReview() {
     venueWouldVisitAgain,
     venueDescription,
   );
-  
 
   // simple validation
   if (!venueTitle || !venueDescription) {
@@ -342,10 +336,10 @@ async function writeReview() {
       // Show successfully submitted review
       const reviewStatusMsg = document.getElementById("reviewStatusMsg");
       reviewStatusMsg.innerText = "Your review has been submitted.";
-      // Redirect after a few seconds
-      setTimeout(() => {
-        window.location.href = `/pages/venue.html?docID=${venueDocID}`;
-      }, 1500);
+      // // Redirect after a few seconds
+      // setTimeout(() => {
+      //   window.location.href = `/pages/venue.html?docID=${venueDocID}`;
+      // }, 1500);
     } catch (error) {
       console.error("Error adding review:", error);
     }
@@ -358,13 +352,32 @@ async function writeReview() {
 }
 
 async function aggregateVenueReviews(venueDocID) {
-  // point to venue in Firestore
   try {
-    venueRef = doc(db, "venue", venueDocID);
-    venueSnap = await getDoc(venueRef);
-    venueData = venueSnap.data();
+    // point to venue in Firestore
+    const venueRef = doc(db, "venue", venueDocID);
+    const venueSnap = await getDoc(venueRef);
+    const venueData = venueSnap.data();
+
+    // point to reviews in Firestore
+    const venueReviewsRef = collection(db, "venue", venueDocID, "reviews");
+    const venueReviewsSnap = await getDocs(venueReviewsRef);
+
+    // Initialize review attributes to none / 0
+    let totalReviews = 0;
+    let totalRating = 0;
+    let totalAtmosphere = { Chill: 0, Moderate: 0, Lively: 0, "High Energy": 0 };
+    let totalGroupSize = { Solo: 0, "Small Group": 0, "Large Group": 0 };
+    let totalPricing = 0;
+    let totalWouldVisitAgain = { Yes: 0, No: 0, Unsure: 0 };
+
+    // Loop through each review and aggregate
+    venueReviewsSnap.forEach((reviewSnap) => {
+      const reviewData = reviewSnap.data();
+      console.log(reviewData);
+    });
+
   } catch (error) {
-    console.log("Error fetching venue data!");
+    console.log("Error aggregating venue reviews!", error);
   }
 }
 
