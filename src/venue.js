@@ -353,6 +353,19 @@ async function writeReview() {
     console.log("No user is signed in");
     window.location.href = "../pages/login.html";
   }
+  // IF REVIEW IS SUCCESSFULLY WRITTEN -> Update/create the venue's review summary.
+  await aggregateVenueReviews(venueDocID);
+}
+
+async function aggregateVenueReviews(venueDocID) {
+  // point to venue in Firestore
+  try {
+    venueRef = doc(db, "venue", venueDocID);
+    venueSnap = await getDoc(venueRef);
+    venueData = venueSnap.data();
+  } catch (error) {
+    console.log("Error fetching venue data!");
+  }
 }
 
 // ADD EVENT LISTENER TO SUBMIT BUTTON
