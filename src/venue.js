@@ -136,10 +136,10 @@ function addReviewForm() {
             class="border-2 border-stone-300 rounded-lg p-2 focus:outline-none focus:border-orange-400"
           >
             <option value="">Select atmosphere type</option>
-            <option value="chill">Chill</option>
-            <option value="moderate">Moderate</option>
-            <option value="lively">Lively</option>
-            <option value="highEnergy">High Energy</option>
+            <option value="Chill">Chill</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Lively">Lively</option>
+            <option value="High Energy">High Energy</option>
           </select>
         </div>
         <div class="flex flex-col gap-1 w-1/2">
@@ -151,8 +151,8 @@ function addReviewForm() {
           >
             <option value="">Best for what group size</option>
             <option value="solo">Solo</option>
-            <option value="smallGroup">Small Group</option>
-            <option value="largeGroup">Large Group</option>
+            <option value="Small Group">Small Group</option>
+            <option value="Large Group">Large Group</option>
           </select>
         </div>
       </div>
@@ -182,13 +182,13 @@ function addReviewForm() {
           <label class="text-stone-600 text-sm font-semibold tracking-wide">WOULD YOU VISIT AGAIN?</label>
           <div class="flex gap-4">
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="yes" class="accent-orange-500" /> Yes
+              <input type="radio" name="wouldVisitAgain" value="Yes" class="accent-orange-500" /> Yes
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="no" class="accent-orange-500" /> No
+              <input type="radio" name="wouldVisitAgain" value="No" class="accent-orange-500" /> No
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="unsure" checked class="accent-orange-500" /> Not sure
+              <input type="radio" name="wouldVisitAgain" value="Unsure" checked class="accent-orange-500" /> Not sure
             </label>
           </div>
         </div>
