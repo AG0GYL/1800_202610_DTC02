@@ -31,6 +31,7 @@ async function displayVenueInfo() {
     const name = venue.name;
     const city = venue.city;
     const details = venue.details;
+    const photo_url = venue.photo_url;
     const lng = venue.lng;
     const lat = venue.lat;
 
@@ -38,6 +39,16 @@ async function displayVenueInfo() {
     document.getElementById("venueName").textContent = name;
     document.getElementById("venueDetails").textContent = details;
     document.getElementById("venueLocation").textContent = city;
+    document.getElementById("venueAboutDescription").textContent = details;
+
+    // Photo carousel
+    document.getElementById("photoGalleryCarousel").src = photo_url;
+    photoGalleryCarousel.innerHTML = `
+      <section
+        id="photoGalleryCarousel"
+        class="bg-[url(${venue.photo_url})] bg-cover bg-center bg-orange-500/70 w-full flex justify-center h-[300px] rounded-lg"
+      >
+      </section>`;
 
     // Venue reviews summary
     if (venue.totalReviews) {
