@@ -29,6 +29,7 @@ async function displayVenueInfo() {
 
     const venue = venueSnap.data();
     const name = venue.name;
+    const city = venue.city;
     const details = venue.details;
     const lng = venue.lng;
     const lat = venue.lat;
@@ -36,6 +37,34 @@ async function displayVenueInfo() {
     // Update the page
     document.getElementById("venueName").textContent = name;
     document.getElementById("venueDetails").textContent = details;
+    document.getElementById("venueLocation").textContent = city;
+
+    // Venue reviews summary
+    if (venue.totalReviews) {
+      document.getElementById("venueRatingNumbers").textContent =
+        venue.averageRating.toFixed(1);
+      document.getElementById("venueReviewCount").textContent =
+        venue.totalReviews;
+      document.getElementById("venuePricing").textContent = "$".repeat(
+        venue.averagePricing,
+      );
+      for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById(`star${i}`);
+        if (i <= Math.floor(venue.averageRating)) {
+          star.textContent = "star";
+        } else if (i === Math.ceil(venue.averageRating)) {
+          star.textContent = "star_half";
+        } else {
+          star.textContent = "star_outline";
+        }
+      }
+      // If there are no reviews yet. Populate with placeholders
+    } else {
+      document.getElementById("venueRatingNumbers").textContent =
+        "No reviews yet";
+      document.getElementById("venueReviewCount").textContent = 0;
+      document.getElementById("venuePricing").textContent = "—";
+    }
 
     // Header background
     const headerContainer = document.getElementById("headerBackgroundOverlay");
