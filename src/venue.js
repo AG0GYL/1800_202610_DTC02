@@ -10,6 +10,7 @@ import {
   where,
   orderBy,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 // Get the document ID from the URL
@@ -145,7 +146,7 @@ function addReviewForm() {
             class="border-2 border-stone-300 rounded-lg p-2 focus:outline-none focus:border-orange-400"
           >
             <option value="">Best for what group size</option>
-            <option value="solo">Solo</option>
+            <option value="Solo">Solo</option>
             <option value="Small Group">Small Group</option>
             <option value="Large Group">Large Group</option>
           </select>
@@ -332,14 +333,16 @@ async function writeReview() {
       });
 
       console.log("Review successfully written!");
+      // IF REVIEW IS SUCCESSFULLY WRITTEN -> Update/create the venue's review summary.
+      await aggregateVenueReviews(venueDocID);
 
       // Show successfully submitted review
       const reviewStatusMsg = document.getElementById("reviewStatusMsg");
       reviewStatusMsg.innerText = "Your review has been submitted.";
-      // // Redirect after a few seconds
-      // setTimeout(() => {
-      //   window.location.href = `/pages/venue.html?docID=${venueDocID}`;
-      // }, 1500);
+      // Redirect after a few seconds
+      setTimeout(() => {
+        window.location.href = `/pages/venue.html?docID=${venueDocID}`;
+      }, 1500);
     } catch (error) {
       console.error("Error adding review:", error);
     }
@@ -347,8 +350,6 @@ async function writeReview() {
     console.log("No user is signed in");
     window.location.href = "../pages/login.html";
   }
-  // IF REVIEW IS SUCCESSFULLY WRITTEN -> Update/create the venue's review summary.
-  await aggregateVenueReviews(venueDocID);
 }
 
 async function aggregateVenueReviews(venueDocID) {
@@ -356,7 +357,6 @@ async function aggregateVenueReviews(venueDocID) {
     // point to venue in Firestore
     const venueRef = doc(db, "venue", venueDocID);
     const venueSnap = await getDoc(venueRef);
-    const venueData = venueSnap.data();
 
     // point to reviews in Firestore
     const venueReviewsRef = collection(db, "venue", venueDocID, "reviews");
@@ -420,6 +420,15 @@ async function aggregateVenueReviews(venueDocID) {
         maxWouldVisitAgainCount = totalWouldVisitAgain[key];
       }
     }
+    // After aggregating reviews. Update/create the fields to the venue's Firestore document
+    await updateDoc(venueRef, {
+      totalReviews,
+      averageRating,
+      averageAtmosphere,
+      averageGroupSize,
+      averagePricing,
+      averageWouldVisitAgain,
+    });
   } catch (error) {
     console.log("Error aggregating venue reviews!", error);
   }
