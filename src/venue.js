@@ -365,7 +365,12 @@ async function aggregateVenueReviews(venueDocID) {
     // Initialize review attributes to none / 0
     let totalReviews = 0;
     let totalRating = 0;
-    let totalAtmosphere = { Chill: 0, Moderate: 0, Lively: 0, "High Energy": 0 };
+    let totalAtmosphere = {
+      Chill: 0,
+      Moderate: 0,
+      Lively: 0,
+      "High Energy": 0,
+    };
     let totalGroupSize = { Solo: 0, "Small Group": 0, "Large Group": 0 };
     let totalPricing = 0;
     let totalWouldVisitAgain = { Yes: 0, No: 0, Unsure: 0 };
@@ -373,9 +378,48 @@ async function aggregateVenueReviews(venueDocID) {
     // Loop through each review and aggregate
     venueReviewsSnap.forEach((reviewSnap) => {
       const reviewData = reviewSnap.data();
-      console.log(reviewData);
+      totalReviews += 1;
+      totalRating += reviewData.rating;
+      totalAtmosphere[reviewData.atmosphere] += 1;
+      totalGroupSize[reviewData.groupSize] += 1;
+      totalPricing += reviewData.pricing.length;
+      totalWouldVisitAgain[reviewData.wouldVisitAgain] += 1;
     });
 
+    // Find the average data of the aggregated reviews data
+    let averageRating = totalRating / totalReviews;
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageAtmosphere;
+    let maxAtmosphereCount = 0;
+    for (let key in totalAtmosphere) {
+      if (totalAtmosphere[key] > maxAtmosphereCount) {
+        averageAtmosphere = key;
+        maxAtmosphereCount = totalAtmosphere[key];
+      }
+    }
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageGroupSize;
+    let maxGroupSizeCount = 0;
+    for (let key in totalGroupSize) {
+      if (totalGroupSize[key] > maxGroupSizeCount) {
+        averageGroupSize = key;
+        maxGroupSizeCount = totalGroupSize[key];
+      }
+    }
+
+    let averagePricing = Math.floor(totalPricing / totalReviews);
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageWouldVisitAgain;
+    let maxWouldVisitAgainCount = 0;
+    for (let key in totalWouldVisitAgain) {
+      if (totalWouldVisitAgain[key] > maxWouldVisitAgainCount) {
+        averageWouldVisitAgain = key;
+        maxWouldVisitAgainCount = totalWouldVisitAgain[key];
+      }
+    }
   } catch (error) {
     console.log("Error aggregating venue reviews!", error);
   }
