@@ -562,3 +562,43 @@ async function populateReviews() {
 }
 
 populateReviews();
+
+displayVenueOpenStatus();
+function isVenueOpen() {
+  const now = new Date();
+  const hour = now.getHours();
+  return hour >= 12 || hour < 1;
+}
+
+function displayVenueOpenStatus() {
+  if (isVenueOpen()) {
+    // HERO's open status
+    document.getElementById("venueOpenStatus").textContent = "● Open Now";
+    document.getElementById("venueOpenStatus").classList.remove("bg-red-600");
+    document.getElementById("venueOpenStatus").classList.add("bg-green-600");
+    // SCHEDULE's open status
+    document.getElementById("venueScheduleOpenStatus").textContent =
+      "● Open Now";
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.remove("text-red-600");
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.add("text-green-600");
+  } else {
+    // HERO's open status
+    document.getElementById("venueOpenStatus").textContent = "● Closed";
+    document.getElementById("venueOpenStatus").classList.remove("bg-green-600");
+    document.getElementById("venueOpenStatus").classList.add("bg-red-600");
+    // SCHEDULE's open status
+    document.getElementById("venueScheduleOpenStatus").textContent =
+      "● Closed Now";
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.remove("text-green-600");
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.add("text-red-600");
+  }
+}
+displayVenueOpenStatus();
