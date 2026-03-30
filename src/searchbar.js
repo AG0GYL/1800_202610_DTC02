@@ -28,24 +28,44 @@ async function searchVenues(searchTerm) {
     ...citySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
   ];
 
-  const uniqueResults = Array.from(
-    new Map(results.map((item) => [item.id, item])).values(),
-  );
-
-  console.log("Searching for:", term);
-  console.log("Results:", uniqueResults);
-  
-
-  return uniqueResults;
+  return Array.from(new Map(results.map((item) => [item.id, item])).values());
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const searchBar = document.getElementById("searchBar");
+  const filterBtn = document.getElementById("filterBtn");
+  const filterPanel = document.getElementById("filterPanel");
+
+
+  filterPanel.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+ 
+  filterBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    filterPanel.classList.toggle("hidden");
+  });
+
   document.querySelector("form").addEventListener("submit", (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const term = searchBar.value.trim();
-  if (!term) return;
+    const term = searchBar.value.trim();
+    const level = document.getElementById("levelFilter").value;
+    const group = document.getElementById("groupFilter").value;
 
-  window.location.href = `/pages/results.html?q=${encodeURIComponent(term)}`;
-});
+    const params = new URLSearchParams();
+
+    if (term) params.set("q", term);
+    if (level) params.set("averageAtmosphere", level);
+    if (group) params.set("averageGroupSize", group);
+
+    window.location.href = `/pages/results.html?${params.toString()}`;
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!filterPanel.contains(e.target) && !filterBtn.contains(e.target)) {
+      filterPanel.classList.add("hidden");
+    }
+  });
 });
