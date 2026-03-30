@@ -136,7 +136,7 @@ function populateUserInfo() {
               "data:image/png;base64," + profileImage;
           }
           // Populate reviews posted section
-          populateReviews(user.uid);
+          populateReviews(user.uid, name, profileImage);
         } else {
           console.log("No such document!");
         }
@@ -201,15 +201,71 @@ async function updateUserDocument(uid, name, school, city) {
   }
 }
 
-async function populateReviews(userID) {
+async function populateReviews(userID, username, profileImage) {
   try {
     const myReviewRef = query(
       collectionGroup(db, "reviews"),
       where("userID", "==", userID),
     );
+
     const myReviewSnap = await getDocs(myReviewRef);
     myReviewSnap.forEach((doc) => {
-      console.log(doc.data());
+      let data = doc.data();
+      // REVIEWER DETAILS
+      const reviewUserName = username || "Anonymous";
+      // FOR NOW: SET THE AVATAR TO THE FIRST CHAR OF THEIR NAME
+      const reviewUserAvatar = username[0] || " ";
+
+      // REVIEW DETAILS
+      const venueTitle = data.title || "(No title)";
+      const venueAtmosphere = data.atmosphere || "(Not specified)";
+      const venueGroupSize = data.groupSize || "(Not specified)";
+      const venueDescription = data.description || "";
+      const venuePricing = data.pricing ?? "(unknown)";
+      const venueWouldVisitAgain = data.wouldVisitAgain ?? "(unknown)";
+      const venueRating = Number(data.rating ?? 0);
+
+      // Format the time
+      let time = "";
+      if (data.timestamp?.toDate) {
+        time = data.timestamp.toDate().toLocaleString();
+      }
+
+      // Clone the template and fill in the fields
+      const reviewCard = reviewCardTemplate.content.cloneNode(true);
+
+      // REVIEWER DETAILS
+      reviewCard.querySelector(".reviewUserName").textContent = reviewUserName;
+      reviewCard.querySelector(".reviewUserAvatar").src =
+        `data:image/png;base64,${profileImage}`;
+
+      // REVIEW DETAILS
+      reviewCard.querySelector(".reviewUserTimeStamp").textContent = time;
+      reviewCard.querySelector(".reviewUserTitle").textContent = venueTitle;
+      reviewCard.querySelector(".reviewUserAtmosphere").textContent =
+        venueAtmosphere;
+      reviewCard.querySelector(".reviewUserGroupSize").textContent =
+        venueGroupSize;
+      reviewCard.querySelector(".reviewUserDescription").textContent =
+        venueDescription;
+      reviewCard.querySelector(".reviewUserPricing").textContent = venuePricing;
+      reviewCard.querySelector(".reviewUserWouldVisitAgain").textContent =
+        venueWouldVisitAgain;
+
+      // Star rating
+      let starRating = "";
+      const safeRating = Math.max(0, Math.min(5, venueRating));
+      for (let i = 0; i < safeRating; i++) {
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star</span>';
+      }
+      for (let i = safeRating; i < 5; i++) {
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star_outline</span>';
+      }
+      reviewCard.querySelector(".reviewUseRating").innerHTML = starRating;
+
+      venueReviewsGoesHere.appendChild(reviewCard);
     });
   } catch (error) {
     console.log(error);

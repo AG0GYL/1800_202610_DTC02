@@ -8,6 +8,11 @@
     <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- GOOGLE API FOR ICONS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- COMPONENTS -->
     <script src="../src/navbar.js" type="module"></script>
     <script src="./profile.js" type="module" defer></script>
@@ -21,7 +26,7 @@
       <section id="columnContainer" class="flex gap-5 flex-col md:flex-row">
         <div
           id="leftColumnContainer"
-          class="w-full md:w-1/2 flex flex-col gap-5"
+          class="w-full md:w-1/2 flex flex-col gap-10"
         >
           <!-- PROFILE PICTURE CONTAINER -->
           <section
@@ -119,18 +124,18 @@
               </div>
             </form>
           </section>
+          <!-- POSTED REVIEWS SECTION -->
+          <section
+            class="flex flex-col border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
+          >
+            <h1 class="font-bold text-2xl">Posted Reviews</h1>
+            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
+          </section>
         </div>
         <div
           id="rightColumnContainer"
           class="w-full md:w-1/2 flex flex-col gap-5"
         >
-          <!-- FAVORITE TEAM SELECTION -->
-          <section
-            class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
-          >
-            <h1 class="font-bold text-2xl">Posted Reviews</h1>
-            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
-          </section>
           <!-- FAVORITE TEAM SELECTION -->
           <section
             class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
@@ -166,9 +171,13 @@
           <!-- avatar + username -->
           <div class="flex items-center gap-2">
             <div
-              class="reviewUserAvatar w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center"
+              class="reviewUserAvatarContainer overflow-hidden w-10 h-10 bg-cover bg-center rounded-full bg-orange-500 flex items-center justify-center"
             >
-              C
+              <img
+                src=""
+                alt="Profile Picture"
+                class="reviewUserAvatar w-full h-full object-cover text-center"
+              />
             </div>
             <h2 class="reviewUserName">Placeholder</h2>
           </div>
