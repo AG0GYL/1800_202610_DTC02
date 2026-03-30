@@ -8,6 +8,11 @@
     <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- GOOGLE API FOR ICONS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- COMPONENTS -->
     <script src="../src/navbar.js" type="module"></script>
     <script src="./profile.js" type="module" defer></script>
@@ -19,7 +24,10 @@
     <main class="max-w-6xl mx-auto p-10 flex flex-col gap-4">
       <h1 class="text-5xl font-bold py-5">User Profile</h1>
       <section id="columnContainer" class="flex gap-5 flex-col md:flex-row">
-        <div id="leftColumnContainer" class="w-full md:w-1/2 flex flex-col gap-5">
+        <div
+          id="leftColumnContainer"
+          class="w-full md:w-1/2 flex flex-col gap-10"
+        >
           <!-- PROFILE PICTURE CONTAINER -->
           <section
             id="profilePictureContainer"
@@ -116,8 +124,18 @@
               </div>
             </form>
           </section>
+          <!-- POSTED REVIEWS SECTION -->
+          <section
+            class="flex flex-col border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
+          >
+            <h1 class="font-bold text-2xl">Posted Reviews</h1>
+            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
+          </section>
         </div>
-        <div id="rightColumnContainer" class="w-full md:w-1/2 flex flex-col gap-5">
+        <div
+          id="rightColumnContainer"
+          class="w-full md:w-1/2 flex flex-col gap-5"
+        >
           <!-- FAVORITE TEAM SELECTION -->
           <section
             class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
@@ -139,5 +157,99 @@
         </div>
       </section>
     </main>
+
+    <!-- TEMPLATE GOES HERE -->
+    <!-- REVIEW CARD TEMPLATE -->
+    <template id="reviewCardTemplate">
+      <div
+        class="reviewCardTemplateContainer flex flex-col gap-4 justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+      >
+        <!-- AVATAR + USERNAME + TIMESTAMP -->
+        <section
+          class="reviewUserIdentification flex items-center justify-between"
+        >
+          <!-- avatar + username -->
+          <div class="flex items-center gap-2">
+            <div
+              class="reviewUserAvatarContainer overflow-hidden w-10 h-10 bg-cover bg-center rounded-full bg-orange-500 flex items-center justify-center"
+            >
+              <img
+                src=""
+                alt="Profile Picture"
+                class="reviewUserAvatar w-full h-full object-cover text-center"
+              />
+            </div>
+            <h2 class="reviewUserName">Placeholder</h2>
+          </div>
+          <!-- TIMESTAMP -->
+          <p class="reviewUserTimeStamp">00:00 AM</p>
+        </section>
+        <!-- SUMMARY: RATING + TITLE + SUMMARY VIBES -->
+        <section class="flex flex-col gap-2">
+          <!-- STAR RATING -->
+          <div class="reviewUseRating flex gap-1">
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="1"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="2"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="3"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="4"
+              >star_outline</span
+            >
+            <span
+              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+              data-value="5"
+              >star_outline</span
+            >
+          </div>
+          <!-- REVIEW TITLE -->
+          <h2 class="reviewUserTitle font-semibold">Placeholder</h2>
+          <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
+          <div class="reviewUserSummary flex gap-2 flex-wrap">
+            <span
+              class="reviewUserAtmosphere border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserGroupSize border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserPricing border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+            <span
+              class="reviewUserWouldVisitAgain border-1 border-stone-400/90 py-1 px-3 rounded-lg"
+              >Placeholder</span
+            >
+          </div>
+        </section>
+        <!-- LONG DESCRIPTION -->
+        <section>
+          <p class="reviewUserDescription border-t-1 border-stone-200 pt-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quos
+            libero, sit dolorem, rem maxime voluptas maiores vitae dolorum
+            aliquid autem consequuntur inventore ducimus voluptate quo quas
+            velit vero! Autem.
+          </p>
+        </section>
+        <a
+          href=""
+          class="reviewVenueLink border-1 p-2 px-4 w-fit rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+        ></a>
+      </div>
+    </template>
   </body>
 </html>

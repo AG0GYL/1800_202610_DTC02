@@ -1,6 +1,16 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../src/firebaseConfig.js";
-import { doc, documentId, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  documentId,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+  query,
+  collectionGroup,
+  where,
+} from "firebase/firestore";
 
 //------------------------------------------------------------
 // This function is an Event Listener for the file (image) picker
@@ -125,6 +135,8 @@ function populateUserInfo() {
             document.getElementById("profileImage").src =
               "data:image/png;base64," + profileImage;
           }
+          // Populate reviews posted section
+          populateReviews(user.uid, name, profileImage);
         } else {
           console.log("No such document!");
         }
@@ -188,3 +200,89 @@ async function updateUserDocument(uid, name, school, city) {
     console.error("Error updating user document:", error);
   }
 }
+
+async function populateReviews(userID, username, profileImage) {
+  try {
+    const myReviewRef = query(
+      collectionGroup(db, "reviews"),
+      where("userID", "==", userID),
+    );
+
+    const myReviewSnap = await getDocs(myReviewRef);
+
+    myReviewSnap.forEach(async (doc) => {
+      let data = doc.data();
+      // Fetch venueID
+      // doc.ref = review itself
+      // doc.ref.parent = review collection
+      // doc.ref.parent.parent = venue
+      const venueID = doc.ref.parent.parent.id;
+      // fetch venue name
+      const venueRef = doc.ref.parent.parent;
+      const venueSnap = await getDoc(venueRef);
+      const venueName = venueSnap.data().name;
+
+      // REVIEWER DETAILS
+      const reviewUserName = username || "Anonymous";
+
+      // REVIEW DETAILS
+      const venueTitle = data.title || "(No title)";
+      const venueAtmosphere = data.atmosphere || "(Not specified)";
+      const venueGroupSize = data.groupSize || "(Not specified)";
+      const venueDescription = data.description || "";
+      const venuePricing = data.pricing ?? "(unknown)";
+      const venueWouldVisitAgain = data.wouldVisitAgain ?? "(unknown)";
+      const venueRating = Number(data.rating ?? 0);
+
+      // Format the time
+      let time = "";
+      if (data.timestamp?.toDate) {
+        time = data.timestamp.toDate().toLocaleString();
+      }
+
+      // Clone the template and fill in the fields
+      const reviewCard = reviewCardTemplate.content.cloneNode(true);
+
+      // REVIEWER DETAILS
+      reviewCard.querySelector(".reviewUserName").textContent = reviewUserName;
+      reviewCard.querySelector(".reviewUserAvatar").src =
+        `data:image/png;base64,${profileImage}`;
+
+      // REVIEW DETAILS
+      reviewCard.querySelector(".reviewUserTimeStamp").textContent = time;
+      reviewCard.querySelector(".reviewUserTitle").textContent = venueTitle;
+      reviewCard.querySelector(".reviewUserAtmosphere").textContent =
+        venueAtmosphere;
+      reviewCard.querySelector(".reviewUserGroupSize").textContent =
+        venueGroupSize;
+      reviewCard.querySelector(".reviewUserDescription").textContent =
+        venueDescription;
+      reviewCard.querySelector(".reviewUserPricing").textContent = venuePricing;
+      reviewCard.querySelector(".reviewUserWouldVisitAgain").textContent =
+        venueWouldVisitAgain;
+      // CLICKING ON REVIEW REDIRECTS TO VENUE PAGE
+      reviewCard.querySelector(".reviewVenueLink").href =
+        `/pages/venue.html?docID=${venueID}`;
+      reviewCard.querySelector(".reviewVenueLink").innerText = venueName;
+
+      // Star rating
+      let starRating = "";
+      const safeRating = Math.max(0, Math.min(5, venueRating));
+      for (let i = 0; i < safeRating; i++) {
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star</span>';
+      }
+      for (let i = safeRating; i < 5; i++) {
+        starRating +=
+          '<span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer">star_outline</span>';
+      }
+      reviewCard.querySelector(".reviewUseRating").innerHTML = starRating;
+
+      venueReviewsGoesHere.appendChild(reviewCard);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// populateReviews();

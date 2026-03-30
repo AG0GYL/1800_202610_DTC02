@@ -10,6 +10,7 @@ import {
   where,
   orderBy,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 // Get the document ID from the URL
@@ -28,13 +29,53 @@ async function displayVenueInfo() {
 
     const venue = venueSnap.data();
     const name = venue.name;
+    const city = venue.city;
     const details = venue.details;
+    const photo_url = venue.photo_url;
     const lng = venue.lng;
     const lat = venue.lat;
 
     // Update the page
     document.getElementById("venueName").textContent = name;
     document.getElementById("venueDetails").textContent = details;
+    document.getElementById("venueLocation").textContent = city;
+    document.getElementById("venueAboutDescription").textContent = details;
+
+    // Photo carousel
+    document.getElementById("photoGalleryCarousel").src = photo_url;
+    photoGalleryCarousel.innerHTML = `
+      <section
+        id="photoGalleryCarousel"
+        class="bg-[url(${venue.photo_url})] bg-cover bg-center bg-orange-500/70 w-full flex justify-center h-[300px] rounded-lg"
+      >
+      </section>`;
+
+    // Venue reviews summary
+    if (venue.totalReviews) {
+      document.getElementById("venueRatingNumbers").textContent =
+        venue.averageRating.toFixed(1);
+      document.getElementById("venueReviewCount").textContent =
+        venue.totalReviews;
+      document.getElementById("venuePricing").textContent = "$".repeat(
+        venue.averagePricing,
+      );
+      for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById(`star${i}`);
+        if (i <= Math.floor(venue.averageRating)) {
+          star.textContent = "star";
+        } else if (i === Math.ceil(venue.averageRating)) {
+          star.textContent = "star_half";
+        } else {
+          star.textContent = "star_outline";
+        }
+      }
+      // If there are no reviews yet. Populate with placeholders
+    } else {
+      document.getElementById("venueRatingNumbers").textContent =
+        "No reviews yet";
+      document.getElementById("venueReviewCount").textContent = 0;
+      document.getElementById("venuePricing").textContent = "—";
+    }
 
     // Header background
     const headerContainer = document.getElementById("headerBackgroundOverlay");
@@ -42,19 +83,17 @@ async function displayVenueInfo() {
     headerContainer.classList.add("bg-cover", "bg-center");
 
     //Map Href
-    document.getElementById("map").href = `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
+    document.getElementById("map").href =
+      `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
 
     // Map
     const map = L.map("mapContainer").setView([lat, lng], 15);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup(`<b>${name}</b>`)
-      .openPopup();
-
+    L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";
@@ -62,7 +101,6 @@ async function displayVenueInfo() {
 }
 
 displayVenueInfo();
-
 
 // Save venue document ID into local storage
 document.addEventListener("DOMContentLoaded", () => {
@@ -82,14 +120,12 @@ function saveVenueDocumentIDAndToggleReviewForm() {
     return;
   }
 
-
   // Toggle review form submission container
   const reviewFormSubmissionContainer = document.getElementById(
     "reviewFormSubmissionContainer",
   );
   reviewFormSubmissionContainer.classList.toggle("hidden");
 }
-
 
 function addReviewForm() {
   const reviewFormSubmissionContainer = document.getElementById(
@@ -136,10 +172,10 @@ function addReviewForm() {
             class="border-2 border-stone-300 rounded-lg p-2 focus:outline-none focus:border-orange-400"
           >
             <option value="">Select atmosphere type</option>
-            <option value="chill">Chill</option>
-            <option value="moderate">Moderate</option>
-            <option value="lively">Lively</option>
-            <option value="highEnergy">High Energy</option>
+            <option value="Chill">Chill</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Lively">Lively</option>
+            <option value="High Energy">High Energy</option>
           </select>
         </div>
         <div class="flex flex-col gap-1 w-1/2">
@@ -150,9 +186,9 @@ function addReviewForm() {
             class="border-2 border-stone-300 rounded-lg p-2 focus:outline-none focus:border-orange-400"
           >
             <option value="">Best for what group size</option>
-            <option value="solo">Solo</option>
-            <option value="smallGroup">Small Group</option>
-            <option value="largeGroup">Large Group</option>
+            <option value="Solo">Solo</option>
+            <option value="Small Group">Small Group</option>
+            <option value="Large Group">Large Group</option>
           </select>
         </div>
       </div>
@@ -182,13 +218,13 @@ function addReviewForm() {
           <label class="text-stone-600 text-sm font-semibold tracking-wide">WOULD YOU VISIT AGAIN?</label>
           <div class="flex gap-4">
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="yes" class="accent-orange-500" /> Yes
+              <input type="radio" name="wouldVisitAgain" value="Yes" class="accent-orange-500" /> Yes
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="no" class="accent-orange-500" /> No
+              <input type="radio" name="wouldVisitAgain" value="No" class="accent-orange-500" /> No
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="wouldVisitAgain" value="unsure" checked class="accent-orange-500" /> Not sure
+              <input type="radio" name="wouldVisitAgain" value="Unsure" checked class="accent-orange-500" /> Not sure
             </label>
           </div>
         </div>
@@ -308,7 +344,6 @@ async function writeReview() {
     venueWouldVisitAgain,
     venueDescription,
   );
-  
 
   // simple validation
   if (!venueTitle || !venueDescription) {
@@ -338,6 +373,8 @@ async function writeReview() {
       });
 
       console.log("Review successfully written!");
+      // IF REVIEW IS SUCCESSFULLY WRITTEN -> Update/create the venue's review summary.
+      await aggregateVenueReviews(venueDocID);
 
       // Show successfully submitted review
       const reviewStatusMsg = document.getElementById("reviewStatusMsg");
@@ -352,6 +389,88 @@ async function writeReview() {
   } else {
     console.log("No user is signed in");
     window.location.href = "../pages/login.html";
+  }
+}
+
+async function aggregateVenueReviews(venueDocID) {
+  try {
+    // point to venue in Firestore
+    const venueRef = doc(db, "venue", venueDocID);
+    const venueSnap = await getDoc(venueRef);
+
+    // point to reviews in Firestore
+    const venueReviewsRef = collection(db, "venue", venueDocID, "reviews");
+    const venueReviewsSnap = await getDocs(venueReviewsRef);
+
+    // Initialize review attributes to none / 0
+    let totalReviews = 0;
+    let totalRating = 0;
+    let totalAtmosphere = {
+      Chill: 0,
+      Moderate: 0,
+      Lively: 0,
+      "High Energy": 0,
+    };
+    let totalGroupSize = { Solo: 0, "Small Group": 0, "Large Group": 0 };
+    let totalPricing = 0;
+    let totalWouldVisitAgain = { Yes: 0, No: 0, Unsure: 0 };
+
+    // Loop through each review and aggregate
+    venueReviewsSnap.forEach((reviewSnap) => {
+      const reviewData = reviewSnap.data();
+      totalReviews += 1;
+      totalRating += reviewData.rating;
+      totalAtmosphere[reviewData.atmosphere] += 1;
+      totalGroupSize[reviewData.groupSize] += 1;
+      totalPricing += reviewData.pricing.length;
+      totalWouldVisitAgain[reviewData.wouldVisitAgain] += 1;
+    });
+
+    // Find the average data of the aggregated reviews data
+    let averageRating = totalRating / totalReviews;
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageAtmosphere;
+    let maxAtmosphereCount = 0;
+    for (let key in totalAtmosphere) {
+      if (totalAtmosphere[key] > maxAtmosphereCount) {
+        averageAtmosphere = key;
+        maxAtmosphereCount = totalAtmosphere[key];
+      }
+    }
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageGroupSize;
+    let maxGroupSizeCount = 0;
+    for (let key in totalGroupSize) {
+      if (totalGroupSize[key] > maxGroupSizeCount) {
+        averageGroupSize = key;
+        maxGroupSizeCount = totalGroupSize[key];
+      }
+    }
+
+    let averagePricing = Math.floor(totalPricing / totalReviews);
+
+    // Similar to Python's logic of new_max = max(a, b)
+    let averageWouldVisitAgain;
+    let maxWouldVisitAgainCount = 0;
+    for (let key in totalWouldVisitAgain) {
+      if (totalWouldVisitAgain[key] > maxWouldVisitAgainCount) {
+        averageWouldVisitAgain = key;
+        maxWouldVisitAgainCount = totalWouldVisitAgain[key];
+      }
+    }
+    // After aggregating reviews. Update/create the fields to the venue's Firestore document
+    await updateDoc(venueRef, {
+      totalReviews,
+      averageRating,
+      averageAtmosphere,
+      averageGroupSize,
+      averagePricing,
+      averageWouldVisitAgain,
+    });
+  } catch (error) {
+    console.log("Error aggregating venue reviews!", error);
   }
 }
 
@@ -454,3 +573,43 @@ async function populateReviews() {
 }
 
 populateReviews();
+
+displayVenueOpenStatus();
+function isVenueOpen() {
+  const now = new Date();
+  const hour = now.getHours();
+  return hour >= 12 || hour < 1;
+}
+
+function displayVenueOpenStatus() {
+  if (isVenueOpen()) {
+    // HERO's open status
+    document.getElementById("venueOpenStatus").textContent = "● Open Now";
+    document.getElementById("venueOpenStatus").classList.remove("bg-red-600");
+    document.getElementById("venueOpenStatus").classList.add("bg-green-600");
+    // SCHEDULE's open status
+    document.getElementById("venueScheduleOpenStatus").textContent =
+      "● Open Now";
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.remove("text-red-600");
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.add("text-green-600");
+  } else {
+    // HERO's open status
+    document.getElementById("venueOpenStatus").textContent = "● Closed";
+    document.getElementById("venueOpenStatus").classList.remove("bg-green-600");
+    document.getElementById("venueOpenStatus").classList.add("bg-red-600");
+    // SCHEDULE's open status
+    document.getElementById("venueScheduleOpenStatus").textContent =
+      "● Closed Now";
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.remove("text-green-600");
+    document
+      .getElementById("venueScheduleOpenStatus")
+      .classList.add("text-red-600");
+  }
+}
+displayVenueOpenStatus();
