@@ -1,6 +1,16 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../src/firebaseConfig.js";
-import { doc, documentId, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  documentId,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+  query,
+  collectionGroup,
+  where,
+} from "firebase/firestore";
 
 //------------------------------------------------------------
 // This function is an Event Listener for the file (image) picker
@@ -125,6 +135,8 @@ function populateUserInfo() {
             document.getElementById("profileImage").src =
               "data:image/png;base64," + profileImage;
           }
+          // Populate reviews posted section
+          populateReviews(user.uid);
         } else {
           console.log("No such document!");
         }
@@ -188,3 +200,20 @@ async function updateUserDocument(uid, name, school, city) {
     console.error("Error updating user document:", error);
   }
 }
+
+async function populateReviews(userID) {
+  try {
+    const myReviewRef = query(
+      collectionGroup(db, "reviews"),
+      where("userID", "==", userID),
+    );
+    const myReviewSnap = await getDocs(myReviewRef);
+    myReviewSnap.forEach((doc) => {
+      console.log(doc.data());
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// populateReviews();
