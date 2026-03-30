@@ -40,45 +40,12 @@ async function searchVenues(searchTerm) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const searchBar = document.getElementById("searchBar");
-  const resultsContainer = document.getElementById("results");
-  
+  document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  let timeout;
+  const term = searchBar.value.trim();
+  if (!term) return;
 
-  searchBar.addEventListener("input", () => {
-    clearTimeout(timeout);
-
-    timeout = setTimeout(async () => {
-      const results = await searchVenues(searchBar.value);
-      displayResults(results, resultsContainer);
-    }, 300);
-  });
-
-  function displayResults(results, container) {
-    container.innerHTML = "";
-
-    if (results.length === 0) {
-      container.innerHTML = "<p>No results found</p>";
-      return;
-    }
-
-    results.forEach((venue) => {
-      const div = document.createElement("div");
-
-      div.classList.add("result-card");
-
-      div.innerHTML = `
-        <h3>${venue.name}</h3>
-        <p>${venue.city}</p>
-        <img src="${venue.photo_url}" width="200">
-      `;
-
-      container.appendChild(div);
-    });
-  }
+  window.location.href = `/pages/results.html?q=${encodeURIComponent(term)}`;
 });
-
-
-const results = await searchVenues("Vancouver");
-console.log(results)
+});
