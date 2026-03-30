@@ -209,12 +209,21 @@ async function populateReviews(userID, username, profileImage) {
     );
 
     const myReviewSnap = await getDocs(myReviewRef);
-    myReviewSnap.forEach((doc) => {
+
+    myReviewSnap.forEach(async (doc) => {
       let data = doc.data();
+      // Fetch venueID
+      // doc.ref = review itself
+      // doc.ref.parent = review collection
+      // doc.ref.parent.parent = venue
+      const venueID = doc.ref.parent.parent.id;
+      // fetch venue name
+      const venueRef = doc.ref.parent.parent;
+      const venueSnap = await getDoc(venueRef);
+      const venueName = venueSnap.data().name;
+
       // REVIEWER DETAILS
       const reviewUserName = username || "Anonymous";
-      // FOR NOW: SET THE AVATAR TO THE FIRST CHAR OF THEIR NAME
-      const reviewUserAvatar = username[0] || " ";
 
       // REVIEW DETAILS
       const venueTitle = data.title || "(No title)";
@@ -251,6 +260,10 @@ async function populateReviews(userID, username, profileImage) {
       reviewCard.querySelector(".reviewUserPricing").textContent = venuePricing;
       reviewCard.querySelector(".reviewUserWouldVisitAgain").textContent =
         venueWouldVisitAgain;
+      // CLICKING ON REVIEW REDIRECTS TO VENUE PAGE
+      reviewCard.querySelector(".reviewVenueLink").href =
+        `/pages/venue.html?docID=${venueID}`;
+      reviewCard.querySelector(".reviewVenueLink").innerText = venueName;
 
       // Star rating
       let starRating = "";
