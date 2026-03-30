@@ -11,6 +11,7 @@
     <script type="module" src="./main.js" defer></script>
     <!-- COMPONENTS -->
     <script type="module" src="./src/navbar.js" defer></script>
+    <script type="module" src="./src/searchbar.js" defer></script>
     <!-- <style>
       * {
         border: 1px solid darkorange;
@@ -43,6 +44,7 @@
               type="text"
               placeholder="Enter an address, neighborhood, city, or ZIP code"
               class="p-3 w-full outline-none"
+              id="searchBar"
             />
             <!-- DIVIDER -->
             <div class="w-[1px] bg-gray-400 my-2"></div>
@@ -62,6 +64,7 @@
 
     <!-- MAIN -->
     <main>
+      <div id="results"></div>
       <!-- VENUE CONTAINER -->
       <section id="section-container" class="max-w-6xl mx-auto p-10">
         <!-- TITLE -->
