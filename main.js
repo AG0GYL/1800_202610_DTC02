@@ -108,7 +108,7 @@ function addVenue() {
   addDoc(venueRef, {
     code: "VAN05",
     photo_url:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUV6R4gVVyS4DwvgTQbhc7CgBP39wyq4yRbA&s",
+      "https://biminis1975.ca/wp-content/uploads/2025/02/DSC00118-1.jpg",
     name: "Bimini's Since 1975",
     city: "Vancouver",
     level: "casual",
