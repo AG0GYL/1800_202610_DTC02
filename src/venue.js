@@ -79,9 +79,27 @@ async function displayVenueInfo() {
 
     // Header background
     const headerContainer = document.getElementById("headerBackgroundOverlay");
-    headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${venue.photo_url})`;
+    const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
+    if (firstImage) {
+      headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${firstImage})`;
+    } else {
+      headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${venue.photo_url})`;
+    }
     headerContainer.classList.add("bg-cover", "bg-center");
 
+    //Photo Carousel
+    const images = venue.images; // array of base64 strings
+    const carousel = document.getElementById("photoGalleryContainer");
+    carousel.innerHTML = "";
+    if (images) {
+      images.forEach((base64, index) => {
+        const img = document.createElement("img");
+        img.src = base64;          // base64 data URL works directly as src
+        img.className = "w-full h-64 object-cover rounded";
+        img.alt = `Venue photo ${index + 1}`;
+        carousel.appendChild(img);
+      });
+    }
     //Map Href
     document.getElementById("map").href =
       `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
@@ -289,11 +307,11 @@ stars.forEach((star) => {
 
 //-----------------------------------------------------------
 // Get venue ID from Local Storage
-// Go to firestore to get the name of the vene (using this ID)
-// and display in title of the page
+// Go to firestore to get the name of the venue (using this ID)
+// and display in title of the page 
 //-----------------------------------------------------------
-var venueDocID = new URL(window.location.href).searchParams.get("docID");
-displayVenueName(venueDocID);
+var venueDocID = localStorage.getItem("venueDocID");
+// displayVenueName(venueDocID);
 async function displayVenueName(id) {
   try {
     const venueRef = doc(db, "venue", id);
@@ -359,7 +377,7 @@ async function writeReview() {
       const userID = user.uid;
 
       // ✅ Store review as subcollection under this hike
-      // Path: venue/{venueDocID}/reviews/{autoReviewID}
+      //   Path: venue/{venueDocID}/reviews/{autoReviewID}
       await addDoc(collection(db, "venue", venueDocID, "reviews"), {
         userID: userID,
         title: venueTitle,

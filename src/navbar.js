@@ -39,9 +39,17 @@ class SiteNavbar extends HTMLElement {
           </h1>
 
           <ul class="justify-between items-center flex gap-2">
-            <li class="font-semibold text-sm px-3 py-2">
-              <a href="/pages/map.html">Maps</a>
+            <!-- Create Venue renders here -->
+            <li id="create-venue" class="font-semibold text-sm">
+              <div class="invisible bg-orange-500 px-3 py-2 rounded-2xl text-white text-sm min-w-[80px]">
+                Loading
+              </div>
             </li>
+          
+            <li class="font-semibold text-sm px-3 py-2">
+              <a href="/pages/map.html" id="maps-link">Maps</a>
+            </li>
+
             <!-- Auth control renders here -->
             <li id="auth-control" class="font-semibold text-sm">
               <div class="invisible bg-orange-500 px-3 py-2 rounded-2xl text-white text-sm min-w-[80px]">
@@ -53,10 +61,37 @@ class SiteNavbar extends HTMLElement {
         </nav>
       </div>
     `;
+    this.getLocation();
+  }
+
+  getLocation() {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        document.getElementById("maps-link").href = `/pages/map.html?lat=${lat}&lng=${lng}&zoom=20&cur=1`;
+      },
+      function (error) {
+        const messages = {
+          1: "Permission denied.",
+          2: "Position unavailable.",
+          3: "Request timed out."
+        };
+        alert(messages[error.code] || "Unknown error.");
+      },
+      { timeout: 10000, enableHighAccuracy: true }
+    );
   }
 
   bindAuthState() {
     const authControl = this.querySelector("#auth-control");
+    const createVenue = this.querySelector("#create-venue");
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -127,10 +162,21 @@ class SiteNavbar extends HTMLElement {
             </div>
           </div>
         `;
+
+        createVenue.innerHTML = `
+          <a href="/pages/createvenue.html" id="createvenue-link">
+          <div id="createvenue_container" class="relative">
+            <input type="button" value=" Create Venue" class="bg-orange-500 hover:bg-orange-600 transition px-3 py-2 rounded-2xl text-white text-sm cursor-pointer min-w-[80px]" />            
+          </div>
+          </a>
+        `;
         // AVATAR PROFILE DROPDOWN
         authControl
           .querySelector("#avatarBtn")
           .addEventListener("click", toggleDropdown);
+
+
+
 
         // DROPDOWN BUTTON
         authControl
@@ -143,6 +189,7 @@ class SiteNavbar extends HTMLElement {
               class="bg-orange-500 hover:bg-orange-600 transition px-3 py-2 rounded-2xl text-white text-sm cursor-pointer min-w-[80px]" />
           </a>
         `;
+
       }
     });
   }

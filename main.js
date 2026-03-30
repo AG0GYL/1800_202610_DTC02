@@ -243,6 +243,13 @@ async function displayCardsDynamically() {
       newcard.querySelector(".card-text").textContent =
         venue.details || `Located in ${venue.city}.`;
       newcard.querySelector(".card-level").textContent = venue.level;
+
+      const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
+      if (firstImage) {
+        newcard.querySelector(".card-image").style.backgroundImage = `url(${firstImage})`;
+      } else {
+        newcard.querySelector(".card-image").textContent = venue.photo_url;
+      }
       newcard.querySelector(".card-image").textContent = venue.photo_url;
       newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
       newcard.querySelector(".read-more").href =
