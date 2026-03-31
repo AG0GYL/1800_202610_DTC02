@@ -83,7 +83,7 @@ class SiteNavbar extends HTMLElement {
           2: "Position unavailable.",
           3: "Request timed out."
         };
-        alert(messages[error.code] || "Unknown error.");
+        console.log(messages[error.code] || "Unknown error.");
       },
       { timeout: 10000, enableHighAccuracy: true }
     );

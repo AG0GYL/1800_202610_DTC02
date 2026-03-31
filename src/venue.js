@@ -80,7 +80,7 @@ async function displayVenueInfo() {
     // Header background
     const headerContainer = document.getElementById("headerBackgroundOverlay");
     const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
-    if (firstImage) {
+    if (firstImage != "path/to/placeholder.jpg") {
       headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${firstImage})`;
     } else {
       headerContainer.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0)), url(${venue.photo_url})`;
@@ -94,12 +94,19 @@ async function displayVenueInfo() {
     if (images) {
       images.forEach((base64, index) => {
         const img = document.createElement("img");
-        img.src = base64;          // base64 data URL works directly as src
+        img.src = base64; // base64 data URL works directly as src
         img.className = "w-full h-64 object-cover rounded";
         img.alt = `Venue photo ${index + 1}`;
         carousel.appendChild(img);
       });
+    } else {
+      const img = document.createElement("img");
+      img.src = venue.photo_url;
+      img.className = "w-full h-64 object-cover rounded";
+      img.alt = "Venue photo";
+      carousel.appendChild(img);
     }
+
     //Map Href
     document.getElementById("map").href =
       `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
@@ -308,9 +315,9 @@ stars.forEach((star) => {
 //-----------------------------------------------------------
 // Get venue ID from Local Storage
 // Go to firestore to get the name of the venue (using this ID)
-// and display in title of the page 
+// and display in title of the page
 //-----------------------------------------------------------
-var venueDocID = localStorage.getItem("venueDocID");
+var venueDocID = new URL(window.location.href).searchParams.get("docID");
 // displayVenueName(venueDocID);
 async function displayVenueName(id) {
   try {

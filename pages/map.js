@@ -17,20 +17,21 @@ function createColoredPin(color) {
       </svg>
     `,
     iconSize: [24, 36],
-    iconAnchor: [12, 36],   // tip of the pin
-    popupAnchor: [0, -36]
+    iconAnchor: [12, 36], // tip of the pin
+    popupAnchor: [0, -36],
   });
 }
 
 const icons = {
-  user: createColoredPin("red"),  // orange
-  result: createColoredPin("#3b82f6"),  // blue
+  user: createColoredPin("red"), // orange
+  result: createColoredPin("#3b82f6"), // blue
   selected: createColoredPin("#22c55e"), // green
 };
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
 function getUrlParams() {
@@ -52,12 +53,8 @@ if (!isNaN(lat) && !isNaN(lng)) {
       .addTo(map)
       .bindPopup("Selected Venue")
       .openPopup();
-    console.log(asd1);
   } else {
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup("You're here")
-      .openPopup();
+    L.marker([lat, lng]).addTo(map).bindPopup("You're here").openPopup();
   }
 }
 
@@ -86,9 +83,7 @@ async function displayPins() {
       const venueName = venue.name;
       const details = venue.details || `Located in ${venue.city}.`;
 
-      const marker = L.marker([lat, lng])
-        .addTo(map)
-        .bindPopup(`
+      const marker = L.marker([lat, lng]).addTo(map).bindPopup(`
           <a href="./venue.html?docID=${venueId}" class="font-bold text-orange-500 hover:underline">
             ${venueName}
           </a>
