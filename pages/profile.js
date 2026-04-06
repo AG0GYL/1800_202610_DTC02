@@ -318,3 +318,21 @@ function accordion() {
   });
 }
 accordion();
+
+async function populateBookmarks(userID, username) {
+  // GET USER INFO
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  // GET USER BOOKMARKS
+  const userBookmarks = userData.bookmarks;
+  if (!userBookmarks) {
+    console.log(`User ${username} has no saved venues!`);
+    return;
+  }
+
+  userBookmarks.forEach((venue) => {
+    console.log(venue);
+  });
+}
