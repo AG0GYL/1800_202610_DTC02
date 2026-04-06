@@ -682,3 +682,28 @@ function accordion() {
   });
 }
 accordion();
+
+async function createSaveBtn() {
+  const user = auth.currentUser;
+  if (!user) return;
+  const userID = user.uid;
+
+  venueID = getDocIdFromUrl();
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  const bookmark = userData.bookmarks || [];
+
+  const isBookmarked = bookmark.includes(venueID);
+  const saveVenueBtn = document.getElementById("saveVenueBtn");
+  const path = saveVenueBtn.querySelector("path");
+
+  if (isBookmarked) {
+    path.setAttribute("fill", "none");
+  } else {
+    path.setAttribute("fill", "#f97316");
+  }
+
+  saveVenueBtn.addEventListener("click", () => toggleSaveBtn());
+}
