@@ -639,6 +639,18 @@ function displayVenueOpenStatus() {
 }
 displayVenueOpenStatus();
 
+function modalPopUp(message) {
+  const modal = document.getElementById("popUp");
+  // SET TEXT AND REMOVE VISIBLE
+  modal.textContent = message;
+  modal.classList.remove("opacity-0");
+  modal.classList.add("opacity-100");
+  setTimeout(() => {
+    modal.classList.remove("opacity-100");
+    modal.classList.add("opacity-0");
+  }, 2000);
+}
+
 function createShareBtn() {
   document
     .getElementById("shareVenueBtn")
