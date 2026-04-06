@@ -137,6 +137,7 @@ function populateUserInfo() {
           }
           // Populate reviews posted section
           populateReviews(user.uid, name, profileImage);
+          populateBookmarks(user.uid, name);
         } else {
           console.log("No such document!");
         }
@@ -331,8 +332,23 @@ async function populateBookmarks(userID, username) {
     console.log(`User ${username} has no saved venues!`);
     return;
   }
+  userBookmarks.forEach(async (venueID) => {
+    const venueRef = doc(db, "venue", venueID);
+    const venueSnap = await getDoc(venueRef);
+    const venueData = venueSnap.data();
+    console.log(venueData);
 
-  userBookmarks.forEach((venue) => {
-    console.log(venue);
+    const bookmarkCard = bookmarkCardTemplate.content.cloneNode(true);
+    // bookmarkCard.querySelector("img").src = venueData.photo_url;
+    bookmarkCard.querySelector(".venueName").textContent = venueData.name;
+    bookmarkCard.querySelector(".venueLocation").textContent = venueData.city;
+    bookmarkCard.querySelector(
+      ".bookmarkCardTemplateContainer",
+    ).style.backgroundImage =
+      `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0)), url(${venueData.photo_url})`;
+
+    // CLICKING ON REVIEW REDIRECTS TO VENUE PAGE
+    bookmarkCard.querySelector("a").href = `/pages/venue.html?docID=${venueID}`;
+    venueBookmarksGoesHere.appendChild(bookmarkCard);
   });
 }
