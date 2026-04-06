@@ -1,4 +1,6 @@
 import { db } from "./firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { onAuthReady } from "./authentication.js";
 import { auth } from "./firebaseConfig.js";
 import {
   doc,
@@ -11,6 +13,9 @@ import {
   orderBy,
   getDocs,
   updateDoc,
+  onSnapshot,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 // Get the document ID from the URL
@@ -638,3 +643,131 @@ function displayVenueOpenStatus() {
   }
 }
 displayVenueOpenStatus();
+
+function modalPopUp(message) {
+  const modal = document.getElementById("popUp");
+  // SET TEXT AND REMOVE VISIBLE
+  modal.textContent = message;
+  modal.classList.remove("opacity-0");
+  modal.classList.add("opacity-100");
+  setTimeout(() => {
+    modal.classList.remove("opacity-100");
+    modal.classList.add("opacity-0");
+  }, 2000);
+}
+
+function createShareBtn() {
+  document
+    .getElementById("shareVenueBtn")
+    .addEventListener("click", async () => {
+      const venueName = document.getElementById("venueName").textContent;
+      const shareData = {
+        title: venueName,
+        text: "Check out this venue on Scout!",
+        url: window.location.href,
+      };
+
+      try {
+        await navigator.share(shareData);
+      } catch (error) {
+        // Fallback — copy to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        console.log("Saved to clipboard!");
+        // MODAL POP UP
+        modalPopUp("Saved to clipboard!");
+      }
+    });
+}
+
+createShareBtn();
+
+// ACCORDION BEHAVIOR
+function accordion() {
+  const reviewsDropDown = document.getElementById("reviewsDropDown");
+  const venueReviews = document.getElementById("venueReviewsGoesHere");
+  const dropdownArrow = reviewsDropDown.querySelector("svg");
+  reviewsDropDown.addEventListener("click", () => {
+    venueReviews.classList.toggle("hidden");
+    dropdownArrow.classList.toggle("rotate-180");
+  });
+}
+accordion();
+
+async function createSaveBtn() {
+  const user = auth.currentUser;
+  if (!user) return;
+  const userID = user.uid;
+
+  const venueID = getDocIdFromUrl();
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  const bookmark = userData.bookmarks || [];
+
+  const isBookmarked = bookmark.includes(venueID);
+  const saveVenueBtn = document.getElementById("saveVenueBtn");
+  const path = saveVenueBtn.querySelector("path");
+
+  if (isBookmarked) {
+    path.setAttribute("fill", "#f97316");
+    console.log("Venue is bookmarked according to user bookmarks!");
+  } else {
+    path.setAttribute("fill", "none");
+    console.log("Venue is not bookmarked according to user bookmarks!");
+  }
+
+  saveVenueBtn.addEventListener("click", toggleSaveBtn);
+}
+async function toggleSaveBtn() {
+  const user = auth.currentUser;
+  if (!user) {
+    console.log("No user is signed in");
+    window.location.href = "../pages/login.html";
+    return;
+  }
+  const userID = user.uid;
+
+  const venueID = getDocIdFromUrl();
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  const bookmarks = userData.bookmarks || [];
+
+  const isBookmarked = bookmarks.includes(venueID);
+  const saveVenueBtn = document.getElementById("saveVenueBtn");
+  const path = saveVenueBtn.querySelector("path");
+
+  try {
+    if (isBookmarked) {
+      // Remove from Firestore array
+      await updateDoc(userRef, { bookmarks: arrayRemove(venueID) });
+      console.log("Removed venue from bookmarks!");
+      path.setAttribute("fill", "none");
+      // MODAL POP UP
+      modalPopUp("Removed from Bookmarks!");
+    } else {
+      // Add to Firestore array
+      await updateDoc(userRef, { bookmarks: arrayUnion(venueID) });
+      console.log("Added venue to bookmarks!");
+      path.setAttribute("fill", "#f97316");
+      // MODAL POP UP
+      modalPopUp("Added to Bookmarks!");
+    }
+  } catch (error) {
+    console.log("Error creating save button!");
+  }
+}
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    createSaveBtn();
+  } else {
+    // No user logged in — redirect to login page
+    const saveVenueBtn = document.getElementById("saveVenueBtn");
+    saveVenueBtn.addEventListener("click", () => {
+      window.location.href = "../pages/login.html";
+    });
+  }
+});

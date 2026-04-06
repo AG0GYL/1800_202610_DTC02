@@ -73,7 +73,7 @@
               <h1 class="font-bold text-2xl">Personal Info</h1>
               <!-- REQUIRED FORM QUESTIONS -->
               <fieldset
-                class="flex flex-col gap-4"
+                class="group disabled flex flex-col gap-4"
                 id="personalInfoFields"
                 disabled
               >
@@ -82,7 +82,7 @@
                   <input
                     type="text"
                     id="nameInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -91,7 +91,7 @@
                   <input
                     type="text"
                     id="schoolInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your school"
                   />
                 </div>
@@ -100,7 +100,7 @@
                   <input
                     type="text"
                     id="cityInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your city"
                   />
                 </div>
@@ -117,43 +117,105 @@
                 <button
                   id="saveButton"
                   type="button"
-                  class="border-1 p-2 px-4 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+                  disabled
+                  class="disabled:cursor-not-allowed disabled:border-stone-400 disabled:opacity-50 disabled:bg-gray-200 disabled:text-stone-600 border-1 p-2 px-4 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
                 >
                   Save changes
                 </button>
               </div>
             </form>
           </section>
-          <!-- POSTED REVIEWS SECTION -->
-          <section
-            class="flex flex-col border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
-          >
-            <h1 class="font-bold text-2xl">Posted Reviews</h1>
-            <div id="venueReviewsGoesHere" class="flex flex-col gap-4"></div>
-          </section>
         </div>
         <div
           id="rightColumnContainer"
           class="w-full md:w-1/2 flex flex-col gap-5"
         >
-          <!-- FAVORITE TEAM SELECTION -->
-          <section
-            class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
+          <!-- POSTED REVIEWS SECTION -->
+          <div
+            id="venueReviewsContainer"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400 gap-4"
           >
-            <h1 class="font-bold text-2xl">Favorite team</h1>
-          </section>
-          <!-- SPORTS SELECTION -->
-          <section
-            class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
+            <!-- POSTED REVIEWS SECTION -->
+            <section class="flex justify-between w-full items-center">
+              <h1 class="font-extrabold text-2xl">Posted Reviews</h1>
+              <!-- ACCORDION DROPDOWN -->
+              <button
+                id="reviewsDropDown"
+                class="text-orange-500 font-semibold cursor-pointer"
+              >
+                <svg
+                  width="30px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="#f97316"
+                  class="transition-transform duration-200"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.46938 9.39966C4.76227 9.10677 5.23715 9.10677 5.53004 9.39966L11.894 15.7636C11.9916 15.8613 12.1499 15.8613 12.2476 15.7636L18.6115 9.39966C18.9044 9.10677 19.3793 9.10677 19.6722 9.39966C19.9651 9.69256 19.9651 10.1674 19.6722 10.4603L13.3082 16.8243C12.6248 17.5077 11.5168 17.5077 10.8333 16.8243L4.46938 10.4603C4.17649 10.1674 4.17649 9.69256 4.46938 9.39966Z"
+                      fill="#f97316"
+                    ></path>
+                  </g>
+                </svg>
+              </button>
+            </section>
+            <div
+              id="venueReviewsGoesHere"
+              class="hidden flex flex-col gap-4"
+            ></div>
+          </div>
+          <!-- BOOKMARKED VENUES SECTION -->
+          <div
+            id="bookmarkReviewsContainer"
+            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400 gap-4"
           >
-            <h1 class="font-bold text-2xl">Sports</h1>
-          </section>
-          <!-- PREFERRED VIBE SELECTION -->
-          <section
-            class="flex border-1 border-stone-400/90 p-4 px-3 rounded-lg gap-4 shadow-md backdrop-blur-sm hover:border-orange-400"
-          >
-            <h1 class="font-bold text-2xl">Vibe selection</h1>
-          </section>
+            <!-- BOOKMARKED VENUES SECTION -->
+            <section class="flex justify-between w-full items-center">
+              <h1 class="font-extrabold text-2xl">Bookmarked Venues</h1>
+              <!-- ACCORDION DROPDOWN -->
+              <button
+                id="bookmarksDropDown"
+                class="text-orange-500 font-semibold cursor-pointer"
+              >
+                <svg
+                  width="30px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="#f97316"
+                  class="transition-transform duration-200"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.46938 9.39966C4.76227 9.10677 5.23715 9.10677 5.53004 9.39966L11.894 15.7636C11.9916 15.8613 12.1499 15.8613 12.2476 15.7636L18.6115 9.39966C18.9044 9.10677 19.3793 9.10677 19.6722 9.39966C19.9651 9.69256 19.9651 10.1674 19.6722 10.4603L13.3082 16.8243C12.6248 17.5077 11.5168 17.5077 10.8333 16.8243L4.46938 10.4603C4.17649 10.1674 4.17649 9.69256 4.46938 9.39966Z"
+                      fill="#f97316"
+                    ></path>
+                  </g>
+                </svg>
+              </button>
+            </section>
+            <div
+              id="venueBookmarksGoesHere"
+              class="hidden flex flex-col gap-4"
+            ></div>
+          </div>
         </div>
       </section>
     </main>
@@ -249,6 +311,50 @@
           href=""
           class="reviewVenueLink border-1 p-2 px-4 w-fit rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
         ></a>
+      </div>
+    </template>
+    <!-- BOOKMARK CARD TEMPLATE -->
+    <!-- divider -->
+    <template id="bookmarkCardTemplate">
+      <div
+        class="bookmarkCardTemplateContainer h-30 overflow-hidden bg-cover flex flex-col gap-4 justify-center w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
+      >
+        <!-- INFO -->
+        <div class="flex justify-between w-full items-center">
+          <!-- VENUE DETAILS -->
+          <section class="flex flex-col justify-center">
+            <h1 class="venueName text-3xl font-extrabold text-white">
+              Venue Name
+            </h1>
+            <h2 class="venueLocation text-lg text-white">Venue Location</h2>
+          </section>
+          <a href="#" class="flex items-end">
+            <!-- SVG -->
+            <svg
+              class="drop-shadow-2xl"
+              width="50px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M20 4L12 12M20 4V8.5M20 4H15.5M19 12.5V16.8C19 17.9201 19 18.4802 18.782 18.908C18.5903 19.2843 18.2843 19.5903 17.908 19.782C17.4802 20 16.9201 20 15.8 20H7.2C6.0799 20 5.51984 20 5.09202 19.782C4.71569 19.5903 4.40973 19.2843 4.21799 18.908C4 18.4802 4 17.9201 4 16.8V8.2C4 7.0799 4 6.51984 4.21799 6.09202C4.40973 5.71569 4.71569 5.40973 5.09202 5.21799C5.51984 5 6.07989 5 7.2 5H11.5"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </a>
+        </div>
       </div>
     </template>
   </body>

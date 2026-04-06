@@ -137,6 +137,7 @@ function populateUserInfo() {
           }
           // Populate reviews posted section
           populateReviews(user.uid, name, profileImage);
+          populateBookmarks(user.uid, name);
         } else {
           console.log("No such document!");
         }
@@ -157,8 +158,13 @@ populateUserInfo();
 // Function to enable editing of user info form fields
 document.querySelector("#editButton").addEventListener("click", editUserInfo);
 function editUserInfo() {
-  //Enable the form fields
-  document.getElementById("personalInfoFields").disabled = false;
+  const fieldset = document.getElementById("personalInfoFields");
+  const saveBtn = document.getElementById("saveButton");
+
+  // Toggle fieldset
+  fieldset.disabled = !fieldset.disabled;
+  // Toggle save button
+  saveBtn.disabled = fieldset.disabled;
 }
 
 // Function save updated user info from the profile form
@@ -182,6 +188,13 @@ async function saveUserInfo() {
 
   // disable edit AFTER submisison
   document.getElementById("personalInfoFields").disabled = true;
+
+  // disable save button after clicking save
+  // Toggle save button
+  const saveBtn = document.getElementById("saveButton");
+  const fieldset = document.getElementById("personalInfoFields");
+
+  saveBtn.disabled = fieldset.disabled;
 }
 
 // Updates the user document in Firestore with new values
@@ -286,3 +299,56 @@ async function populateReviews(userID, username, profileImage) {
 }
 
 // populateReviews();
+// ACCORDION BEHAVIOR
+function accordion() {
+  // POSTED REVIEWS DROPDOWN
+  const reviewsDropDown = document.getElementById("reviewsDropDown");
+  const venueReviews = document.getElementById("venueReviewsGoesHere");
+  const reviewsDropdownArrow = reviewsDropDown.querySelector("svg");
+  reviewsDropDown.addEventListener("click", () => {
+    venueReviews.classList.toggle("hidden");
+    reviewsDropdownArrow.classList.toggle("rotate-180");
+  });
+  // BOOKMARKED VENUES DROPDOWN
+  const bookmarksDropDown = document.getElementById("bookmarksDropDown");
+  const venueBookmarks = document.getElementById("venueBookmarksGoesHere");
+  const bookmarksDropdownArrow = bookmarksDropDown.querySelector("svg");
+  bookmarksDropDown.addEventListener("click", () => {
+    venueBookmarks.classList.toggle("hidden");
+    bookmarksDropdownArrow.classList.toggle("rotate-180");
+  });
+}
+accordion();
+
+async function populateBookmarks(userID, username) {
+  // GET USER INFO
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  // GET USER BOOKMARKS
+  const userBookmarks = userData.bookmarks;
+  if (!userBookmarks) {
+    console.log(`User ${username} has no saved venues!`);
+    return;
+  }
+  userBookmarks.forEach(async (venueID) => {
+    const venueRef = doc(db, "venue", venueID);
+    const venueSnap = await getDoc(venueRef);
+    const venueData = venueSnap.data();
+    console.log(venueData);
+
+    const bookmarkCard = bookmarkCardTemplate.content.cloneNode(true);
+    // bookmarkCard.querySelector("img").src = venueData.photo_url;
+    bookmarkCard.querySelector(".venueName").textContent = venueData.name;
+    bookmarkCard.querySelector(".venueLocation").textContent = venueData.city;
+    bookmarkCard.querySelector(
+      ".bookmarkCardTemplateContainer",
+    ).style.backgroundImage =
+      `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0)), url(${venueData.photo_url})`;
+
+    // CLICKING ON REVIEW REDIRECTS TO VENUE PAGE
+    bookmarkCard.querySelector("a").href = `/pages/venue.html?docID=${venueID}`;
+    venueBookmarksGoesHere.appendChild(bookmarkCard);
+  });
+}
