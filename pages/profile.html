@@ -73,7 +73,7 @@
               <h1 class="font-bold text-2xl">Personal Info</h1>
               <!-- REQUIRED FORM QUESTIONS -->
               <fieldset
-                class="flex flex-col gap-4"
+                class="group disabled flex flex-col gap-4"
                 id="personalInfoFields"
                 disabled
               >
@@ -82,7 +82,7 @@
                   <input
                     type="text"
                     id="nameInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -91,7 +91,7 @@
                   <input
                     type="text"
                     id="schoolInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your school"
                   />
                 </div>
@@ -100,7 +100,7 @@
                   <input
                     type="text"
                     id="cityInput"
-                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text"
+                    class="border-2 p-1 rounded-lg border-stone-400 cursor-text group-disabled:opacity-50 group-disabled:bg-gray-200"
                     placeholder="Enter your city"
                   />
                 </div>
@@ -117,7 +117,8 @@
                 <button
                   id="saveButton"
                   type="button"
-                  class="border-1 p-2 px-4 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+                  disabled
+                  class="disabled:cursor-not-allowed disabled:border-stone-400 disabled:opacity-50 disabled:bg-gray-200 disabled:text-stone-600 border-1 p-2 px-4 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
                 >
                   Save changes
                 </button>

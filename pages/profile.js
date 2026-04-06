@@ -157,8 +157,13 @@ populateUserInfo();
 // Function to enable editing of user info form fields
 document.querySelector("#editButton").addEventListener("click", editUserInfo);
 function editUserInfo() {
-  //Enable the form fields
-  document.getElementById("personalInfoFields").disabled = false;
+  const fieldset = document.getElementById("personalInfoFields");
+  const saveBtn = document.getElementById("saveButton");
+
+  // Toggle fieldset
+  fieldset.disabled = !fieldset.disabled;
+  // Toggle save button
+  saveBtn.disabled = fieldset.disabled;
 }
 
 // Function save updated user info from the profile form
@@ -182,6 +187,13 @@ async function saveUserInfo() {
 
   // disable edit AFTER submisison
   document.getElementById("personalInfoFields").disabled = true;
+
+  // disable save button after clicking save
+  // Toggle save button
+  const saveBtn = document.getElementById("saveButton");
+  const fieldset = document.getElementById("personalInfoFields");
+
+  saveBtn.disabled = fieldset.disabled;
 }
 
 // Updates the user document in Firestore with new values
