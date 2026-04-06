@@ -746,14 +746,14 @@ async function toggleSaveBtn() {
       console.log("Removed venue from bookmarks!");
       path.setAttribute("fill", "none");
       // MODAL POP UP
-      modalPopUp("Added to Bookmarks!");
+      modalPopUp("Removed from Bookmarks!");
     } else {
       // Add to Firestore array
       await updateDoc(userRef, { bookmarks: arrayUnion(venueID) });
       console.log("Added venue to bookmarks!");
       path.setAttribute("fill", "#f97316");
       // MODAL POP UP
-      modalPopUp("Removed from Bookmarks!");
+      modalPopUp("Added to Bookmarks!");
     }
   } catch (error) {
     console.log("Error creating save button!");
