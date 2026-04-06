@@ -763,5 +763,11 @@ async function toggleSaveBtn() {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     createSaveBtn();
+  } else {
+    // No user logged in — redirect to login page
+    const saveVenueBtn = document.getElementById("saveVenueBtn");
+    saveVenueBtn.addEventListener("click", () => {
+      window.location.href = "../pages/login.html";
+    });
   }
 });
