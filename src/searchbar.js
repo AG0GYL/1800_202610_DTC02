@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.stopPropagation();
   });
 
- 
+
   filterBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     filterPanel.classList.toggle("hidden");
