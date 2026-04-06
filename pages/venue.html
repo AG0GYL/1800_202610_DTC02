@@ -1,464 +1,275 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- GOOGLE API FOR ICONS -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!-- COMPONENTS -->
-    <link rel="stylesheet" href="./map.css" />
-    <!-- LEAFLET CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <!-- LEAFLET JS -->
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-      defer
-    ></script>
-    <!-- COMPONENTS -->
-    <script type="module" src="../src/navbar.js" defer></script>
-  </head>
 
-  <body>
-    <!-- our own navbar goes here -->
-    <site-navbar></site-navbar>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- GOOGLE API FOR ICONS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- COMPONENTS -->
+  <link rel="stylesheet" href="./map.css" />
+  <!-- LEAFLET CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- LEAFLET JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <!-- COMPONENTS -->
+  <script type="module" src="../src/navbar.js" defer></script>
+</head>
 
-    <!-- HEADER SECTION -->
-    <header class="bg-black text-white" id="headerBackgroundOverlay">
-      <div class="max-w-6xl mx-auto px-10 pt-20">
-        <!-- KEYWORD TAGS FOR VENUE -->
-        <ul class="flex gap-4 py-5">
-          <span
-            id="venueOpenStatus"
-            class="p-1 px-4 rounded-lg bg-green-600 cursor-pointer"
-            >● Open Now</span
-          >
-          <span
-            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
-            >Sports Bar</span
-          >
-          <span
-            class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer"
-            >Pizza</span
-          >
-        </ul>
-        <h1 class="text-5xl font-extrabold" id="venueName">Venue Name</h1>
-        <p class="max-w-6xl mx-auto pr-[30%]" id="venueDetails">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At libero
-          natus praesentium iste necessitatibus velit quasi ratione minus
-          facilis neque nisi, quae tempore labore expedita amet corrupti numquam
-          perspiciatis eaque.
-        </p>
-      </div>
-      <!-- VENUE SUMMARY INFORMATION / RATING / NUMBER OF REVIEWS / PRICE / LOCATION -->
-      <div
-        id="venueSummaryInformation"
-        class="max-w-6xl mx-auto p-10 py-5 flex gap-2 flex-col md:flex-row"
-      >
-        <!-- RATINGS -->
-        <section id="venueRatingsContainer" class="flex gap-3">
-          <div id="venueRatingStars">
-            <span class="material-icons text-orange-500" id="star1"
-              >star_outline</span
-            >
-            <span class="material-icons text-orange-500" id="star2"
-              >star_outline</span
-            >
-            <span class="material-icons text-orange-500" id="star3"
-              >star_outline</span
-            >
-            <span class="material-icons text-orange-500" id="star4"
-              >star_outline</span
-            >
-            <span class="material-icons text-orange-500" id="star5"
-              >star_outline</span
-            >
-          </div>
-          <span id="venueRatingNumbers" class="font-bold">4.2</span>
-        </section>
-        <!-- OTHER INFO -->
-        <div class="flex gap-4 text-stone-300 flex-wrap">
-          <span class="font-semibold"
-            >(<span id="venueReviewCount">10</span> reviews)</span
-          >
-          <span id="venuePricing">$$</span>
-          <span id="venueLocation">Downtown Vancouver</span>
-          <span id="venueLocation"></span>
+<body>
+  <!-- our own navbar goes here -->
+  <site-navbar></site-navbar>
+
+  <!-- HEADER SECTION -->
+  <header class="bg-black text-white" id="headerBackgroundOverlay">
+    <div class="max-w-6xl mx-auto px-10 pt-20">
+      <!-- KEYWORD TAGS FOR VENUE -->
+      <ul class="flex gap-4 py-5">
+        <span id="venueOpenStatus" class="p-1 px-4 rounded-lg bg-green-600 cursor-pointer">● Open Now</span>
+        <span class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer">Sports Bar</span>
+        <span class="p-1 px-4 outline-1 rounded-lg bg-slate-600/50 cursor-pointer">Pizza</span>
+      </ul>
+      <h1 class="text-5xl font-extrabold" id="venueName">Venue Name</h1>
+      <p class="max-w-6xl mx-auto pr-[30%]" id="venueDetails">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At libero
+        natus praesentium iste necessitatibus velit quasi ratione minus
+        facilis neque nisi, quae tempore labore expedita amet corrupti numquam
+        perspiciatis eaque.
+      </p>
+    </div>
+    <!-- VENUE SUMMARY INFORMATION / RATING / NUMBER OF REVIEWS / PRICE / LOCATION -->
+    <div id="venueSummaryInformation" class="max-w-6xl mx-auto p-10 py-5 flex gap-2 flex-col md:flex-row">
+      <!-- RATINGS -->
+      <section id="venueRatingsContainer" class="flex gap-3">
+        <div id="venueRatingStars">
+          <span class="material-icons text-orange-500" id="star1">star_outline</span>
+          <span class="material-icons text-orange-500" id="star2">star_outline</span>
+          <span class="material-icons text-orange-500" id="star3">star_outline</span>
+          <span class="material-icons text-orange-500" id="star4">star_outline</span>
+          <span class="material-icons text-orange-500" id="star5">star_outline</span>
         </div>
+        <span id="venueRatingNumbers" class="font-bold">4.2</span>
+      </section>
+      <!-- OTHER INFO -->
+      <div class="flex gap-4 text-stone-300 flex-wrap">
+        <span class="font-semibold">(<span id="venueReviewCount">10</span> reviews)</span>
+        <span id="venuePricing">$$</span>
+        <span id="venueLocation">Downtown Vancouver</span>
+        <span id="venueLocation"></span>
       </div>
-    </header>
-    <main class="max-w-6xl mx-auto px-10">
-      <!-- 2 COLUMN SET UP -->
-      <div
-        id="columnContainer"
-        class="flex w-full gap-5 pt-10 flex-col md:flex-row"
-      >
-        <!-- PHOTOS / ABOUT / REVIEWS -->
-        <section
-          id="leftMainColumn"
-          class="flex flex-col md:w-2/3 w-full py-4 gap-5"
-        >
-          <!-- PHOTO GALLERY CAROUSEL -->
-          <div
-            id="photoGalleryContainer"
-            class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg shadow-md hover:border-orange-400"
-          >
-            <section
-              id="photoGalleryContainerHeader"
-              class="flex justify-between w-full items-center"
-            >
-              <h2 class="text-2xl font-extrabold">Photos</h2>
-              <a href="#" class="text-orange-500 font-semibold cursor-pointer"
-                >See all <span id="photoGalleryCount">47</span>→</a
-              >
-            </section>
-            <section
-              id="photoGalleryCarousel"
-              class="bg-orange-500/70 w-full flex justify-center h-[300px] rounded-lg"
-            >
-              Pictures
-            </section>
-          </div>
+    </div>
+  </header>
+  <main class="max-w-6xl mx-auto px-10">
+    <!-- 2 COLUMN SET UP -->
+    <div id="columnContainer" class="flex w-full gap-5 pt-10 flex-col md:flex-row">
+      <!-- PHOTOS / ABOUT / REVIEWS -->
+      <section id="leftMainColumn" class="flex flex-col md:w-2/3 w-full py-4 gap-5">
+        <!-- PHOTO GALLERY CAROUSEL -->
+        <div id="photoGalleryContainer"
+          class="flex flex-col justify-between items-center w-full border-1 border-stone-400/90 p-4 px-3 rounded-lg shadow-md hover:border-orange-400">
+          <section id="photoGalleryContainerHeader" class="flex justify-between w-full items-center">
+            <h2 class="text-2xl font-extrabold">Photos</h2>
+            <a href="#" class="text-orange-500 font-semibold cursor-pointer">See all <span
+                id="photoGalleryCount">47</span>→</a>
+          </section>
+          <section id="photoGalleryCarousel" class="bg-orange-500/70 w-full flex justify-center h-[300px] rounded-lg">
+            Pictures
+          </section>
+        </div>
 
-          <!-- ABOUT -->
-          <div
-            id="venueAboutDescriptionContainer"
-            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
-          >
-            <h2 class="text-2xl font-extrabold flex justify-start">About</h2>
-            <p id="venueAboutDescription" class="">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
-              quia vitae vero ullam maiores aperiam suscipit nisi totam
-              molestias dolor nostrum, praesentium in numquam? Natus quaerat id
-              esse neque eligendi.
-            </p>
-          </div>
+        <!-- ABOUT -->
+        <div id="venueAboutDescriptionContainer"
+          class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400">
+          <h2 class="text-2xl font-extrabold flex justify-start">About</h2>
+          <p id="venueAboutDescription" class="">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+            quia vitae vero ullam maiores aperiam suscipit nisi totam
+            molestias dolor nostrum, praesentium in numquam? Natus quaerat id
+            esse neque eligendi.
+          </p>
+        </div>
 
-          <!-- REVIEW NAVBAR -->
-          <section id="reviewFormSubmissionControls" class="pt-5 flex gap-4">
-            <!-- WRITE A REVIEW BTN -->
-            <button
-              id="writeReviewBtn"
-              class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
-            >
-              Write a Review
-            </button>
-            <!-- SHARE BUTTON -->
-            <button
-              id="shareVenueBtn"
-              class="group border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
-            >
-              <svg
-                width="30px"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="#f97316"
-                stroke-width="0.24000000000000005"
-              >
+        <!-- REVIEW NAVBAR -->
+        <section id="reviewFormSubmissionControls" class="pt-5 flex gap-4">
+          <!-- WRITE A REVIEW BTN -->
+          <button id="writeReviewBtn"
+            class="border-1 p-2 px-3 rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150">
+            Write a Review
+          </button>
+          <!-- SHARE BUTTON -->
+          <button id="shareVenueBtn"
+            class="group border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500">
+            <svg width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f97316"
+              stroke-width="0.24000000000000005">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M19.6495 0.799565C18.4834 -0.72981 16.0093 0.081426 16.0093 1.99313V3.91272C12.2371 3.86807 9.65665 5.16473 7.9378 6.97554C6.10034 8.9113 5.34458 11.3314 5.02788 12.9862C4.86954 13.8135 5.41223 14.4138 5.98257 14.6211C6.52743 14.8191 7.25549 14.7343 7.74136 14.1789C9.12036 12.6027 11.7995 10.4028 16.0093 10.5464V13.0069C16.0093 14.9186 18.4834 15.7298 19.6495 14.2004L23.3933 9.29034C24.2022 8.2294 24.2022 6.7706 23.3933 5.70966L19.6495 0.799565ZM7.48201 11.6095C9.28721 10.0341 11.8785 8.55568 16.0093 8.55568H17.0207C17.5792 8.55568 18.0319 9.00103 18.0319 9.55037L18.0317 13.0069L21.7754 8.09678C22.0451 7.74313 22.0451 7.25687 21.7754 6.90322L18.0317 1.99313V4.90738C18.0317 5.4567 17.579 5.90201 17.0205 5.90201H16.0093C11.4593 5.90201 9.41596 8.33314 9.41596 8.33314C8.47524 9.32418 7.86984 10.502 7.48201 11.6095Z"
+                  fill="#f97316"></path>
+                <path
+                  d="M7 1.00391H4C2.34315 1.00391 1 2.34705 1 4.00391V20.0039C1 21.6608 2.34315 23.0039 4 23.0039H20C21.6569 23.0039 23 21.6608 23 20.0039V17.0039C23 16.4516 22.5523 16.0039 22 16.0039C21.4477 16.0039 21 16.4516 21 17.0039V20.0039C21 20.5562 20.5523 21.0039 20 21.0039H4C3.44772 21.0039 3 20.5562 3 20.0039V4.00391C3 3.45162 3.44772 3.00391 4 3.00391H7C7.55228 3.00391 8 2.55619 8 2.00391C8 1.45162 7.55228 1.00391 7 1.00391Z"
+                  fill="#f97316"></path>
+              </g>
+            </svg>
+          </button>
+          <!-- SAVE BUTTON -->
+          <button id="saveVenueBtn"
+            class="group border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500">
+            <svg width="30px" viewBox="-1.6 -1.6 19.20 19.20" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="#f97316" stroke-width="2">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z"
+                  fill="none"></path>
+              </g>
+            </svg>
+          </button>
+        </section>
+        <section id="reviewFormSubmissionContainer" class="hidden"></section>
+
+        <!-- REVIEWS -->
+        <div id="venueReviewsContainer"
+          class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400 gap-4">
+          <section id="venueReviewsContainerHeader" class="flex justify-between w-full items-center">
+            <h2 class="text-2xl font-extrabold">Rating & Reviews</h2>
+            <button id="reviewsDropDown" class="text-orange-500 font-semibold cursor-pointer">
+              <svg width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f97316"
+                class="transition-transform duration-200">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M19.6495 0.799565C18.4834 -0.72981 16.0093 0.081426 16.0093 1.99313V3.91272C12.2371 3.86807 9.65665 5.16473 7.9378 6.97554C6.10034 8.9113 5.34458 11.3314 5.02788 12.9862C4.86954 13.8135 5.41223 14.4138 5.98257 14.6211C6.52743 14.8191 7.25549 14.7343 7.74136 14.1789C9.12036 12.6027 11.7995 10.4028 16.0093 10.5464V13.0069C16.0093 14.9186 18.4834 15.7298 19.6495 14.2004L23.3933 9.29034C24.2022 8.2294 24.2022 6.7706 23.3933 5.70966L19.6495 0.799565ZM7.48201 11.6095C9.28721 10.0341 11.8785 8.55568 16.0093 8.55568H17.0207C17.5792 8.55568 18.0319 9.00103 18.0319 9.55037L18.0317 13.0069L21.7754 8.09678C22.0451 7.74313 22.0451 7.25687 21.7754 6.90322L18.0317 1.99313V4.90738C18.0317 5.4567 17.579 5.90201 17.0205 5.90201H16.0093C11.4593 5.90201 9.41596 8.33314 9.41596 8.33314C8.47524 9.32418 7.86984 10.502 7.48201 11.6095Z"
-                    fill="#f97316"
-                  ></path>
-                  <path
-                    d="M7 1.00391H4C2.34315 1.00391 1 2.34705 1 4.00391V20.0039C1 21.6608 2.34315 23.0039 4 23.0039H20C21.6569 23.0039 23 21.6608 23 20.0039V17.0039C23 16.4516 22.5523 16.0039 22 16.0039C21.4477 16.0039 21 16.4516 21 17.0039V20.0039C21 20.5562 20.5523 21.0039 20 21.0039H4C3.44772 21.0039 3 20.5562 3 20.0039V4.00391C3 3.45162 3.44772 3.00391 4 3.00391H7C7.55228 3.00391 8 2.55619 8 2.00391C8 1.45162 7.55228 1.00391 7 1.00391Z"
-                    fill="#f97316"
-                  ></path>
-                </g>
-              </svg>
-            </button>
-            <!-- SAVE BUTTON -->
-            <button
-              id="saveVenueBtn"
-              class="group border-1 p-2 px-3 rounded-lg cursor-pointer border-stone-400/90 font-semibold hover:border-orange-500"
-            >
-              <svg
-                width="30px"
-                viewBox="-1.6 -1.6 19.20 19.20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="#f97316"
-                stroke-width="2"
-              >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  <path
-                    d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z"
-                    fill="none"
-                  ></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M4.46938 9.39966C4.76227 9.10677 5.23715 9.10677 5.53004 9.39966L11.894 15.7636C11.9916 15.8613 12.1499 15.8613 12.2476 15.7636L18.6115 9.39966C18.9044 9.10677 19.3793 9.10677 19.6722 9.39966C19.9651 9.69256 19.9651 10.1674 19.6722 10.4603L13.3082 16.8243C12.6248 17.5077 11.5168 17.5077 10.8333 16.8243L4.46938 10.4603C4.17649 10.1674 4.17649 9.69256 4.46938 9.39966Z"
+                    fill="#f97316"></path>
                 </g>
               </svg>
             </button>
           </section>
-          <section id="reviewFormSubmissionContainer" class="hidden"></section>
-
-          <!-- REVIEWS -->
-          <div
-            id="venueReviewsContainer"
-            class="flex flex-col justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400 gap-4"
-          >
-            <section
-              id="venueReviewsContainerHeader"
-              class="flex justify-between w-full items-center"
-            >
-              <h2 class="text-2xl font-extrabold">Rating & Reviews</h2>
-              <button
-                id="reviewsDropDown"
-                class="text-orange-500 font-semibold cursor-pointer"
-              >
-                <svg
-                  width="30px"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  stroke="#f97316"
-                  class="transition-transform duration-200"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M4.46938 9.39966C4.76227 9.10677 5.23715 9.10677 5.53004 9.39966L11.894 15.7636C11.9916 15.8613 12.1499 15.8613 12.2476 15.7636L18.6115 9.39966C18.9044 9.10677 19.3793 9.10677 19.6722 9.39966C19.9651 9.69256 19.9651 10.1674 19.6722 10.4603L13.3082 16.8243C12.6248 17.5077 11.5168 17.5077 10.8333 16.8243L4.46938 10.4603C4.17649 10.1674 4.17649 9.69256 4.46938 9.39966Z"
-                      fill="#f97316"
-                    ></path>
-                  </g>
-                </svg>
-              </button>
-            </section>
-            <div
-              id="venueReviewsGoesHere"
-              class="hidden flex flex-col gap-4"
-            ></div>
-          </div>
-        </section>
-        <section
-          id="rightMainColumn"
-          class="flex flex-col md:w-1/3 w-full py-4 gap-5"
-        >
-          <!-- MAP CONTAINER -->
-          <div
-            id="mapContainer"
-            class="flex flex-col w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
-          >
-            <h2 class="text-2xl font-extrabold">Location & Hours</h2>
-            <!-- MAP -->
-            <a
-              href="./map."
-              id="map"
-              class="w-full max-h-[300px] rounded-lg"
-            ></a>
-            <div class="flexhtml flex-col w-full gap-3">
-              <div class="flex flex-col w-full">
-                <p class="font-semibold">Street</p>
-                <p class="text-stone-600">City, postal code</p>
-              </div>
-              <a
-                href="./map.html"
-                class="text-orange-500 font-semibold cursor-pointer"
-                >Get Directions →</a
-              >
-            </div>
-          </div>
-          <!-- SCHEDULE CONTAINER -->
-          <div
-            id="scheduleContainer"
-            class="flex flex-col w-full border-1 border-stone-400/90 pb-4 rounded-lg shadow-md hover:border-orange-400"
-          >
-            <span
-              id="venueScheduleOpenStatus"
-              class="px-3 py-2 font-semibold text-green-600 cursor-pointer border-stone-400/90 border-b-1 rounded-none"
-              >● Open Now</span
-            >
-            <ul class="w-full px-3">
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Mon<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Tues<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Wed<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Thurs<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Fri<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Sat<span>12:00PM - 1:00 AM</span>
-              </li>
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                Sun<span>12:00PM - 1:00 AM</span>
-              </li>
-            </ul>
-          </div>
-          <!-- WATCH PARTY SCHEDULE CONTAINER -->
-          <div
-            id="gameScheduleContainer"
-            class="flex flex-col w-full border-1 bg-stone-900 text-white pb-4 rounded-lg shadow-md hover:border-orange-400"
-          >
-            <span class="px-3 py-2 font-semibold text-orange-500"
-              >GAME SCHEDULES</span
-            >
-            <ul id="gameScheduleGoesHere" class="w-full px-3">
-              <li
-                class="flex justify-between p-1 hover:font-semibold duration-150"
-              >
-                VAN vs. EDM<span>12:00PM - 1:00 AM</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
-    </main>
-    <!-- MODAL -->
-    <!-- Select ID: modal and change text content to whatever message -->
-    <!-- Then: .classList.remove(opacity-0) .classList.add(opacity-100) timeout do the reverse -->
-    <div class="fixed bottom-10 left-0 right-0">
-      <div class="max-w-6xl mx-auto px-10 flex justify-end drop-shadow-xl">
-        <div
-          id="popUp"
-          class="bg-orange-500 text-white px-4 py-2 rounded-lg opacity-0 transition-all duration-300 w-fit"
-        >
-          Placeholder text
+          <div id="venueReviewsGoesHere" class="hidden flex flex-col gap-4"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- TEMPLATE GOES HERE -->
-    <!-- REVIEW CARD TEMPLATE -->
-    <template id="reviewCardTemplate">
-      <div
-        class="reviewCardTemplateContainer flex flex-col gap-4 justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400"
-      >
-        <!-- AVATAR + USERNAME + TIMESTAMP -->
-        <section
-          class="reviewUserIdentification flex items-center justify-between"
-        >
-          <!-- avatar + username -->
-          <div class="flex items-center gap-2">
-            <div
-              class="reviewUserAvatar w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center"
-            >
-              C
+      </section>
+      <section id="rightMainColumn" class="flex flex-col md:w-1/3 w-full py-4 gap-5">
+        <!-- MAP CONTAINER -->
+        <div id="mapContainer"
+          class="flex flex-col w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400">
+          <h2 class="text-2xl font-extrabold">Location & Hours</h2>
+          <!-- MAP -->
+          <a href="./map." id="map" class="w-full max-h-[300px] rounded-lg"></a>
+          <div class="flexhtml flex-col w-full gap-3">
+            <div class="flex flex-col w-full">
+              <p class="font-semibold">Street</p>
+              <p class="text-stone-600">City, postal code</p>
             </div>
-            <h2 class="reviewUserName">Placeholder</h2>
+            <a href="./map.html" class="text-orange-500 font-semibold cursor-pointer">Get Directions →</a>
           </div>
-          <!-- TIMESTAMP -->
-          <p class="reviewUserTimeStamp">00:00 AM</p>
-        </section>
-        <!-- SUMMARY: RATING + TITLE + SUMMARY VIBES -->
-        <section class="flex flex-col gap-2">
-          <!-- STAR RATING -->
-          <div class="reviewUseRating flex gap-1">
-            <span
-              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
-              data-value="1"
-              >star_outline</span
-            >
-            <span
-              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
-              data-value="2"
-              >star_outline</span
-            >
-            <span
-              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
-              data-value="3"
-              >star_outline</span
-            >
-            <span
-              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
-              data-value="4"
-              >star_outline</span
-            >
-            <span
-              class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
-              data-value="5"
-              >star_outline</span
-            >
+        </div>
+        <!-- SCHEDULE CONTAINER -->
+        <div id="scheduleContainer"
+          class="flex flex-col w-full border border-stone-400/90 pb-0 rounded-lg shadow-md hover:border-orange-400 overflow-hidden">
+          <span id="venueScheduleOpenStatus"
+            class="px-3 py-2 font-semibold text-green-600 cursor-pointer border-stone-400/90 border-b rounded-none">
+            ● Open Now
+          </span>
+          <ul id="scheduleList" class="w-full px-3 mt-1"></ul>
+          <div class="flex justify-end gap-2 px-3 pb-3 pt-2 border-t border-stone-400/90 mt-2">
+            <button id="editBtn" onclick="toggleEdit()"
+              class="text-sm px-3 py-1 rounded border border-stone-400 hover:bg-stone-100">Edit</button>
+            <button id="saveBtn" onclick="saveSchedule()"
+              class="text-sm px-3 py-1 rounded bg-stone-800 text-white hidden">Save</button>
           </div>
-          <!-- REVIEW TITLE -->
-          <h2 class="reviewUserTitle font-semibold">Placeholder</h2>
-          <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
-          <div class="reviewUserSummary flex gap-2 flex-wrap">
-            <span
-              class="reviewUserAtmosphere border-1 border-stone-400/90 py-1 px-3 rounded-lg"
-              >Placeholder</span
-            >
-            <span
-              class="reviewUserGroupSize border-1 border-stone-400/90 py-1 px-3 rounded-lg"
-              >Placeholder</span
-            >
-            <span
-              class="reviewUserPricing border-1 border-stone-400/90 py-1 px-3 rounded-lg"
-              >Placeholder</span
-            >
-            <span
-              class="reviewUserWouldVisitAgain border-1 border-stone-400/90 py-1 px-3 rounded-lg"
-              >Placeholder</span
-            >
-          </div>
-        </section>
-        <!-- LONG DESCRIPTION -->
-        <section>
-          <p class="reviewUserDescription border-t-1 border-stone-200 pt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quos
-            libero, sit dolorem, rem maxime voluptas maiores vitae dolorum
-            aliquid autem consequuntur inventore ducimus voluptate quo quas
-            velit vero! Autem.
-          </p>
-        </section>
-      </div>
-    </template>
+        </div>
+        <!-- WATCH PARTY SCHEDULE CONTAINER -->
+        <div id="gameScheduleContainer"
+          class="flex flex-col w-full border-1 bg-stone-900 text-white pb-4 rounded-lg shadow-md hover:border-orange-400">
+          <span class="px-3 py-2 font-semibold text-orange-500">GAME SCHEDULES</span>
+          <ul id="gameScheduleGoesHere" class="w-full px-3">
+            <li class="flex justify-between p-1 hover:font-semibold duration-150">
+              VAN vs. EDM<span>12:00PM - 1:00 AM</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+  <!-- VENUE SCHEDULE CONTAINER -->
+  <div id="scheduleContainer"
+    class="flex flex-col w-full max-w-sm border border-stone-400/90 rounded-lg shadow-md hover:border-orange-400 overflow-hidden">
+    <span class="px-3 py-2 font-semibold text-green-600 border-b border-stone-400/90">
+      ● Open Now
+    </span>
+    <ul id="scheduleList" class="w-full px-3 mt-1"></ul>
+    <div class="flex justify-end gap-2 px-3 pb-3 pt-2 border-t border-stone-400/90 mt-2">
+      <button id="editBtn"
+        class="text-sm px-3 py-1 rounded border border-stone-400 hover:bg-stone-100 cursor-pointer">Edit</button>
+      <button id="saveBtn"
+        class="text-sm px-3 py-1 rounded bg-stone-800 text-white hidden cursor-pointer hover:bg-stone-700">Save</button>
+    </div>
+  </div>
 
-    <!-- IMPORT JS -->
-    <script type="module" src="../src/venue.js"></script>
-  </body>
+  <!-- TEMPLATE GOES HERE -->
+  <!-- REVIEW CARD TEMPLATE -->
+  <template id="reviewCardTemplate">
+    <div
+      class="reviewCardTemplateContainer flex flex-col gap-4 justify-between w-full border-1 border-stone-400/90 py-4 px-3 rounded-lg shadow-md hover:border-orange-400">
+      <!-- AVATAR + USERNAME + TIMESTAMP -->
+      <section class="reviewUserIdentification flex items-center justify-between">
+        <!-- avatar + username -->
+        <div class="flex items-center gap-2">
+          <div class="reviewUserAvatar w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center">
+
+          </div>
+          <h2 class="reviewUserName">Placeholder</h2>
+        </div>
+        <!-- TIMESTAMP -->
+        <p class="reviewUserTimeStamp">00:00 AM</p>
+      </section>
+      <!-- SUMMARY: RATING + TITLE + SUMMARY VIBES -->
+      <section class="flex flex-col gap-2">
+        <!-- STAR RATING -->
+        <div class="reviewUseRating flex gap-1">
+          <span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+            data-value="1">star_outline</span>
+          <span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+            data-value="2">star_outline</span>
+          <span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+            data-value="3">star_outline</span>
+          <span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+            data-value="4">star_outline</span>
+          <span class="material-icons starIcon text-orange-400 text-3xl cursor-pointer"
+            data-value="5">star_outline</span>
+        </div>
+        <!-- REVIEW TITLE -->
+        <h2 class="reviewUserTitle font-semibold">Placeholder</h2>
+        <!-- REVIEW SUMMARY (ATMOSPHERE / GROUP SIZE / PRICING / WOULD GO AGAIN) -->
+        <div class="reviewUserSummary flex gap-2 flex-wrap">
+          <span class="reviewUserAtmosphere border-1 border-stone-400/90 py-1 px-3 rounded-lg">Placeholder</span>
+          <span class="reviewUserGroupSize border-1 border-stone-400/90 py-1 px-3 rounded-lg">Placeholder</span>
+          <span class="reviewUserPricing border-1 border-stone-400/90 py-1 px-3 rounded-lg">Placeholder</span>
+          <span class="reviewUserWouldVisitAgain border-1 border-stone-400/90 py-1 px-3 rounded-lg">Placeholder</span>
+        </div>
+      </section>
+      <!-- LONG DESCRIPTION -->
+      <section>
+        <p class="reviewUserDescription border-t-1 border-stone-200 pt-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quos
+          libero, sit dolorem, rem maxime voluptas maiores vitae dolorum
+          aliquid autem consequuntur inventore ducimus voluptate quo quas
+          velit vero! Autem.
+        </p>
+      </section>
+    </div>
+  </template>
+
+  <!-- IMPORT JS -->
+  <script type="module" src="../src/venue.js"></script>
+</body>
+
 </html>

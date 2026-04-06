@@ -250,7 +250,6 @@ async function displayCardsDynamically() {
       } else {
         newcard.querySelector(".card-image").textContent = venue.photo_url;
       }
-      newcard.querySelector(".card-image").textContent = venue.photo_url;
       newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
       newcard.querySelector(".read-more").href =
         `./pages/venue.html?docID=${doc.id}`;

@@ -1,10 +1,10 @@
 import { db } from "./firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { onAuthReady } from "./authentication.js";
 import { auth } from "./firebaseConfig.js";
 import {
   doc,
   getDoc,
+  setDoc,
   collection,
   addDoc,
   serverTimestamp,
@@ -114,7 +114,7 @@ async function displayVenueInfo() {
 
     //Map Href
     document.getElementById("map").href =
-      `./map.html?lat=${lat}&lng=${lng}&zoom=15`;
+      `./map.html?lat=${lat}&lng=${lng}&zoom=15&docID=${id}`;
 
     // Map
     const map = L.map("mapContainer").setView([lat, lng], 15);
@@ -124,6 +124,105 @@ async function displayVenueInfo() {
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
     L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
+
+    const VENUE_OWNER_ID = venue.userID;
+
+    const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+    const schedule = {
+      Mon: { open: '12:00 PM', close: '1:00 AM' },
+      Tues: { open: '12:00 PM', close: '1:00 AM' },
+      Wed: { open: '12:00 PM', close: '1:00 AM' },
+      Thurs: { open: '12:00 PM', close: '1:00 AM' },
+      Fri: { open: '12:00 PM', close: '1:00 AM' },
+      Sat: { open: '12:00 PM', close: '1:00 AM' },
+      Sun: { open: '12:00 PM', close: '1:00 AM' },
+    };
+    let editing = false;
+
+    async function loadSchedule() {
+      try {
+        const docRef = doc(db, 'venue', id);  // ✅ 'venue' not 'venues'
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().schedule) {
+          const saved = docSnap.data().schedule;
+          days.forEach(day => {
+            if (saved[day]) {
+              schedule[day].open = saved[day].open;
+              schedule[day].close = saved[day].close;
+            }
+          });
+        }
+      } catch (err) {
+        console.error('Failed to load schedule:', err);
+      }
+      render();
+    }
+
+    async function saveTimeToFirebase() {
+      try {
+        const docRef = doc(db, 'venue', id);  // ✅ 'venue' not 'venues'
+        await setDoc(docRef, { schedule }, { merge: true });
+        console.log('Schedule saved');
+      } catch (err) {
+        console.error('Failed to save schedule:', err);
+      }
+    }
+
+    function render() {
+      document.getElementById('scheduleList').innerHTML = days.map(day => {
+        const { open, close } = schedule[day];
+        if (editing) {
+          return `
+        <li class="flex justify-between items-center p-1 gap-2">
+          <span class="w-14 text-sm text-stone-600">${day}</span>
+          <div class="flex items-center gap-1">
+            <input id="open_${day}" value="${open}"
+              class="border border-stone-300 rounded px-1 py-0.5 text-xs w-24 focus:outline-none focus:border-orange-400" />
+            <span class="text-stone-400 text-xs">–</span>
+            <input id="close_${day}" value="${close}"
+              class="border border-stone-300 rounded px-1 py-0.5 text-xs w-24 focus:outline-none focus:border-orange-400" />
+          </div>
+        </li>`;
+        }
+        return `
+      <li class="flex justify-between p-1 text-sm hover:font-semibold duration-150">
+        <span>${day}</span><span>${open} – ${close}</span>
+      </li>`;
+      }).join('');
+    }
+
+    function toggleEdit() {
+      editing = true;
+      document.getElementById('editBtn').classList.add('hidden');
+      document.getElementById('saveBtn').classList.remove('hidden');
+      render();
+    }
+
+    async function saveSchedule() {
+      days.forEach(day => {
+        schedule[day].open = document.getElementById(`open_${day}`).value;
+        schedule[day].close = document.getElementById(`close_${day}`).value;
+      });
+      await saveTimeToFirebase();
+      editing = false;
+      document.getElementById('editBtn').classList.remove('hidden');
+      document.getElementById('saveBtn').classList.add('hidden');
+      render();
+    }
+
+    window.toggleEdit = toggleEdit;
+    window.saveSchedule = saveSchedule;
+
+    document.getElementById('editBtn').addEventListener('click', toggleEdit);
+    document.getElementById('saveBtn').addEventListener('click', saveSchedule);
+
+    onAuthStateChanged(auth, (user) => {
+      const isOwner = user && user.uid === VENUE_OWNER_ID;
+      document.getElementById('editBtn').classList.toggle('hidden', !isOwner);
+    });
+
+    loadSchedule();
+
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";
@@ -509,7 +608,6 @@ const submitReviewBtn = document.getElementById("submitReviewBtn");
 submitReviewBtn.addEventListener("click", writeReview);
 
 async function populateReviews() {
-  console.log("test");
   const reviewCardTemplate = document.getElementById("reviewCardTemplate");
   const venueReviewsGoesHere = document.getElementById("venueReviewsGoesHere");
 

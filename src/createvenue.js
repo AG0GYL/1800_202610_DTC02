@@ -173,3 +173,95 @@ async function createVenue() {
         alert("Something went wrong. Please try again.");
     }
 }
+const input = document.getElementById('venueLocation');
+const list = document.getElementById('autocomplete-list');
+const latField = document.getElementById('venueLat');
+const lonField = document.getElementById('venueLon');
+
+let debounceTimer;
+let activeIndex = -1;
+
+input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const query = input.value.trim();
+    if (query.length < 3) { closeList(); return; }
+    debounceTimer = setTimeout(() => fetchSuggestions(query), 400);
+});
+
+async function fetchSuggestions(query) {
+    try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&q=${encodeURIComponent(query)}`;
+        const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+        const data = await res.json();
+        renderList(data);
+    } catch (err) {
+        console.error('Nominatim error:', err);
+    }
+}
+
+function renderList(results) {
+    list.innerHTML = '';
+    activeIndex = -1;
+    if (!results.length) { closeList(); return; }
+
+    results.forEach((place) => {
+        const li = document.createElement('li');
+        li.textContent = place.display_name;
+        li.className = 'px-3 py-2 text-sm text-gray-700 cursor-pointer border-b border-gray-100 last:border-b-0 hover:bg-orange-50 hover:text-orange-700';
+        li.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            selectPlace(place);
+        });
+        list.appendChild(li);
+    });
+
+    list.classList.remove('hidden');
+}
+
+function selectPlace(place) {
+    input.value = place.display_name;
+    latField.value = place.lat;
+    lonField.value = place.lon;
+    closeList();
+}
+
+function closeList() {
+    list.classList.add('hidden');
+    list.innerHTML = '';
+    activeIndex = -1;
+}
+
+input.addEventListener('keydown', (e) => {
+    const items = list.querySelectorAll('li');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        updateActive(items);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        updateActive(items);
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+        e.preventDefault();
+        items[activeIndex].dispatchEvent(new Event('mousedown'));
+    } else if (e.key === 'Escape') {
+        closeList();
+    }
+});
+
+function updateActive(items) {
+    items.forEach(li => {
+        li.classList.remove('bg-orange-100', 'text-orange-800');
+    });
+    if (activeIndex >= 0) {
+        items[activeIndex].classList.add('bg-orange-100', 'text-orange-800');
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (!document.getElementById('location-wrapper').contains(e.target)) {
+        closeList();
+    }
+});

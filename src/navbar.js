@@ -79,7 +79,7 @@ class SiteNavbar extends HTMLElement {
       },
       function (error) {
         const messages = {
-          1: "Permission denied.",
+          1: "Location permission denied.",
           2: "Position unavailable.",
           3: "Request timed out."
         };

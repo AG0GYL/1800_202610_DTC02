@@ -1,5 +1,5 @@
 import { db } from "../src/firebaseConfig.js";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 
 var FADE_ZOOM = 11;
 var markers = [];
@@ -40,22 +40,36 @@ function getUrlParams() {
   const lng = parseFloat(params.get("lng"));
   const zoom = parseInt(params.get("zoom")) || 15;
   const cur = parseFloat(params.get("cur"));
-  return { lat, lng, zoom, cur };
+  const docID = params.get("docID");
+  return { lat, lng, zoom, cur, docID };
 }
 
-const { lat, lng, zoom, cur } = getUrlParams();
+const { lat, lng, zoom, cur, docID } = getUrlParams();
 
-if (!isNaN(lat) && !isNaN(lng)) {
-  map.setView([lat, lng], zoom);
-  // Add a highlighted marker at the venue
-  if (!isNaN(cur) && cur === 1) {
-    L.marker([lat, lng], { icon: icons.user })
-      .addTo(map)
-      .bindPopup("Selected Venue")
-      .openPopup();
-  } else {
-    L.marker([lat, lng]).addTo(map).bindPopup("You're here").openPopup();
-  }
+if (!isNaN(cur) && cur === 1) {
+  L.marker([lat, lng], { icon: icons.user })
+    .addTo(map)
+    .bindPopup(`
+      <span class="font-bold text-orange-500">You're here</span>
+      <br>Your current location.
+    `)
+    .openPopup();
+} else {
+  // Fetch the specific venue first
+  const docRef = doc(db, "venue", docID);
+  const docSnap = await getDoc(docRef);
+  const venueName = docSnap.data().name;
+  const details = docSnap.data().details || `Located in ${docSnap.data().city}.`;
+
+  L.marker([lat, lng], { icon: icons.selected })
+    .addTo(map)
+    .bindPopup(`
+      <a href="./venue.html?docID=${docID}" class="font-bold text-orange-500 hover:underline">
+        ${venueName}
+      </a>
+      <br>${details}
+    `)
+    .openPopup();
 }
 
 function updateMarkers() {
@@ -83,12 +97,15 @@ async function displayPins() {
       const venueName = venue.name;
       const details = venue.details || `Located in ${venue.city}.`;
 
-      const marker = L.marker([lat, lng]).addTo(map).bindPopup(`
-          <a href="./venue.html?docID=${venueId}" class="font-bold text-orange-500 hover:underline">
-            ${venueName}
-          </a>
-          <br>${details}
-        `);
+      // Use green for the selected venue, blue for all others
+      const icon = venueId === docID ? icons.selected : icons.result;
+
+      const marker = L.marker([lat, lng], { icon }).addTo(map).bindPopup(`
+      <a href="./venue.html?docID=${venueId}" class="font-bold text-orange-500 hover:underline">
+        ${venueName}
+      </a>
+      <br>${details}
+    `);
 
       markers.push(marker);
     });
