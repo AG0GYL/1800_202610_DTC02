@@ -638,3 +638,35 @@ function displayVenueOpenStatus() {
   }
 }
 displayVenueOpenStatus();
+
+function createShareBtn() {
+  document
+    .getElementById("shareVenueBtn")
+    .addEventListener("click", async () => {
+      const venueName = document.getElementById("venueName").textContent;
+      const shareData = {
+        title: venueName,
+        text: "Check out this venue on Scout!",
+        url: window.location.href,
+      };
+
+      try {
+        await navigator.share(shareData);
+      } catch (error) {
+        // Fallback — copy to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        console.log("Saved to clipboard!");
+        const modal = document.getElementById("popUp");
+        // SET TEXT AND REMOVE VISIBLE
+        modal.textContent = "Saved to clipboard!";
+        modal.classList.remove("opacity-0");
+        modal.classList.add("opacity-100");
+        setTimeout(() => {
+          modal.classList.remove("opacity-100");
+          modal.classList.add("opacity-0");
+        }, 2000);
+      }
+    });
+}
+
+createShareBtn();
