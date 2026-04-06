@@ -300,12 +300,21 @@ async function populateReviews(userID, username, profileImage) {
 // populateReviews();
 // ACCORDION BEHAVIOR
 function accordion() {
+  // POSTED REVIEWS DROPDOWN
   const reviewsDropDown = document.getElementById("reviewsDropDown");
   const venueReviews = document.getElementById("venueReviewsGoesHere");
-  const dropdownArrow = reviewsDropDown.querySelector("svg");
+  const reviewsDropdownArrow = reviewsDropDown.querySelector("svg");
   reviewsDropDown.addEventListener("click", () => {
     venueReviews.classList.toggle("hidden");
-    dropdownArrow.classList.toggle("rotate-180");
+    reviewsDropdownArrow.classList.toggle("rotate-180");
+  });
+  // BOOKMARKED VENUES DROPDOWN
+  const bookmarksDropDown = document.getElementById("bookmarksDropDown");
+  const venueBookmarks = document.getElementById("venueBookmarksGoesHere");
+  const bookmarksDropdownArrow = bookmarksDropDown.querySelector("svg");
+  bookmarksDropDown.addEventListener("click", () => {
+    venueBookmarks.classList.toggle("hidden");
+    bookmarksDropdownArrow.classList.toggle("rotate-180");
   });
 }
 accordion();
