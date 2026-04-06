@@ -1,4 +1,6 @@
 import { db } from "./firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { onAuthReady } from "./authentication.js";
 import { auth } from "./firebaseConfig.js";
 import {
   doc,
@@ -11,6 +13,9 @@ import {
   orderBy,
   getDocs,
   updateDoc,
+  onSnapshot,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 // Get the document ID from the URL
@@ -668,15 +673,8 @@ function createShareBtn() {
         // Fallback — copy to clipboard
         navigator.clipboard.writeText(window.location.href);
         console.log("Saved to clipboard!");
-        const modal = document.getElementById("popUp");
-        // SET TEXT AND REMOVE VISIBLE
-        modal.textContent = "Saved to clipboard!";
-        modal.classList.remove("opacity-0");
-        modal.classList.add("opacity-100");
-        setTimeout(() => {
-          modal.classList.remove("opacity-100");
-          modal.classList.add("opacity-0");
-        }, 2000);
+        // MODAL POP UP
+        modalPopUp("Saved to clipboard!");
       }
     });
 }
@@ -700,7 +698,7 @@ async function createSaveBtn() {
   if (!user) return;
   const userID = user.uid;
 
-  venueID = getDocIdFromUrl();
+  const venueID = getDocIdFromUrl();
   const userRef = doc(db, "users", userID);
   const userSnap = await getDoc(userRef);
   const userData = userSnap.data();
@@ -712,10 +710,58 @@ async function createSaveBtn() {
   const path = saveVenueBtn.querySelector("path");
 
   if (isBookmarked) {
-    path.setAttribute("fill", "none");
-  } else {
     path.setAttribute("fill", "#f97316");
+    console.log("Venue is bookmarked according to user bookmarks!");
+  } else {
+    path.setAttribute("fill", "none");
+    console.log("Venue is not bookmarked according to user bookmarks!");
   }
 
-  saveVenueBtn.addEventListener("click", () => toggleSaveBtn());
+  saveVenueBtn.addEventListener("click", toggleSaveBtn);
 }
+async function toggleSaveBtn() {
+  const user = auth.currentUser;
+  if (!user) {
+    console.log("No user is signed in");
+    window.location.href = "../pages/login.html";
+    return;
+  }
+  const userID = user.uid;
+
+  const venueID = getDocIdFromUrl();
+  const userRef = doc(db, "users", userID);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+
+  const bookmarks = userData.bookmarks || [];
+
+  const isBookmarked = bookmarks.includes(venueID);
+  const saveVenueBtn = document.getElementById("saveVenueBtn");
+  const path = saveVenueBtn.querySelector("path");
+
+  try {
+    if (isBookmarked) {
+      // Remove from Firestore array
+      await updateDoc(userRef, { bookmarks: arrayRemove(venueID) });
+      console.log("Removed venue from bookmarks!");
+      path.setAttribute("fill", "none");
+      // MODAL POP UP
+      modalPopUp("Added to Bookmarks!");
+    } else {
+      // Add to Firestore array
+      await updateDoc(userRef, { bookmarks: arrayUnion(venueID) });
+      console.log("Added venue to bookmarks!");
+      path.setAttribute("fill", "#f97316");
+      // MODAL POP UP
+      modalPopUp("Removed from Bookmarks!");
+    }
+  } catch (error) {
+    console.log("Error creating save button!");
+  }
+}
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    createSaveBtn();
+  }
+});
