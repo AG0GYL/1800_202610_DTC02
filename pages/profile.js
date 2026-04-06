@@ -298,3 +298,14 @@ async function populateReviews(userID, username, profileImage) {
 }
 
 // populateReviews();
+// ACCORDION BEHAVIOR
+function accordion() {
+  const reviewsDropDown = document.getElementById("reviewsDropDown");
+  const venueReviews = document.getElementById("venueReviewsGoesHere");
+  const dropdownArrow = reviewsDropDown.querySelector("svg");
+  reviewsDropDown.addEventListener("click", () => {
+    venueReviews.classList.toggle("hidden");
+    dropdownArrow.classList.toggle("rotate-180");
+  });
+}
+accordion();
