@@ -54,6 +54,7 @@ if (!isNaN(cur) && cur === 1) {
       <br>Your current location.
     `)
     .openPopup();
+  map.setView([lat, lng], zoom);
 } else {
   // Fetch the specific venue first
   const docRef = doc(db, "venue", docID);
@@ -70,6 +71,7 @@ if (!isNaN(cur) && cur === 1) {
       <br>${details}
     `)
     .openPopup();
+  map.setView([lat, lng], zoom);
 }
 
 function updateMarkers() {
