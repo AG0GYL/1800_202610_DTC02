@@ -702,14 +702,31 @@ async function populateReviews() {
 
 populateReviews();
 
-displayVenueOpenStatus();
-function isVenueOpen() {
-  const now = new Date();
-  const hour = now.getHours();
-  return hour >= 12 || hour < 1;
+async function isVenueOpen() {
+  const id = getDocIdFromUrl();
+
+  try {
+    const venueRef = doc(db, "venue", id);
+    const venueSnap = await getDoc(venueRef);
+    const venue = venueSnap.data();
+    const now = new Date();
+    const day = now.getDay(); // 0 (Sun) to 6 (Sat)
+    const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+    const dayName = days[day];
+    const hour = now.getHours();
+    const openTime = venue.schedule[dayName]?.open || "12:00 PM";
+    const closeTime = venue.schedule?.[dayName]?.close || "1:00 AM";
+    const openHour = parseInt(openTime.split(":")[0]) + (openTime.includes("PM") && !openTime.startsWith("12") ? 12 : 0);
+    const closeHour = parseInt(closeTime.split(":")[0]) + (closeTime.includes("PM") && !closeTime.startsWith("12") ? 12 : 0);
+    console.log(hour >= openHour && hour < closeHour);
+    return hour >= openHour && hour < closeHour;
+  } catch (error) {
+    console.error("Error checking venue open status:", error);
+    return false;
+  }
 }
 
-function displayVenueOpenStatus() {
+async function displayVenueOpenStatus() {
   if (isVenueOpen()) {
     // HERO's open status
     document.getElementById("venueOpenStatus").textContent = "● Open Now";
