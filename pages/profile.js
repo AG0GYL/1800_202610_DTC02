@@ -339,7 +339,6 @@ async function populateBookmarks(userID, username) {
     console.log(venueData);
 
     const bookmarkCard = bookmarkCardTemplate.content.cloneNode(true);
-    // bookmarkCard.querySelector("img").src = venueData.photo_url;
     bookmarkCard.querySelector(".venueName").textContent = venueData.name;
     bookmarkCard.querySelector(".venueLocation").textContent = venueData.city;
     bookmarkCard.querySelector(
