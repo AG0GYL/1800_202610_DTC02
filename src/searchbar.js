@@ -35,12 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBar = document.getElementById("searchBar");
   const filterBtn = document.getElementById("filterBtn");
   const filterPanel = document.getElementById("filterPanel");
+  const ratingSlider = document.getElementById("ratingFilter");
+  const ratingValue = document.getElementById("ratingValue");
 
+  if (ratingSlider && ratingValue) {
+  ratingValue.textContent = Number(ratingSlider.value).toFixed(1);
+
+  ratingSlider.addEventListener("input", () => {
+    ratingValue.textContent = Number(ratingSlider.value).toFixed(1);
+  });
+}
 
   filterPanel.addEventListener("click", (e) => {
     e.stopPropagation();
   });
-
 
   filterBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -53,12 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const term = searchBar.value.trim();
     const level = document.getElementById("levelFilter").value;
     const group = document.getElementById("groupFilter").value;
+    const rating = document.getElementById("ratingFilter").value;
 
     const params = new URLSearchParams();
 
     if (term) params.set("q", term);
     if (level) params.set("averageAtmosphere", level);
     if (group) params.set("averageGroupSize", group);
+    if (rating) params.set("averageRating", rating);
 
     window.location.href = `/pages/results.html?${params.toString()}`;
   });
