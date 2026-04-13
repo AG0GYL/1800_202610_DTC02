@@ -6,6 +6,7 @@ var markers = [];
 
 var map = L.map("map").setView([49.27686984435864, -123.11198770925881], 11);
 
+// create pins
 function createColoredPin(color) {
   return L.divIcon({
     className: "",
@@ -22,18 +23,21 @@ function createColoredPin(color) {
   });
 }
 
+// pin colours
 const icons = {
   user: createColoredPin("red"), // orange
   result: createColoredPin("#3b82f6"), // blue
   selected: createColoredPin("#22c55e"), // green
 };
 
+// build map
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
+// get url parameters
 function getUrlParams() {
   const params = new URLSearchParams(window.location.search);
   const lat = parseFloat(params.get("lat"));
@@ -74,6 +78,7 @@ if (!isNaN(cur) && cur === 1) {
   map.setView([lat, lng], zoom);
 }
 
+// update pin size
 function updateMarkers() {
   var zoom = map.getZoom();
   var opacity = zoom >= FADE_ZOOM ? 1 : 0;
@@ -88,6 +93,7 @@ function updateMarkers() {
 map.on("zoomend", updateMarkers);
 map.on("zoomstart", updateMarkers);
 
+// display pins on map
 async function displayPins() {
   try {
     const querySnapshot = await getDocs(collection(db, "venue"));

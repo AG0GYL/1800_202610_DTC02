@@ -4,53 +4,63 @@ import { doc, onSnapshot } from "firebase/firestore";
 import {
   collection,
   getDocs,
+  getDoc,
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
-function showName() {
+function showNameAndCity() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
 
   // Wait for Firebase to determine the current authentication state.
   // onAuthReady() runs the callback once Firebase finishes checking the signed-in user.
   // The user's name is extracted from the Firebase Authentication object
   // You can "go to console" to check out current users.
-  onAuthReady((user) => {
+  onAuthReady(async (user) => {
     // If a user is logged in:
     // Use their display name if available, otherwise show their email.
-    const name = user.displayName || user.email;
-
-    // Update the welcome message with their name/email.
-    if (nameElement) {
-      nameElement.textContent = `Hi, ${name}! `;
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const name = userData.name || userData.email;
+        const city = userData.city || "Vancouver";
+        // Update the welcome message with their name/email.
+        if (nameElement) {
+          nameElement.textContent = `Hi, ${name}! `;
+        }
+        document.getElementById("userCity").textContent = city;
+      }
+    } catch (error) {
+      console.log("Error fetching name!");
     }
   });
 }
+// Commenting out readQuote
+// function readQuote(day) {
+//   const quoteDocRef = doc(db, "quotes", day); // Get a reference to the document
+//   onSnapshot(
+//     quoteDocRef,
+//     (docSnap) => {
+//       // Listen for real-time updates
+//       if (docSnap.exists()) {
+//         //Document existence check
+//         document.getElementById("quote-goes-here").innerHTML =
+//           docSnap.data().quote;
+//       } else {
+//         console.log("No such document!");
+//       }
+//     },
+//     (error) => {
+//       //Listener/system error
+//       console.error("Error listening to document: ", error);
+//     },
+//   );
+// }
+// readQuote("wednesday");
 
-function readQuote(day) {
-  const quoteDocRef = doc(db, "quotes", day); // Get a reference to the document
-
-  onSnapshot(
-    quoteDocRef,
-    (docSnap) => {
-      // Listen for real-time updates
-      if (docSnap.exists()) {
-        //Document existence check
-        document.getElementById("quote-goes-here").innerHTML =
-          docSnap.data().quote;
-      } else {
-        console.log("No such document!");
-      }
-    },
-    (error) => {
-      //Listener/system error
-      console.error("Error listening to document: ", error);
-    },
-  );
-}
-readQuote("wednesday");
-
-showName();
+showNameAndCity();
 
 // Helper function to add the sample Venue documents.
 function addVenue() {
@@ -245,12 +255,12 @@ async function displayCardsDynamically() {
       newcard.querySelector(".card-level").textContent = venue.level;
 
       const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
-      if (firstImage) {
-        newcard.querySelector(".card-image").style.backgroundImage = `url(${firstImage})`;
+      if (venue.images?.length && firstImage) {
+        newcard.querySelector(".card-image").src = firstImage;
       } else {
         newcard.querySelector(".card-image").textContent = venue.photo_url;
+        newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
       }
-      newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
       newcard.querySelector(".read-more").href =
         `./pages/venue.html?docID=${doc.id}`;
 
