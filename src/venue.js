@@ -727,7 +727,7 @@ async function isVenueOpen() {
 }
 
 async function displayVenueOpenStatus() {
-  if (isVenueOpen()) {
+  if (await isVenueOpen()) {
     // HERO's open status
     document.getElementById("venueOpenStatus").textContent = "● Open Now";
     document.getElementById("venueOpenStatus").classList.remove("bg-red-600");

@@ -5,16 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Personal Profile</title>
+    <!-- libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- components -->
     <script src="../src/navbar.js" type="module"></script>
     <script src="../src/createvenue.js" type="module" defer></script>
 </head>
 
 <body>
+    <!-- navbar -->
     <site-navbar></site-navbar>
 
     <main>
+        <!-- create venue form -->
         <div class="grid justify-items-center container mx-auto px-4 py-8">
             <h1 class="text-3xl font-bold mb-6">Create a New Venue</h1>
             <form id="createVenueForm" class="space-y-6 max-w-lg w-full">
@@ -44,7 +48,7 @@
                     <input type="hidden" id="venueLat" name="venueLat">
                     <input type="hidden" id="venueLon" name="venueLon">
                 </div>
-
+                <!-- upload picture -->
                 <div>
                     <p>Picture Upload</p>
                     <div id="imageDisplay">

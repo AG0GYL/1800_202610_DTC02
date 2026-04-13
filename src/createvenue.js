@@ -2,7 +2,7 @@ import { db, auth } from "./firebaseConfig.js";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 let selectedFiles = [];
-
+// 
 document.getElementById("inputImage").addEventListener("change", (event) => {
     const files = Array.from(event.target.files);
     if (!files.length) return;
