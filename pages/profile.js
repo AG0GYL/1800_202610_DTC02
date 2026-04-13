@@ -336,6 +336,7 @@ async function populateBookmarks(userID, username) {
     const venueRef = doc(db, "venue", venueID);
     const venueSnap = await getDoc(venueRef);
     const venueData = venueSnap.data();
+    const firstImage = venueData.images?.[0] ?? "path/to/placeholder.jpg";
     console.log(venueData);
 
     const bookmarkCard = bookmarkCardTemplate.content.cloneNode(true);
@@ -344,8 +345,7 @@ async function populateBookmarks(userID, username) {
     bookmarkCard.querySelector(
       ".bookmarkCardTemplateContainer",
     ).style.backgroundImage =
-      `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0)), url(${venueData.photo_url})`;
-
+      `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0)), url(${venueData.photo_url || firstImage})`;
     // CLICKING ON REVIEW REDIRECTS TO VENUE PAGE
     bookmarkCard.querySelector("a").href = `/pages/venue.html?docID=${venueID}`;
     venueBookmarksGoesHere.appendChild(bookmarkCard);
