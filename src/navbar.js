@@ -105,7 +105,7 @@ class SiteNavbar extends HTMLElement {
           if (userSnap.exists()) {
             const userData = userSnap.data();
             name = userData.name;
-            email = userData.email;
+            email = user.email;
           }
         } catch (error) {
           console.log("Error fetching name!");

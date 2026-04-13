@@ -127,15 +127,15 @@ async function displayVenueInfo() {
 
     const VENUE_OWNER_ID = venue.userID;
 
-    const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+    const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
     const schedule = {
-      Mon: { open: '12:00 PM', close: '1:00 AM' },
-      Tues: { open: '12:00 PM', close: '1:00 AM' },
-      Wed: { open: '12:00 PM', close: '1:00 AM' },
-      Thurs: { open: '12:00 PM', close: '1:00 AM' },
-      Fri: { open: '12:00 PM', close: '1:00 AM' },
-      Sat: { open: '12:00 PM', close: '1:00 AM' },
-      Sun: { open: '12:00 PM', close: '1:00 AM' },
+      Mon: { open: "12:00 PM", close: "1:00 AM" },
+      Tues: { open: "12:00 PM", close: "1:00 AM" },
+      Wed: { open: "12:00 PM", close: "1:00 AM" },
+      Thurs: { open: "12:00 PM", close: "1:00 AM" },
+      Fri: { open: "12:00 PM", close: "1:00 AM" },
+      Sat: { open: "12:00 PM", close: "1:00 AM" },
+      Sun: { open: "12:00 PM", close: "1:00 AM" },
     };
     let editing = false;
 
@@ -145,7 +145,7 @@ async function displayVenueInfo() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists() && docSnap.data().schedule) {
           const saved = docSnap.data().schedule;
-          days.forEach(day => {
+          days.forEach((day) => {
             if (saved[day]) {
               schedule[day].open = saved[day].open;
               schedule[day].close = saved[day].close;
@@ -153,26 +153,27 @@ async function displayVenueInfo() {
           });
         }
       } catch (err) {
-        console.error('Failed to load schedule:', err);
+        console.error("Failed to load schedule:", err);
       }
       render();
     }
 
     async function saveTimeToFirebase() {
       try {
-        const docRef = doc(db, 'venue', id);  // ✅ 'venue' not 'venues'
+        const docRef = doc(db, "venue", id); // ✅ 'venue' not 'venues'
         await setDoc(docRef, { schedule }, { merge: true });
-        console.log('Schedule saved');
+        console.log("Schedule saved");
       } catch (err) {
-        console.error('Failed to save schedule:', err);
+        console.error("Failed to save schedule:", err);
       }
     }
 
     function render() {
-      document.getElementById('scheduleList').innerHTML = days.map(day => {
-        const { open, close } = schedule[day];
-        if (editing) {
-          return `
+      document.getElementById("scheduleList").innerHTML = days
+        .map((day) => {
+          const { open, close } = schedule[day];
+          if (editing) {
+            return `
         <li class="flex justify-between items-center p-1 gap-2">
           <span class="w-14 text-sm text-stone-600">${day}</span>
           <div class="flex items-center gap-1">
@@ -183,46 +184,46 @@ async function displayVenueInfo() {
               class="border border-stone-300 rounded px-1 py-0.5 text-xs w-24 focus:outline-none focus:border-orange-400" />
           </div>
         </li>`;
-        }
-        return `
+          }
+          return `
       <li class="flex justify-between p-1 text-sm hover:font-semibold duration-150">
         <span>${day}</span><span>${open} – ${close}</span>
       </li>`;
-      }).join('');
+        })
+        .join("");
     }
 
     function toggleEdit() {
       editing = true;
-      document.getElementById('editBtn').classList.add('hidden');
-      document.getElementById('saveBtn').classList.remove('hidden');
+      document.getElementById("editBtn").classList.add("hidden");
+      document.getElementById("saveBtn").classList.remove("hidden");
       render();
     }
 
     async function saveSchedule() {
-      days.forEach(day => {
+      days.forEach((day) => {
         schedule[day].open = document.getElementById(`open_${day}`).value;
         schedule[day].close = document.getElementById(`close_${day}`).value;
       });
       await saveTimeToFirebase();
       editing = false;
-      document.getElementById('editBtn').classList.remove('hidden');
-      document.getElementById('saveBtn').classList.add('hidden');
+      document.getElementById("editBtn").classList.remove("hidden");
+      document.getElementById("saveBtn").classList.add("hidden");
       render();
     }
 
     window.toggleEdit = toggleEdit;
     window.saveSchedule = saveSchedule;
 
-    document.getElementById('editBtn').addEventListener('click', toggleEdit);
-    document.getElementById('saveBtn').addEventListener('click', saveSchedule);
+    document.getElementById("editBtn").addEventListener("click", toggleEdit);
+    document.getElementById("saveBtn").addEventListener("click", saveSchedule);
 
     onAuthStateChanged(auth, (user) => {
       const isOwner = user && user.uid === VENUE_OWNER_ID;
-      document.getElementById('editBtn').classList.toggle('hidden', !isOwner);
+      document.getElementById("editBtn").classList.toggle("hidden", !isOwner);
     });
 
     loadSchedule();
-
   } catch (error) {
     console.error("Error loading venue:", error);
     document.getElementById("venueName").textContent = "Error loading venue.";
@@ -292,8 +293,8 @@ function addReviewForm() {
       </div>
  
       <!-- TWO COLUMN: ATMOSPHERE + GROUP SIZE -->
-      <div class="flex gap-4">
-        <div class="flex flex-col gap-1 w-1/2">
+      <div class="flex gap-4 flex-col md:flex-row">
+        <div class="flex flex-col gap-1 w-full md:w-1/2">
           <label class="text-stone-600 text-sm font-semibold">ATMOSPHERE</label>
           <select
             id="atmosphereSelect"
@@ -307,7 +308,7 @@ function addReviewForm() {
             <option value="High Energy">High Energy</option>
           </select>
         </div>
-        <div class="flex flex-col gap-1 w-1/2">
+        <div class="flex flex-col gap-1 w-full md:w-1/2">
           <label class="text-stone-600 text-sm font-semibold">GROUP SIZE</label>
           <select
             id="groupSizeSelect"
@@ -323,9 +324,9 @@ function addReviewForm() {
       </div>
  
       <!-- TWO COLUMN: PRICING + WOULD YOU VISIT AGAIN -->
-      <div class="flex gap-8 w-full">
+      <div class="flex gap-8 flex-col md:flex-row">
         <!-- PRICING -->
-        <div class="flex flex-col gap-1 w-1/2">
+        <div class="flex flex-col gap-1 w-full md:w-1/2">
           <label class="text-stone-600 text-sm font-semibold">PRICE RANGE</label>
           <div class="flex gap-4">
             <label class="flex items-center gap-1 cursor-pointer">
@@ -343,7 +344,7 @@ function addReviewForm() {
           </div>
         </div>
         <!-- WOULD YOU VISIT AGAIN -->
-        <div class="flex flex-col gap-1 w-1/2">
+        <div class="flex flex-col gap-1 w-full md:w-1/2">
           <label class="text-stone-600 text-sm font-semibold tracking-wide">WOULD YOU VISIT AGAIN?</label>
           <div class="flex gap-4">
             <label class="flex items-center gap-1 cursor-pointer">
@@ -711,7 +712,7 @@ async function isVenueOpen() {
     const venue = venueSnap.data();
     const now = new Date();
     const day = now.getDay(); // 0 (Sun) to 6 (Sat)
-    const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+    const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
     const dayName = days[day];
     const hour = now.getHours();
     const openTime = venue.schedule[dayName]?.open || "12:00 PM";
