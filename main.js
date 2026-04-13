@@ -9,7 +9,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-function showName() {
+function showNameAndCity() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
 
   // Wait for Firebase to determine the current authentication state.
@@ -25,10 +25,12 @@ function showName() {
       if (userSnap.exists()) {
         const userData = userSnap.data();
         const name = userData.name || userData.email;
+        const city = userData.city || "Vancouver";
         // Update the welcome message with their name/email.
         if (nameElement) {
           nameElement.textContent = `Hi, ${name}! `;
         }
+        document.getElementById("userCity").textContent = city;
       }
     } catch (error) {
       console.log("Error fetching name!");
@@ -58,7 +60,7 @@ function showName() {
 // }
 // readQuote("wednesday");
 
-showName();
+showNameAndCity();
 
 // Helper function to add the sample Venue documents.
 function addVenue() {
@@ -254,7 +256,8 @@ async function displayCardsDynamically() {
 
       const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
       if (firstImage) {
-        newcard.querySelector(".card-image").style.backgroundImage = `url(${firstImage})`;
+        newcard.querySelector(".card-image").style.backgroundImage =
+          `url(${firstImage})`;
       } else {
         newcard.querySelector(".card-image").textContent = venue.photo_url;
       }
