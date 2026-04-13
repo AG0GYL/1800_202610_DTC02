@@ -1,160 +1,186 @@
 <!doctype html>
 <html lang="en" class="overflow-y-scroll">
-
-<head>
-  <!-- Requiamber meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Landing Page</title>
-  <!-- Other libraries go here -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="module" src="./main.js" defer></script>
-  <!-- COMPONENTS -->
-  <script type="module" src="./src/navbar.js" defer></script>
-  <script type="module" src="./src/searchbar.js" defer></script>
-  <!-- <style>
+  <head>
+    <!-- Requiamber meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landing Page</title>
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module" src="./main.js" defer></script>
+    <!-- COMPONENTS -->
+    <script type="module" src="./src/navbar.js" defer></script>
+    <script type="module" src="./src/searchbar.js" defer></script>
+    <!-- <style>
       * {
         border: 1px solid darkorange;
       }
     </style> -->
-  <script src="./src/ms-stacked-cards.js"></script>
-</head>
+    <script src="./src/ms-stacked-cards.js"></script>
+  </head>
 
-<body>
-  <!-- our own navbar goes here -->
-  <site-navbar></site-navbar>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
 
-  <!-- HEADER -->
-  <header>
-    <!-- HERO CONTENT SECTION -->
-    <div id="hero-content-section"
-      class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto">
-      <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
-        <h1 class="text-slate-50 md:text-7xl text-5xl font-extrabold">
-          <span id="name-goes-here"></span>Find your perfect watch party
-          venue.
-        </h1>
-        <p class="text-white text-xl">
-          <span id="quote-goes-here">Test</span>
-        </p>
-        <form class="flex bg-white rounded-xl w-full md:w-1/2 border">
-          <input type="text" placeholder="Enter an address, neighborhood, city, or ZIP code"
-            class="p-3 w-full outline-none" id="searchBar" />
-          <!-- DIVIDER -->
-          <div class="w-[1px] bg-gray-400 my-2"></div>
-          <button type="button" class="flex items-center gap-3 hover:bg-gray-300 px-4 hover:cursor-pointer"
-            id="filterBtn">
-            <img src="/svg/filter.svg" alt="" />
-          </button>
+    <!-- HEADER -->
+    <header>
+      <!-- HERO CONTENT SECTION -->
+      <div
+        id="hero-content-section"
+        class="flex bg-[linear-gradient(to_bottom,rgba(0,0,0,0.8),rgba(0,0,0,0.5)),url(./images/hero-bg.png)] py-20 bg-cover bg-center max-w-[2000px] mx-auto"
+      >
+        <div class="max-w-6xl p-10 mx-auto flex flex-col gap-10">
+          <h1 class="text-slate-50 md:text-7xl text-5xl font-extrabold">
+            <span id="name-goes-here"></span>Find your perfect watch party
+            venue.
+          </h1>
+          <form class="flex bg-white rounded-xl w-full md:w-1/2 border">
+            <input
+              type="text"
+              placeholder="Enter an address, neighborhood, city, or ZIP code"
+              class="p-3 w-full outline-none"
+              id="searchBar"
+            />
+            <!-- DIVIDER -->
+            <div class="w-[1px] bg-gray-400 my-2"></div>
+            <button
+              type="button"
+              class="flex items-center gap-3 hover:bg-gray-300 px-4 hover:cursor-pointer"
+              id="filterBtn"
+            >
+              <img src="/svg/filter.svg" alt="" />
+            </button>
 
-          <button type="submit" class="bg-orange-600 px-4 rounded-r-xl hover:cursor-pointer hover:bg-orange-500">
-            <img src="/svg/search.svg" alt="" />
-          </button>
-        </form>
-        <!-- filter start -->
-        <div id="filterPanel"
-          class="hidden absolute bg-white shadow-lg rounded-lg p-4 mt-[77%] w-72 ml-[20%] overflow-y-scroll max-h-50 md:mt-[17%] md:ml-[13%]">
-          <h3 class="font-bold mb-2">Filters</h3>
+            <button
+              type="submit"
+              class="bg-orange-600 px-4 rounded-r-xl hover:cursor-pointer hover:bg-orange-500"
+            >
+              <img src="/svg/search.svg" alt="" />
+            </button>
+          </form>
+          <!-- filter start -->
+          <div
+            id="filterPanel"
+            class="hidden absolute bg-white shadow-lg rounded-lg p-4 mt-[77%] w-72 ml-[20%] overflow-y-scroll max-h-50 md:mt-[17%] md:ml-[13%]"
+          >
+            <h3 class="font-bold mb-2">Filters</h3>
 
-          <label class="block mb-2">Level</label>
-          <select id="levelFilter" class="w-full mb-3 border p-2 rounded">
-            <option value="">Any</option>
-            <option value="Chill">Chill</option>
-            <option value="Moderate">Moderate</option>
-            <option value="Lively">Lively</option>
-            <option value="High Energy">High Energy</option>
-          </select>
+            <label class="block mb-2">Level</label>
+            <select id="levelFilter" class="w-full mb-3 border p-2 rounded">
+              <option value="">Any</option>
+              <option value="Chill">Chill</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Lively">Lively</option>
+              <option value="High Energy">High Energy</option>
+            </select>
 
-          <label class="block mb-2">Group Size</label>
-          <select id="groupFilter" class="w-full border p-2 mb-3 rounded">
-            <option value="">Any</option>
-            <option value="Solo">Solo</option>
-            <option value="Small Group">Small Group</option>
-            <option value="Large Group">Large Group</option>
-          </select>
-          <!-- Rating -->
-          <label class="block mb-2">Minimum Rating</label>
+            <label class="block mb-2">Group Size</label>
+            <select id="groupFilter" class="w-full border p-2 mb-3 rounded">
+              <option value="">Any</option>
+              <option value="Solo">Solo</option>
+              <option value="Small Group">Small Group</option>
+              <option value="Large Group">Large Group</option>
+            </select>
+            <!-- Rating -->
+            <label class="block mb-2">Minimum Rating</label>
 
-          <input type="range" id="ratingFilter" min="0" max="5" step="0.1" value="0"
-            class="w-full accent-orange-500 hover: cursor-pointer" />
+            <input
+              type="range"
+              id="ratingFilter"
+              min="0"
+              max="5"
+              step="0.1"
+              value="0"
+              class="w-full accent-orange-500 hover: cursor-pointer"
+            />
 
-          <p class="text-sm text-gray-400 mt-1">
-            <span id="ratingValue">0.0</span>+ stars
+            <p class="text-sm text-gray-400 mt-1">
+              <span id="ratingValue">0.0</span>+ stars
+            </p>
+
+            <!-- Pricing -->
+            <label class="block mb-2">Price</label>
+            <select id="priceFilter" class="w-full border p-2 rounded mb-3">
+              <option value="">Any</option>
+              <option value="1">$</option>
+              <option value="2">$$</option>
+              <option value="3">$$$</option>
+            </select>
+
+            <!-- Would Visit Again -->
+            <label class="block mb-2">Visit again?</label>
+            <select id="visitFilter" class="w-full border p-2 rounded mb-3">
+              <option value="">Any</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <h1></h1>
+          <div id="results" class="space-y-5"></div>
+        </div>
+        <!-- filter end -->
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <div id="results"></div>
+      <!-- VENUE CONTAINER -->
+      <section id="section-container" class="max-w-6xl mx-auto p-10">
+        <!-- TITLE -->
+        <div>
+          <h2 class="text-2xl font-bold">
+            Trending venues near <span id="userCity">Vancouver</span>
+          </h2>
+          <p class="text-stone-600 text-sm">
+            Viewed and saved the most in the area over the past 24 hours
           </p>
-
-          <!-- Pricing -->
-          <label class="block mb-2">Price</label>
-          <select id="priceFilter" class="w-full border p-2 rounded mb-3">
-            <option value="">Any</option>
-            <option value="1">$</option>
-            <option value="2">$$</option>
-            <option value="3">$$$</option>
-          </select>
-
-          <!-- Would Visit Again -->
-          <label class="block mb-2">Visit again?</label>
-          <select id="visitFilter" class="w-full border p-2 rounded mb-3">
-            <option value="">Any</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
         </div>
-        <h1></h1>
-        <div id="results" class="space-y-5"></div>
-      </div>
-      <!-- filter end -->
-    </div>
-    </div>
-  </header>
+        <!-- CARD CAROUSEL -->
+        <section
+          class="md:flex md:flex-row flex flex-col md:overflow-x-auto overflow-y-scroll max-h-[800px] gap-6 overflow-hidden py-5 px-5"
+          id="venue-card-carousel"
+        ></section>
+      </section>
 
-  <!-- MAIN -->
-  <main>
-    <div id="results"></div>
-    <!-- VENUE CONTAINER -->
-    <section id="section-container" class="max-w-6xl mx-auto p-10">
-      <!-- TITLE -->
-      <div>
-        <h2 class="text-2xl font-bold">Trending Venues in North Vancouver</h2>
-        <p class="text-stone-600 text-sm">
-          Viewed and saved the most in the area over the past 24 hours
-        </p>
-      </div>
-      <!-- CARD CAROUSEL -->
-      <section
-        class="md:flex md:flex-row flex flex-col md:overflow-x-auto overflow-y-scroll max-h-[800px] gap-6 overflow-hidden py-5 px-5"
-        id="venue-card-carousel"></section>
-    </section>
+      <template id="venueCardTemplate">
+        <a
+          class="read-more block shrink-0 group outline-5 rounded-lg overflow-hidden outline-stone-600 hover:outline-orange-600"
+          href="#"
+        >
+          <div class="relative w-full shadow-2xl">
+            <img
+              class="card-img-top card-image w-full md:w-[280px] h-[200px] object-cover"
+              src="..."
+              alt="Venue Image"
+              id="venueImage"
+            />
+            <div
+              id="card-overlay"
+              class="absolute top-0 left-0 w-full h-[200px] opacity-0 group-hover:opacity-100 bg-black/65 text-white p-3 flex justify-center items-center text-center flex-col gap-2"
+            >
+              <p class="card-text line-clamp-3 text-lg"></p>
+              <p><span class="card-level font-bold"></span></p>
+            </div>
+            <div class="card-body bg-white p-2">
+              <h5 class="card-title text-lg font-bold truncate"></h5>
+            </div>
+          </div>
+        </a>
+      </template>
 
-    <template id="venueCardTemplate">
-      <a class="read-more block shrink-0 group outline-5 rounded-lg overflow-hidden outline-stone-600 hover:outline-orange-600"
-        href="#">
-        <div class="relative w-full shadow-2xl">
-          <img class="card-img-top card-image w-full md:w-[280px] h-[200px] object-cover bg-center" src="..."
-            alt="Venue Image" id="venueImage" />
-          <div id="card-overlay"
-            class="absolute top-0 left-0 w-full h-[200px] opacity-0 group-hover:opacity-100 bg-black/65 text-white p-3 flex justify-center items-center text-center flex-col gap-2">
-            <p class="card-text line-clamp-3 text-lg"></p>
-            <p><span class="card-level font-bold"></span></p>
-          </div>
-          <div class="card-body bg-white p-2">
-            <h5 class="card-title text-lg font-bold truncate"></h5>
-          </div>
+      <!-- MATCH SCHEDULE -->
+      <section class="max-w-6xl mx-auto p-10">
+        <!-- TITLE -->
+        <div>
+          <h2 class="text-2xl font-bold">Match Schedule</h2>
+          <p class="text-stone-600 text-sm">Short list of matches nearby</p>
         </div>
-      </a>
-    </template>
-
-    <!-- MATCH SCHEDULE -->
-    <section class="max-w-6xl mx-auto p-10">
-      <!-- TITLE -->
-      <div>
-        <h2 class="text-2xl font-bold">Match Schedule</h2>
-        <p class="text-stone-600 text-sm">Short list of matches nearby</p>
-      </div>
-      <!-- STACKED CARDS -->
-      <section id="stacked-cards" class="py-[2%]"></section>
-    </section>
-  </main>
-</body>
-
+        <!-- STACKED CARDS -->
+        <section id="stacked-cards" class="py-[2%]"></section>
+      </section>
+    </main>
+  </body>
 </html>
