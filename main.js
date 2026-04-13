@@ -255,9 +255,8 @@ async function displayCardsDynamically() {
       newcard.querySelector(".card-level").textContent = venue.level;
 
       const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
-      if (firstImage) {
-        newcard.querySelector(".card-image").style.backgroundImage =
-          `url(${firstImage})`;
+      if (venue.images?.length && firstImage) {
+        newcard.querySelector(".card-image").src = firstImage;
       } else {
         newcard.querySelector(".card-image").textContent = venue.photo_url;
         newcard.querySelector("img").setAttribute("src", `${venue.photo_url}`);
