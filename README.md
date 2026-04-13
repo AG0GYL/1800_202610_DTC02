@@ -1,18 +1,24 @@
-# Elmo Hikes
+# Scout
 
 ## Overview
 
-Elmo Hikes is a client-side JavaScript web application that helps users discover and explore hiking trails. The app displays a curated list of hike trails, each with details such as name, location, difficulty, and an image. Users can browse the list and mark their favorite trails for easy access later.
+Scout is a web app created to help fans experience the World Cup in a way that matches their vibe. Filter by atmosphere, price, crowd size, and more to find a perfect spot for a watch party—whether that's a chill cafe or an electric sports bar.
 
-Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user favorites.
+
+Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user and venue data.
 
 ---
 
 ## Features
 
-- Browse a list of curated hiking trails with images and details
-- Mark and unmark trails as favorites
-- View a personalized list of favorite hikes
+- Browse a list of curated venues with images and details
+- Mark and unmark venues as favorites
+- View a personalized list of favorite venues
+- Write reviews for others to see
+- See upcoming FIFA World Cup games
+- Create a personalized profile
+- Add venues if you want to host an event
+- View a map with pins showing venue locations
 - Responsive design for desktop and mobile
 
 ---
@@ -22,7 +28,7 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 - **Frontend**: HTML, CSS, JavaScript
 - **Build Tool**: [Vite](https://vitejs.dev/)
 - **Backend**: Firebase for hosting
-- **Database**: Firestore
+- **Database**: Firestore, TheSportsDB(https://www.thesportsdb.com/) 
 
 ---
 
@@ -37,18 +43,30 @@ To run the application locally:
 
 Once the application is running:
 
-1.  Browse the list of hiking trails displayed on the main page.
-2.  Click the heart icon (or similar) to mark a trail as a favorite.
-3.  View your favorite hikes in the favorites section.
+## 
+
+1.  Browse the list of popular venues displayed on the main page.
+2.  Click on one of the venues or use the search bar to find a venue
+3.  Click the heart icon to mark a venue as a favorite.
+4.  View your favorite venues in the bookmarked venues section in your profile.
+   
 
 ---
 
 ## Project Structure
 
 ```
-elmo-hikes/
+1800_202610_DTC02/
 ├── src/
 │   ├── main.js
+    ├── authentication.js
+    ├── createVenue.js
+    ├── firebaseConfig.js
+    ├── loginSignup.js
+    ├── msStackedCards.js
+    ├── navbar.js
+    ├── searchbar.js
+    ├── venue.js
 ├── styles/
 │   └── style.css
 ├── public/
@@ -61,9 +79,9 @@ elmo-hikes/
 ---
 
 ## Contributors
-- **Andy Guo** - BCIT CST Student with a passion in learning programming algorithms and coding structures. Fun fact: Had once went 3 days without sleep.
+- **Andy Guo** - BCIT CST Student with a passion for learning programming algorithms and coding structures. Fun fact: Had once went 3 days without sleep.
 - **James Cameron Garcia** - BCIT CST Student who is looking to work on his programming foundations. Fun fact: Loves listening to rap music.
-- **Fawaz Shariff** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Loves solving Rubik's Cubes in under a minute.
+- **Fawaz Shariff** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: I can't go a day without breathing.
 
 
 
