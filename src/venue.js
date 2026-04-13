@@ -141,7 +141,7 @@ async function displayVenueInfo() {
 
     async function loadSchedule() {
       try {
-        const docRef = doc(db, "venue", id); // ✅ 'venue' not 'venues'
+        const docRef = doc(db, 'venue', id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists() && docSnap.data().schedule) {
           const saved = docSnap.data().schedule;
@@ -717,12 +717,17 @@ async function isVenueOpen() {
     const hour = now.getHours();
     const openTime = venue.schedule[dayName]?.open || "12:00 PM";
     const closeTime = venue.schedule?.[dayName]?.close || "1:00 AM";
-    const openHour =
-      parseInt(openTime.split(":")[0]) +
-      (openTime.includes("PM") && !openTime.startsWith("12") ? 12 : 0);
-    const closeHour =
-      parseInt(closeTime.split(":")[0]) +
-      (closeTime.includes("PM") && !closeTime.startsWith("12") ? 12 : 0);
+
+    if (openTime === "Closed" || closeTime === "Closed") {
+      return false;
+    }
+    if (openTime.includes("AM") && closeTime.includes("PM")) {
+      // Handle venues that close after midnight (e.g. open 12:00 PM, close 1:00 AM)
+      return hour >= 12 || hour < 1;
+    }
+    const openHour = parseInt(openTime.split(":")[0]) + (openTime.includes("PM") && !openTime.startsWith("12") ? 12 : 0);
+    const closeHour = parseInt(closeTime.split(":")[0]) + (closeTime.includes("PM") && !closeTime.startsWith("12") ? 12 : 0);
+
     console.log(hour >= openHour && hour < closeHour);
     return hour >= openHour && hour < closeHour;
   } catch (error) {
