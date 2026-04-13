@@ -71,14 +71,14 @@ async function searchVenues(term, level, group, rating, price, visit) {
 // Render cards
 function displayResults(results) {
   resultsContainer.innerHTML = "";
-
+// search result is empty
   if (results.length === 0) {
     resultsContainer.innerHTML = `
       <p class="text-gray-400 text-lg">No results found</p>
     `;
     return;
   }
-
+// create cards
   const wrapper = document.createElement("div");
   wrapper.className = "flex flex-wrap gap-6";
 
@@ -135,7 +135,7 @@ function displayResults(results) {
     `;
     
     const button = div.querySelector(".view-btn");
-
+// wait for user to click view button
     button.addEventListener("click", () => {
       window.location.href = `/pages/venue.html?docID=${venue.id}`;
     });

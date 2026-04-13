@@ -1,89 +1,133 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landing Page</title>
+    <!-- libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Landing Page</title>
+  <body class="">
+    <!-- Alert -->
+    <div
+      id="authAlert"
+      class="hidden bg-red-100 border border-red-400 text-red-700 text-sm rounded-lg p-3 absolute top-5 left-1/2 -translate-x-1/2 w-full max-w-sm text-center"
+    ></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
+    <!-- Page Layout -->
+    <div class="flex h-screen">
+      <!-- LEFT: Form Section -->
+      <section class="w-full md:w-[35%] flex items-center justify-center px-10">
+        <div class="w-full max-w-sm space-y-8">
+          <h1 class="font-extrabold text-orange-600 text-4xl">scout.</h1>
 
-<body class="">
-  <!-- Alert -->
-  <div id="authAlert"
-    class="hidden bg-red-100 border border-red-400 text-red-700 text-sm rounded-lg p-3 absolute top-5 left-1/2 -translate-x-1/2 w-full max-w-sm text-center">
-  </div>
+          <!-- LOGIN FORM -->
+          <div id="loginView">
+            <h3 class="text-2xl font-bold mb-6">Login</h3>
+            <form id="loginForm" class="space-y-4">
+              <div class="border-2 rounded-xl p-2">
+                <input
+                  type="email"
+                  id="loginEmail"
+                  class="w-full outline-none text-sm"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="border-2 rounded-xl p-2">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  class="w-full outline-none text-sm"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-orange-600 hover:bg-orange-700 transition text-white font-bold py-2 rounded-xl"
+              >
+                Login
+              </button>
+            </form>
+            <p class="text-sm text-center mt-4 text-gray-500">
+              Don't have an account?
+              <a
+                href="#"
+                id="toSignup"
+                class="text-orange-600 font-semibold hover:underline"
+                >Sign up</a
+              >
+            </p>
+          </div>
 
-  <!-- Page Layout -->
-  <div class="flex h-screen">
-    <!-- LEFT: Form Section -->
-    <section class="w-full md:w-[35%] flex items-center justify-center px-10">
-      <div class="w-full max-w-sm space-y-8">
-        <h1 class="font-extrabold text-orange-600 text-4xl">scout.</h1>
-
-        <!-- LOGIN FORM -->
-        <div id="loginView">
-          <h3 class="text-2xl font-bold mb-6">Login</h3>
-          <form id="loginForm" class="space-y-4">
-            <div class="border-2 rounded-xl p-2">
-              <input type="email" id="loginEmail" class="w-full outline-none text-sm" placeholder="Email" required />
-            </div>
-            <div class="border-2 rounded-xl p-2">
-              <input type="password" id="loginPassword" class="w-full outline-none text-sm" placeholder="Password"
-                required />
-            </div>
-            <button type="submit"
-              class="w-full bg-orange-600 hover:bg-orange-700 transition text-white font-bold py-2 rounded-xl">
-              Login
-            </button>
-          </form>
-          <p class="text-sm text-center mt-4 text-gray-500">
-            Don't have an account?
-            <a href="#" id="toSignup" class="text-orange-600 font-semibold hover:underline">Sign up</a>
-          </p>
+          <!-- SIGNUP FORM -->
+          <div id="signupView" class="hidden">
+            <h3 class="text-2xl font-bold mb-6">Sign Up</h3>
+            <form id="signupForm" class="space-y-4">
+              <div class="border-2 rounded-xl p-2">
+                <input
+                  type="text"
+                  id="signupName"
+                  class="w-full outline-none text-sm"
+                  placeholder="First and Last Name"
+                  required
+                />
+              </div>
+              <div class="border-2 rounded-xl p-2">
+                <input
+                  type="email"
+                  id="signupEmail"
+                  class="w-full outline-none text-sm"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="border-2 rounded-xl p-2">
+                <input
+                  type="password"
+                  id="signupPassword"
+                  class="w-full outline-none text-sm"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-green-600 hover:bg-green-700 transition text-white font-bold py-2 rounded-xl"
+              >
+                Create Account
+              </button>
+            </form>
+            <p class="text-sm text-center mt-4 text-gray-500">
+              Already have an account?
+              <a
+                href="#"
+                id="toLogin"
+                class="text-orange-600 font-semibold hover:underline"
+                >Login</a
+              >
+            </p>
+          </div>
         </div>
+      </section>
 
-        <!-- SIGNUP FORM -->
-        <div id="signupView" class="hidden">
-          <h3 class="text-2xl font-bold mb-6">Sign Up</h3>
-          <form id="signupForm" class="space-y-4">
-            <div class="border-2 rounded-xl p-2">
-              <input type="text" id="signupName" class="w-full outline-none text-sm" placeholder="First and Last Name"
-                required />
-            </div>
-            <div class="border-2 rounded-xl p-2">
-              <input type="email" id="signupEmail" class="w-full outline-none text-sm" placeholder="Email" required />
-            </div>
-            <div class="border-2 rounded-xl p-2">
-              <input type="password" id="signupPassword" class="w-full outline-none text-sm" placeholder="Password"
-                required />
-            </div>
-            <button type="submit"
-              class="w-full bg-green-600 hover:bg-green-700 transition text-white font-bold py-2 rounded-xl">
-              Create Account
-            </button>
-          </form>
-          <p class="text-sm text-center mt-4 text-gray-500">
-            Already have an account?
-            <a href="#" id="toLogin" class="text-orange-600 font-semibold hover:underline">Login</a>
-          </p>
-        </div>
-      </div>
-    </section>
+      <!-- RIGHT: Cover Image -->
+      <section class="hidden md:block flex-1 h-screen">
+        <img
+          src="../images/BBY01.jpg"
+          alt="Cover Image"
+          class="w-full h-full object-cover"
+        />
+      </section>
+    </div>
 
-    <!-- RIGHT: Cover Image -->
-    <section class="hidden md:block flex-1 h-screen">
-      <img src="../images/BBY01.jpg" alt="Cover Image" class="w-full h-full object-cover" />
-    </section>
-  </div>
-
-  <!-- Scripts — firebaseConfig must come first -->
-  <script type="module" src="../src/firebaseConfig.js"></script>
-  <script type="module" src="../src/authentication.js"></script>
-  <script type="module" src="../src/loginSignup.js"></script>
-  <script type="module" src="../src/navbar.js"></script>
-</body>
-
+    <!-- Scripts — firebaseConfig must come first -->
+    <script type="module" src="../src/firebaseConfig.js"></script>
+    <script type="module" src="../src/authentication.js"></script>
+    <script type="module" src="../src/loginSignup.js"></script>
+    <script type="module" src="../src/navbar.js"></script>
+  </body>
 </html>
