@@ -4,6 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import {
   collection,
   getDocs,
+  getDoc,
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
@@ -15,14 +16,22 @@ function showName() {
   // onAuthReady() runs the callback once Firebase finishes checking the signed-in user.
   // The user's name is extracted from the Firebase Authentication object
   // You can "go to console" to check out current users.
-  onAuthReady((user) => {
+  onAuthReady(async (user) => {
     // If a user is logged in:
     // Use their display name if available, otherwise show their email.
-    const name = user.displayName || user.email;
-
-    // Update the welcome message with their name/email.
-    if (nameElement) {
-      nameElement.textContent = `Hi, ${name}! `;
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const name = userData.name || userData.email;
+        // Update the welcome message with their name/email.
+        if (nameElement) {
+          nameElement.textContent = `Hi, ${name}! `;
+        }
+      }
+    } catch (error) {
+      console.log("Error fetching name!");
     }
   });
 }
