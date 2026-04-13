@@ -71,19 +71,20 @@ async function searchVenues(term, level, group, rating, price, visit) {
 // Render cards
 function displayResults(results) {
   resultsContainer.innerHTML = "";
-// search result is empty
+  // search result is empty
   if (results.length === 0) {
     resultsContainer.innerHTML = `
       <p class="text-gray-400 text-lg">No results found</p>
     `;
     return;
   }
-// create cards
+  // create cards
   const wrapper = document.createElement("div");
   wrapper.className = "flex flex-wrap gap-6";
 
   results.forEach((venue) => {
     const div = document.createElement("div");
+    const firstImage = venue.images?.[0] ?? "path/to/placeholder.jpg";
 
     div.className = `
       rounded-2xl overflow-hidden
@@ -93,49 +94,49 @@ function displayResults(results) {
     `;
 
     div.innerHTML = `
-      <div class="relative">
-        <img 
-          src="${venue.photo_url}" 
-          alt="${venue.name}" 
-          class="w-full h-44 object-cover"
-        >
+  <div class="relative">
+    <img 
+      src="${venue.photo_url || firstImage}" 
+      alt="${venue.name}" 
+      class="w-full h-44 object-cover"
+    >
 
-        <span class="
-          absolute top-2 left-2 
-          bg-black/70 text-xs px-2 py-1 rounded-md text-white
-        ">
-          ${venue.averageWouldVisitAgain === "Yes" ? "🔥 Popular" : ""}
-        </span>
-      </div>
+    ${venue.averageWouldVisitAgain === "Yes"
+        ? `<span class="absolute top-2 left-2 bg-black/70 text-xs px-2 py-1 rounded-md text-white">
+            🔥 Popular
+          </span>`
+        : ""
+      }
+  </div>
 
-      <div class="p-4">
-        <h3 class="text-lg font-semibold">${venue.name}</h3>
-        <p class="text-sm text-gray-400 mb-2">${venue.city}</p>
+  <div class="p-4">
+    <h3 class="text-lg font-semibold">${venue.name}</h3>
+    <p class="text-sm text-gray-400 mb-2">${venue.city}</p>
 
-        <div class="flex justify-between items-center text-sm mb-3">
-          <span class="text-orange-400 font-semibold">
-            ⭐ ${Number(venue.averageRating || 0).toFixed(1)}
-          </span>
-          <span class="text-gray-300">
-            ${"$".repeat(venue.averagePricing || 2)}
-          </span>
-        </div>
+    <div class="flex justify-between items-center text-sm mb-3">
+      <span class="text-orange-400 font-semibold">
+        ⭐ ${Number(venue.averageRating || 0).toFixed(1)}
+      </span>
+      <span class="text-gray-300">
+        ${"$".repeat(venue.averagePricing || 2)}
+      </span>
+    </div>
 
-        <p class="text-xs text-gray-400 mb-3 line-clamp-2">
-          ${venue.details || ""}
-        </p>
+    <p class="text-xs text-gray-400 mb-3 line-clamp-2">
+      ${venue.details || ""}
+    </p>
 
-        <button class="view-btn w-full bg-orange-500 hover:bg-orange-600
-        text-white font-semibold py-2 rounded-lg transition hover:cursor-pointer"
-          id="${venue.id}"
-        ">
-          View Venue
-        </button>
-      </div>
-    `;
-    
+    <button
+      class="view-btn w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded-lg transition hover:cursor-pointer"
+      id="${venue.id}"
+    >
+      View Venue
+    </button>
+  </div>
+`;
+
     const button = div.querySelector(".view-btn");
-// wait for user to click view button
+    // wait for user to click view button
     button.addEventListener("click", () => {
       window.location.href = `/pages/venue.html?docID=${venue.id}`;
     });
