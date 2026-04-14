@@ -10,7 +10,6 @@
   <!-- GOOGLE API FOR ICONS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!-- COMPONENTS -->
-  <link rel="stylesheet" href="./map.css" />
   <!-- LEAFLET CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -18,7 +17,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
   <!-- COMPONENTS -->
-  <script type="module" src="../src/navbar.js" defer></script>
+  <script type="module" crossorigin src="/assets/venue-DIE9TYmy.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/navbar-KwjmcJQU.js">
+  <link rel="stylesheet" crossorigin href="/assets/map-DN1-SE41.css">
 </head>
 
 <body>
@@ -153,8 +154,7 @@
               </svg>
             </button>
           </section>
-          <!-- IGNORE THE YELLOW UNDERLINE -->
-          <div id="venueReviewsGoesHere" class="hidden flex flex-col gap-6"></div>
+          <div id="venueReviewsGoesHere" class="hidden flex-col gap-4"></div>
         </div>
       </section>
       <section id="rightMainColumn" class="flex flex-col md:w-1/3 w-full py-4 gap-5">
@@ -255,7 +255,6 @@
   </template>
 
   <!-- IMPORT JS -->
-  <script type="module" src="../src/venue.js"></script>
 </body>
 
 </html>

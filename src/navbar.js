@@ -28,7 +28,7 @@ class SiteNavbar extends HTMLElement {
     this.renderNavbar();
     this.bindAuthState();
   }
-  
+
   renderNavbar() {
     this.innerHTML = `
       <div id="navbar-container" class="sticky top-0 w-full bg-white border-slate-200 border-2 z-50">
@@ -95,6 +95,17 @@ class SiteNavbar extends HTMLElement {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        try {
+          const userRef = doc(db, "users", user.uid);
+          const userSnap = getDoc(userRef);
+          if (userSnap.exists()) {
+            const userData = userSnap.data();
+            name = userData.name;
+            email = user.email;
+          }
+        } catch (error) {
+          console.log("Error fetching name!");
+        }
         authControl.innerHTML = `
           <!-- dropdown -->
           <div id="avatar-container" class="relative">

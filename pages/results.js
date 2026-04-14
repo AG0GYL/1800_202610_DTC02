@@ -90,7 +90,7 @@ function displayResults(results) {
       rounded-2xl overflow-hidden
       shadow-lg hover:shadow-orange-500/30
       hover:-translate-y-1 transition-all duration-200
-      w-[300px]
+      w-full md:w-[300px]
     `;
 
     div.innerHTML = `

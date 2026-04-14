@@ -19,18 +19,18 @@ async function addStackedCards() {
       const date = new Date(match.strTimestamp);
 
       const stackedCards = `
-          <div class="flex flex-col bg-white rounded-xl shadow hover:bg-orange-500 hover:text-white transition max-w-4xl mx-auto mb-[1%] py-[2%]">
+          <div class="flex w-full flex-col bg-white rounded-xl shadow hover:bg-orange-500 hover:text-white transition max-w-4xl mx-auto mb-[1%] py-[2%]">
 
             <!-- HEADER -->
             <div class="match-card flex justify-between items-center cursor-pointer p-4">
 
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center w-1/3">
                 <img src="${match.strHomeTeamBadge || "https://via.placeholder.com/80"}"
                      class="w-16 h-16 object-cover">
-                <p class="text-sm">${match.strHomeTeam}</p>
+                <p class="text-sm text-center">${match.strHomeTeam}</p>
               </div>
 
-              <div class="text-center">
+              <div class="text-center w-1/3">
                 <h3 class="font-bold">
                   ${date.toLocaleDateString("en-CA", {
                     weekday: "short",
@@ -38,16 +38,16 @@ async function addStackedCards() {
                     day: "numeric",
                   })}
                 </h3>
-                <p class="text-sm">
+                <p class="text-sm text-center">
                   ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </p>
                 <p class="text-xs opacity-70">${match.strLeague}</p>
               </div>
 
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center w-1/3">
                 <img src="${match.strAwayTeamBadge || "https://via.placeholder.com/80"}"
                      class="w-16 h-16 object-cover">
-                <p class="text-sm">${match.strAwayTeam}</p>
+                <p class="text-sm text-center">${match.strAwayTeam}</p>
               </div>
 
             </div>
