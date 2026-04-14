@@ -168,7 +168,10 @@
                 </svg>
               </button>
             </section>
-            <div id="venueReviewsGoesHere" class="flex hidden flex-col gap-6"></div>
+            <div
+              id="venueReviewsGoesHere"
+              class="flex hidden flex-col gap-6"
+            ></div>
           </div>
           <!-- BOOKMARKED VENUES SECTION -->
           <div
@@ -304,10 +307,69 @@
             velit vero! Autem.
           </p>
         </section>
-        <a
-          href=""
-          class="reviewVenueLink border-1 p-2 px-4 w-fit rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
-        ></a>
+        <section class="reviewControlsContainer flex justify-between">
+          <a
+            href=""
+            class="reviewVenueLink items-center border-1 p-2 px-4 w-fit rounded-lg cursor-pointer border-orange-500 font-semibold hover:border-stone-400/90 hover:bg-transparent hover:text-black bg-orange-500 text-white duration-150"
+          ></a>
+          <button class="reviewDelete cursor-pointer">
+            <svg
+              width="35px"
+              height="35px"
+              viewBox="14 17 28 27"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#F55800"
+              stroke="#F55800"
+              stroke-width="0.0006100000000000001"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke="#CCCCCC"
+                stroke-width="2.318"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <defs>
+                  <filter
+                    id="a"
+                    width="200%"
+                    height="200%"
+                    x="-50%"
+                    y="-50%"
+                    filterUnits="objectBoundingBox"
+                  >
+                    <feOffset
+                      dy="1"
+                      in="SourceAlpha"
+                      result="shadowOffsetOuter1"
+                    ></feOffset>
+                    <feGaussianBlur
+                      stdDeviation="10"
+                      in="shadowOffsetOuter1"
+                      result="shadowBlurOuter1"
+                    ></feGaussianBlur>
+                    <feColorMatrix
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                      in="shadowBlurOuter1"
+                      result="shadowMatrixOuter1"
+                    ></feColorMatrix>
+                    <feMerge>
+                      <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <path
+                  fill-rule="evenodd"
+                  d="M36 26v10.997c0 1.659-1.337 3.003-3.009 3.003h-9.981c-1.662 0-3.009-1.342-3.009-3.003v-10.997h16zm-2 0v10.998c0 .554-.456 1.002-1.002 1.002h-9.995c-.554 0-1.002-.456-1.002-1.002v-10.998h12zm-9-5c0-.552.451-1 .991-1h4.018c.547 0 .991.444.991 1 0 .552-.451 1-.991 1h-4.018c-.547 0-.991-.444-.991-1zm0 6.997c0-.551.444-.997 1-.997.552 0 1 .453 1 .997v6.006c0 .551-.444.997-1 .997-.552 0-1-.453-1-.997v-6.006zm4 0c0-.551.444-.997 1-.997.552 0 1 .453 1 .997v6.006c0 .551-.444.997-1 .997-.552 0-1-.453-1-.997v-6.006zm-6-5.997h-4.008c-.536 0-.992.448-.992 1 0 .556.444 1 .992 1h18.016c.536 0 .992-.448.992-1 0-.556-.444-1-.992-1h-4.008v-1c0-1.653-1.343-3-3-3h-3.999c-1.652 0-3 1.343-3 3v1z"
+                  filter="url(#a)"
+                ></path>
+              </g>
+            </svg>
+          </button>
+        </section>
       </div>
     </template>
     <!-- BOOKMARK CARD TEMPLATE -->

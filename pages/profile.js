@@ -10,6 +10,7 @@ import {
   query,
   collectionGroup,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 
 //------------------------------------------------------------
@@ -230,6 +231,7 @@ async function populateReviews(userID, username, profileImage) {
       // doc.ref.parent = review collection
       // doc.ref.parent.parent = venue
       const venueID = doc.ref.parent.parent.id;
+      const reviewID = doc.id;
       // fetch venue name
       const venueRef = doc.ref.parent.parent;
       const venueSnap = await getDoc(venueRef);
@@ -277,6 +279,11 @@ async function populateReviews(userID, username, profileImage) {
       reviewCard.querySelector(".reviewVenueLink").href =
         `/pages/venue.html?docID=${venueID}`;
       reviewCard.querySelector(".reviewVenueLink").innerText = venueName;
+      reviewCard
+        .querySelector(".reviewDelete")
+        .addEventListener("click", () => {
+          deleteReview(reviewID, venueID);
+        });
 
       // Star rating
       let starRating = "";
@@ -295,6 +302,22 @@ async function populateReviews(userID, username, profileImage) {
     });
   } catch (error) {
     console.log(error);
+  }
+}
+
+async function deleteReview(reviewID, venueID) {
+  let userChoice = confirm("Are you sure you want to delete the review?");
+  if (userChoice) {
+    try {
+      await deleteDoc(doc(db, "venue", venueID, "reviews", reviewID));
+      alert("Review has been deleted sucessfully!");
+      // Redirect after a few seconds
+      setTimeout(() => {
+        window.location.href = `/pages/profile.html`;
+      }, 1500);
+    } catch (error) {
+      console.error("Error removing document: ", error);
+    }
   }
 }
 
