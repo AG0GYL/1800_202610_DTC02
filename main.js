@@ -250,6 +250,8 @@ async function displayCardsDynamically() {
       // Populate the card with hike data
 
       newcard.querySelector(".card-title").textContent = venue.name;
+      newcard.querySelector(".card-subtitle").textContent =
+        venue.city || "Vancouver";
       newcard.querySelector(".card-text").textContent =
         venue.details || `Located in ${venue.city}.`;
       newcard.querySelector(".card-level").textContent = venue.level;
