@@ -138,6 +138,7 @@ function populateUserInfo() {
           // Populate reviews posted section
           populateReviews(user.uid, name, profileImage);
           populateBookmarks(user.uid, name);
+          populateUserVenues(user.uid, name);
         } else {
           console.log("No such document!");
         }
@@ -317,6 +318,14 @@ function accordion() {
     venueBookmarks.classList.toggle("hidden");
     bookmarksDropdownArrow.classList.toggle("rotate-180");
   });
+
+  const userDropDown = document.getElementById("userDropDown");
+  const userVenues = document.getElementById("userVenuesGoesHere");
+  const userDropdownArrow = userDropDown.querySelector("svg");
+  userDropDown.addEventListener("click", () => {
+    userVenues.classList.toggle("hidden");
+    userDropdownArrow.classList.toggle("rotate-180");
+  });
 }
 accordion();
 
@@ -350,4 +359,54 @@ async function populateBookmarks(userID, username) {
     bookmarkCard.querySelector("a").href = `/pages/venue.html?docID=${venueID}`;
     venueBookmarksGoesHere.appendChild(bookmarkCard);
   });
+}
+
+async function populateUserVenues(userID, username) {
+  console.log("Populating user created venues for", username);
+
+  try {
+    const myVenueRef = query(
+      collectionGroup(db, "venue"),
+      where("userID", "==", userID)
+    );
+
+    const myVenuesSnap = await getDocs(myVenueRef);
+
+    if (myVenuesSnap.empty) {
+      console.log(`User ${username} has not posted any venues!`);
+      return;
+    }
+
+    // Loop through document snapshots correctly
+    myVenuesSnap.forEach((docSnap) => {
+      const venueData = docSnap.data();
+      const venueID = docSnap.id;
+
+      const firstImage =
+        venueData.images?.[0] ?? "path/to/placeholder.jpg";
+
+      console.log(venueData);
+
+      const bookmarkCard =
+        bookmarkCardTemplate.content.cloneNode(true);
+
+      bookmarkCard.querySelector(".venueName").textContent =
+        venueData.name || "Unnamed Venue";
+
+      bookmarkCard.querySelector(".venueLocation").textContent =
+        venueData.city || "Unknown Location";
+
+      bookmarkCard.querySelector(
+        ".bookmarkCardTemplateContainer"
+      ).style.backgroundImage = `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0)), url(${venueData.photo_url || firstImage
+      })`;
+
+      bookmarkCard.querySelector("a").href =
+        `/pages/venue.html?docID=${venueID}`;
+
+      userVenuesGoesHere.appendChild(bookmarkCard);
+    });
+  } catch (error) {
+    console.error("Error populating user venues:", error);
+  }
 }

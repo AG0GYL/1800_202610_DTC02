@@ -5,9 +5,8 @@
 // import '../styles/style.css';
 // document.addEventListener('DOMContentLoaded', sayHello);
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "/src/firebaseConfig.js";
+import { auth } from "/src/firebaseConfig.js";
 import { logoutUser } from "/src/authentication.js";
-import { doc, getDoc } from "firebase/firestore";
 
 function toggleDropdown() {
   document.querySelector(`#dropdown`).classList.toggle("hidden");
@@ -29,7 +28,7 @@ class SiteNavbar extends HTMLElement {
     this.renderNavbar();
     this.bindAuthState();
   }
-
+  
   renderNavbar() {
     this.innerHTML = `
       <div id="navbar-container" class="sticky top-0 w-full bg-white border-slate-200 border-2 z-50">
@@ -76,18 +75,17 @@ class SiteNavbar extends HTMLElement {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
 
-        document.getElementById("maps-link").href =
-          `/pages/map.html?lat=${lat}&lng=${lng}&zoom=20&cur=1`;
+        document.getElementById("maps-link").href = `/pages/map.html?lat=${lat}&lng=${lng}&zoom=20&cur=1`;
       },
       function (error) {
         const messages = {
           1: "Location permission denied.",
           2: "Position unavailable.",
-          3: "Request timed out.",
+          3: "Request timed out."
         };
         console.log(messages[error.code] || "Unknown error.");
       },
-      { timeout: 10000, enableHighAccuracy: true },
+      { timeout: 10000, enableHighAccuracy: true }
     );
   }
 
@@ -95,32 +93,19 @@ class SiteNavbar extends HTMLElement {
     const authControl = this.querySelector("#auth-control");
     const createVenue = this.querySelector("#create-venue");
 
-    onAuthStateChanged(auth, async (user) => {
-      let name = "Unknown";
-      let email = "unknown@gmail.com";
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        try {
-          const userRef = doc(db, "users", user.uid);
-          const userSnap = await getDoc(userRef);
-          if (userSnap.exists()) {
-            const userData = userSnap.data();
-            name = userData.name;
-            email = userData.email;
-          }
-        } catch (error) {
-          console.log("Error fetching name!");
-        }
         authControl.innerHTML = `
           <!-- dropdown -->
           <div id="avatar-container" class="relative">
-            <button id="avatarBtn" class="w-10 h-10 rounded-full bg-orange-500 text-white hover:outline-4 hover:outline-orange-500/25">${name[0]}</button>
+            <button id="avatarBtn" class="w-10 h-10 rounded-full bg-orange-500 text-white hover:outline-4 hover:outline-orange-500/25">S</button>
             <div
               class="dropdown absolute right-0 top-15 flex-col bg-white overflow-hidden min-w-[300px] rounded-3xl hidden"
               id="dropdown"
             >
               <div id="dropdown-header" class="px-6 py-3">
-                <h2 id="dropdown-name" class="text-2xl font-bold">${name}</h2>
-                <h2 id="dropdown-email" class="text-stone-500">${email}</h2>
+                <h2 id="dropdown-name" class="text-2xl font-bold">${user.displayName}</h2>
+                <h2 id="dropdown-email" class="text-stone-500">${user.email}</h2>
               </div>
               <div
                 class="dropdown-items flex flex-col divide-y divide-gray-300 text-lg font-semibold"
@@ -190,6 +175,9 @@ class SiteNavbar extends HTMLElement {
           .querySelector("#avatarBtn")
           .addEventListener("click", toggleDropdown);
 
+
+
+
         // DROPDOWN BUTTON
         authControl
           .querySelector("#logoutBtn")
@@ -201,6 +189,7 @@ class SiteNavbar extends HTMLElement {
               class="bg-orange-500 hover:bg-orange-600 transition px-3 py-2 rounded-2xl text-white text-sm cursor-pointer min-w-[80px]" />
           </a>
         `;
+
       }
     });
   }
