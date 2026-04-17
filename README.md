@@ -1,9 +1,9 @@
 # Scout
 
 ## Overview
-
 Scout is a web app created to help fans experience the World Cup in a way that matches their vibe. Filter by atmosphere, price, crowd size, and more to find a perfect spot for a watch party—whether that's a chill cafe or an electric sports bar.
 
+Hosted Link: https://scout-3e9c2.web.app
 
 Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user and venue data.
 
@@ -25,11 +25,15 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 
 ## Technologies Used
 
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,vite,firebase,figma)](https://skillicons.dev)
+
 - **Frontend**: HTML, CSS, JavaScript
 - **Build Tool**: [Vite](https://vitejs.dev/)
 - **Backend**: Firebase for hosting
-- **Database**: Firestore, TheSportsDB(https://www.thesportsdb.com/) 
-
+- **Database**: Firestore, [TheSportsDB](https://www.thesportsdb.com/)
+- **Libraries**: [Leaflet](https://leafletjs.com)
+- **APIs**: [Geoaplify](https://www.geoapify.com)
+- **Toolchain**: Trello, Figma
 ---
 
 ## Usage
@@ -89,9 +93,10 @@ Once the application is running:
 
 ## Acknowledgments
 
-- Trail data and images are for demonstration purposes only.
+- Venue data and images are used for demonstration purposes only and do not represent real businesses, their owners, or affiliates.
+- Icons sourced from SVG Repo. Images are the property of their respective owners and are used here solely for educational/demonstration purposes.
 - Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
-- Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
+- Icons sourced from [svgrepo](https://www.svgrepo.com) and images whoever owns them....
 
 ---
 
@@ -99,13 +104,15 @@ Once the application is running:
 
 ### Limitations
 
-- Limited trail details (e.g., no live trail conditions).
+- Limited venue details (e.g., no live location data).
+- No authentication process for creating a venue.
+- User authentication is minimal and does not include account recovery or third-party sign-in options.
 - Accessibility features can be further improved.
 
 ### Future Work
 
-- Implement map view and trailhead directions.
-- Add filtering and sorting options (e.g., by difficulty, distance).
+- Implement routing from user's location to a selected venue.
+- Add edit functionality for reviews and created venues
 - Create a dark mode for better usability in low-light conditions.
 
 ---
